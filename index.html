@@ -1,0 +1,691 @@
+<!-- 
+=========================================================
+  TECH KRITI 2026 - OFFICIAL WEBSITE
+  Liquid Glass Edition (With Secure Admin, Payment & Student Portal)
+  Developed & Designed by: Subhankar Papil
+=========================================================
+-->
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>TECH KRITI 2026 - DSEU Rajokri</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap');
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        body { background-color: #050505; color: #ffffff; overflow-x: hidden; position: relative; min-height: 100vh; }
+
+        .bg-blobs { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -2; background: #0a0a1a; overflow: hidden; }
+        .blob1 { position: absolute; width: 50vw; height: 50vw; background: rgba(99, 102, 241, 0.4); border-radius: 50%; filter: blur(100px); top: -10%; left: -10%; animation: float 12s infinite alternate ease-in-out; }
+        .blob2 { position: absolute; width: 40vw; height: 40vw; background: rgba(236, 72, 153, 0.3); border-radius: 50%; filter: blur(100px); bottom: -10%; right: -10%; animation: float 15s infinite alternate-reverse ease-in-out; }
+        .blob3 { position: absolute; width: 35vw; height: 35vw; background: rgba(14, 165, 233, 0.3); border-radius: 50%; filter: blur(100px); top: 40%; left: 30%; animation: float 18s infinite alternate ease-in-out; }
+
+        @keyframes float { 0% { transform: translate(0, 0) scale(1); } 100% { transform: translate(10%, 10%) scale(1.1); } }
+
+        .liquid-glass { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.05); border-top: 1px solid rgba(255, 255, 255, 0.2); border-left: 1px solid rgba(255, 255, 255, 0.1); box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3), inset 0 0 10px rgba(255, 255, 255, 0.02); border-radius: 20px; }
+
+        nav { position: fixed; top: 0; width: 100%; background: rgba(10, 10, 20, 0.4); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); display: flex; justify-content: space-between; align-items: center; padding: 1rem 5%; z-index: 1000; border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
+        .logo { font-size: 1.5rem; font-weight: 800; background: linear-gradient(to right, #6366f1, #22d3ee); -webkit-background-clip: text; color: transparent; cursor: pointer; }
+        .nav-links { display: flex; gap: 2rem; align-items: center; }
+        .nav-links button { background: none; border: none; color: #fff; font-size: 1rem; font-weight: 600; cursor: pointer; transition: color 0.3s; }
+        .nav-links button:hover { color: #22d3ee; }
+        .admin-link { color: #ec4899 !important; } .admin-link:hover { color: #f472b6 !important; }
+        .student-link { color: #a78bfa !important; } .student-link:hover { color: #c4b5fd !important; }
+
+        .page-view { display: none; padding-top: 100px; min-height: 85vh; animation: fadeIn 0.4s ease; }
+        .page-view.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+
+        .container { max-width: 1000px; margin: 0 auto; padding: 2rem; }
+        .admin-container { max-width: 1200px; margin: 0 auto; padding: 2rem; }
+        
+        .back-btn { background: rgba(255, 255, 255, 0.05); color: #fff; border: 1px solid rgba(255, 255, 255, 0.2); padding: 0.6rem 1.2rem; border-radius: 25px; cursor: pointer; font-weight: 600; display: inline-flex; align-items: center; gap: 8px; backdrop-filter: blur(10px); margin-bottom: 1.5rem; transition: transform 0.3s, background 0.3s; }
+        .back-btn:hover { transform: translateX(-5px); background: rgba(255, 255, 255, 0.1); }
+
+        .hero { text-align: center; margin-top: 4rem; }
+        
+        .btn-main { background: linear-gradient(135deg, rgba(99, 102, 241, 0.6), rgba(14, 165, 233, 0.6)); color: white; border: 1px solid rgba(255,255,255,0.3); border-top: 1px solid rgba(255,255,255,0.5); padding: 1rem 2.5rem; font-size: 1.1rem; border-radius: 30px; font-weight: 600; cursor: pointer; backdrop-filter: blur(10px); box-shadow: 0 10px 20px -10px rgba(14, 165, 233, 0.8), inset 0 2px 5px rgba(255,255,255,0.2); transition: transform 0.3s, box-shadow 0.3s, filter 0.3s, opacity 0.3s; }
+        .btn-main:hover { transform: translateY(-3px); box-shadow: 0 15px 25px -5px rgba(99, 102, 241, 0.9), inset 0 2px 5px rgba(255,255,255,0.4); }
+        .btn-main:disabled { opacity: 0.5; cursor: not-allowed; }
+
+        .day-switch { display: flex; justify-content: center; gap: 1rem; margin-bottom: 2.5rem; }
+        .day-switch button { padding: 0.8rem 1.5rem; border-radius: 12px; font-weight: 600; cursor: pointer; color: #fff; transition: all 0.3s ease; }
+        .day-switch button.active-day { background: rgba(99, 102, 241, 0.8); border: 1px solid rgba(255,255,255,0.3); transform: scale(1.05); }
+        
+        .event-card { padding: 1.5rem; margin-bottom: 1.5rem; display: flex; gap: 1.5rem; align-items: flex-start; transition: transform 0.3s, border-left 0.3s; }
+        .event-card:hover { transform: translateY(-5px); border-left: 5px solid #22d3ee; background: rgba(255, 255, 255, 0.08); }
+        .time-badge { background: rgba(99, 102, 241, 0.2); color: #22d3ee; padding: 0.5rem 1rem; border-radius: 10px; font-weight: bold; min-width: 160px; text-align: center; font-size: 0.9rem; border: 1px solid rgba(255,255,255,0.1); }
+        .event-details h3 { margin-bottom: 0.5rem; font-size: 1.2rem; }
+        .event-details p { font-size: 0.95rem; opacity: 0.8; line-height: 1.5; }
+
+        .form-container { max-width: 650px; margin: 0 auto; padding: 2.5rem; position: relative; z-index: 10; }
+        .login-box { max-width: 450px; margin: 4rem auto; }
+        .form-container h2 { transition: filter 0.3s, opacity 0.3s; }
+        .flex-row { display: flex; gap: 1rem; transition: filter 0.3s, opacity 0.3s; }
+        .form-group { margin-bottom: 1.5rem; flex: 1; text-align: left; position: relative; transition: filter 0.3s, opacity 0.3s; }
+        .form-group label { display: block; margin-bottom: 0.5rem; font-weight: 600; font-size: 0.95rem; color: #e2e8f0; }
+        
+        input[type="text"], input[type="email"], input[type="tel"], input[type="password"] { width: 100%; padding: 1rem; border-radius: 15px; background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1); border-top: 1px solid rgba(255, 255, 255, 0.2); color: white; font-size: 1rem; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); box-shadow: inset 0 2px 5px rgba(0,0,0,0.2); transition: all 0.3s ease; }
+        input:focus { outline: none; border-color: #22d3ee; background: rgba(255, 255, 255, 0.08); box-shadow: 0 0 15px rgba(34, 211, 238, 0.2), inset 0 2px 4px rgba(0,0,0,0.1); transform: translateY(-2px); }
+
+        input[type="file"] { width: 100%; padding: 0.8rem; background: rgba(255,255,255,0.05); border-radius: 10px; border: 1px dashed rgba(255,255,255,0.3); color: #cbd5e1; cursor: pointer; }
+        input[type="file"]::file-selector-button { background: #22d3ee; color: #000; border: none; padding: 5px 15px; border-radius: 8px; font-weight: 600; cursor: pointer; margin-right: 10px; transition: 0.3s; }
+        input[type="file"]::file-selector-button:hover { background: #6366f1; color: #fff; }
+
+        select { display: none !important; }
+        .dropdown-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0, 0, 0, 0.5); backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); z-index: 100; opacity: 0; visibility: hidden; transition: all 0.4s ease; }
+        .dropdown-overlay.active { opacity: 1; visibility: visible; }
+
+        .form-blur-active h2, .form-blur-active .btn-main, .form-blur-active p#statusMsg { filter: blur(6px); opacity: 0.3; pointer-events: none; }
+        .form-blur-active .form-group:not(.has-active) { filter: blur(6px); opacity: 0.3; pointer-events: none; }
+        .form-blur-active .admin-stats, .form-blur-active .glass-table-wrapper { filter: blur(6px); opacity: 0.3; pointer-events: none; }
+        .form-blur-active .admin-controls > *:not(.has-active) { filter: blur(6px); opacity: 0.3; pointer-events: none; }
+
+        .custom-select { position: relative; width: 100%; }
+        .select-selected { width: 100%; padding: 1rem; border-radius: 15px; background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1); border-top: 1px solid rgba(255, 255, 255, 0.2); color: white; font-size: 1rem; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); box-shadow: inset 0 2px 5px rgba(0,0,0,0.2); cursor: pointer; display: flex; justify-content: space-between; align-items: center; transition: all 0.3s ease; }
+        .select-selected.active { border-color: #22d3ee; box-shadow: 0 0 15px rgba(34, 211, 238, 0.2); }
+        
+        .select-items { position: absolute; top: 110%; left: 0; right: 0; z-index: 1000; border-radius: 15px; overflow: hidden; opacity: 0; visibility: hidden; transform: translateY(-15px); transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); background: linear-gradient(270deg, rgba(99,102,241,0.25), rgba(34,211,238,0.25), rgba(236,72,153,0.25)); background-size: 600% 600%; animation: gradientShift 4s ease infinite; backdrop-filter: blur(35px); -webkit-backdrop-filter: blur(35px); border: 1px solid rgba(255, 255, 255, 0.3); box-shadow: 0 15px 35px rgba(0,0,0,0.7); max-height: 250px; overflow-y: auto; }
+        .select-items.select-show { opacity: 1; visibility: visible; transform: translateY(0); }
+        
+        @keyframes gradientShift { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+        .select-items div { padding: 12px 16px; cursor: pointer; color: #fff; border-bottom: 1px solid rgba(255, 255, 255, 0.05); transition: all 0.3s ease; text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
+        .select-items div:hover { background: rgba(255, 255, 255, 0.2); padding-left: 22px; border-left: 4px solid #22d3ee; }
+        
+        .admin-stats { display: flex; gap: 1.5rem; margin-bottom: 2rem; flex-wrap: wrap; transition: filter 0.3s; }
+        .stat-card { flex: 1; padding: 1.5rem; text-align: center; min-width: 200px; display: flex; flex-direction: column; justify-content: center; }
+        .stat-card h3 { font-size: 3rem; color: #22d3ee; margin-bottom: 0.2rem; font-weight: 800; text-shadow: 0 0 20px rgba(34,211,238,0.4); }
+        .stat-card p { font-size: 1.1rem; color: #cbd5e1; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
+
+        .admin-controls { display: flex; gap: 1.5rem; margin-bottom: 2rem; flex-wrap: wrap; position: relative; z-index: 10; transition: filter 0.3s; }
+        .admin-controls .search-box { flex: 2; min-width: 250px; }
+        .admin-controls .filter-box { flex: 1; min-width: 200px; position: relative; }
+        
+        .glass-table-wrapper { overflow-x: auto; border-radius: 15px; transition: filter 0.3s; }
+        .glass-table { width: 100%; border-collapse: collapse; text-align: left; white-space: nowrap; }
+        .glass-table th, .glass-table td { padding: 1.2rem; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .glass-table th { background: rgba(0,0,0,0.3); font-weight: 600; color: #22d3ee; letter-spacing: 0.5px; }
+        .glass-table tr:hover { background: rgba(255,255,255,0.05); }
+        .empty-state { text-align: center; padding: 3rem; color: #94a3b8; font-style: italic; }
+        
+        .action-btn { background: rgba(34, 211, 238, 0.2); color: #22d3ee; border: 1px solid rgba(34, 211, 238, 0.4); padding: 6px 12px; border-radius: 8px; cursor: pointer; transition: 0.3s; margin-right: 5px; }
+        .action-btn:hover { background: #22d3ee; color: #000; }
+        .approve-btn { background: rgba(16, 185, 129, 0.2); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.4); }
+        .approve-btn:hover { background: #10b981; color: #fff; }
+
+        .digital-ticket-container { max-width: 500px; margin: 0 auto; text-align: center; display: none; }
+        .digital-ticket { background: linear-gradient(135deg, rgba(99, 102, 241, 0.15), rgba(14, 165, 233, 0.15)); border: 2px solid #22d3ee; border-radius: 20px; padding: 2.5rem 2rem; text-align: center; box-shadow: 0 0 30px rgba(34,211,238,0.3); position: relative; }
+        .digital-ticket h3 { color: #c4b5fd; font-size: 1.8rem; margin-bottom: 15px; letter-spacing: 1px; }
+        .ticket-info { font-size: 1.1rem; color: #fff; line-height: 1.8; margin-bottom: 20px; text-align: left; display: inline-block; }
+        .ticket-info span { font-weight: bold; color: #22d3ee; }
+        .ticket-id { font-size: 1.2rem; background: rgba(255,255,255,0.1); padding: 5px 15px; border-radius: 10px; color: #f472b6; letter-spacing: 2px; font-family: monospace; display: inline-block; margin-bottom: 15px; border: 1px solid rgba(244,114,182,0.3); }
+
+        footer { text-align: center; padding: 2rem; margin-top: 3rem; font-weight: 600; border-top: 1px solid rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); }
+        .contact-tag { color: #22d3ee; font-size: 1.1rem; margin-top: 0.5rem; display: block; }
+        
+        .floating-emoji { position: fixed; top: -60px; font-size: 2.5rem; z-index: -1; pointer-events: none; filter: drop-shadow(0 5px 10px rgba(0,0,0,0.5)); animation: floatDown linear forwards; opacity: 0.6; transition: filter 0.4s ease, opacity 0.4s ease; }
+        body.dropdown-open .floating-emoji { filter: blur(12px) drop-shadow(0 5px 10px rgba(0,0,0,0.5)) !important; opacity: 0.1 !important; }
+        @keyframes floatDown { 0% { transform: translateY(0) rotate(-15deg); opacity: 0; } 10% { opacity: 0.8; } 90% { opacity: 0.8; } 100% { transform: translateY(110vh) rotate(360deg); opacity: 0; } }
+        
+        @media (max-width: 768px) {
+            .event-card { flex-direction: column; gap: 1rem; } .time-badge { width: 100%; text-align: left; }
+            .hero h1 { font-size: 2.5rem !important; } .nav-links { display: none; }
+            .container { padding: 1.5rem; } .flex-row { flex-direction: column; gap: 0; }
+            .form-group { margin-bottom: 1.2rem; } .form-container { padding: 1.5rem; }
+            .admin-stats { flex-direction: column; } .admin-controls { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bg-blobs"><div class="blob1"></div><div class="blob2"></div><div class="blob3"></div></div>
+
+    <nav>
+        <div class="logo" onclick="navigateTo('home')">TECH KRITI '26</div>
+        <div class="nav-links">
+            <button onclick="navigateTo('home')">Home</button>
+            <button onclick="navigateTo('schedule')">Schedule</button>
+            <button onclick="navigateTo('register')">Register</button>
+            <button onclick="navigateTo('student-portal')" class="student-link">Student Portal 🎓</button>
+            <button onclick="navigateTo('admin')" class="admin-link">Admin <i class="fas fa-lock"></i></button>
+        </div>
+    </nav>
+
+    <main>
+        <!-- Home Section -->
+        <section id="home" class="page-view active">
+            <div class="container hero" style="padding-top: 2rem;">
+                <div class="liquid-glass" style="display: inline-flex; align-items: center; gap: 8px; padding: 8px 20px; border-radius: 50px; margin-bottom: 20px; font-weight: 600; font-size: 0.9rem; color: #22d3ee;">
+                    <span style="width: 10px; height: 10px; border-radius: 50%; background: #22d3ee; display: inline-block;"></span>
+                    22 & 23 October | DSEU Rajokri Campus
+                </div>
+                <h1 style="font-size: 4rem; line-height: 1.1; margin-bottom: 1.5rem; font-weight: 800; letter-spacing: -1px;">
+                    Step Into the Future at <br>
+                    <span style="background: linear-gradient(to right, #22d3ee, #6366f1); -webkit-background-clip: text; color: transparent;">TECH KRITI</span>
+                </h1>
+                <p style="font-size: 1.2rem; margin-bottom: 3rem; opacity: 0.9; max-width: 700px; margin-left: auto; margin-right: auto; line-height: 1.6;">
+                    DSEU Rajokri's biggest tech and cultural fest is here! Two days of intense coding battles, mind-bending AI challenges, electrifying performances, and non-stop entertainment. 
+                </p>
+                <div style="display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap;">
+                    <button class="btn-main" onclick="navigateTo('register')"><i class="fas fa-ticket-alt"></i> Get Digital Pass</button>
+                    <button class="btn-main" onclick="navigateTo('schedule')" style="background: rgba(255,255,255,0.05); color: #fff; box-shadow: none;"><i class="fas fa-calendar-alt"></i> View Schedule</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Schedule Section -->
+        <section id="schedule" class="page-view">
+            <div class="container">
+                <button class="back-btn" onclick="navigateTo('home')"><i class="fas fa-arrow-left"></i> Back to Home</button>
+                <h2 style="text-align: center; font-size: 2.5rem; margin-bottom: 2rem;">Event Schedule</h2>
+                <div class="day-switch">
+                    <button id="day1Btn" class="liquid-glass active-day" onclick="showDay(1)">📅 22 Oct (Pre-Events)</button>
+                    <button id="day2Btn" class="liquid-glass" onclick="showDay(2)">📅 23 Oct (Main Event)</button>
+                </div>
+                <div id="day1List">
+                    <div class="event-card liquid-glass"><div class="time-badge">12:00 PM</div><div class="event-details"><h3>Entry & Check-in</h3><p>Gates open for pre-events! Collect your participant badges.</p></div></div>
+                    <div class="event-card liquid-glass"><div class="time-badge">1:00 PM - 2:00 PM</div><div class="event-details"><h3>Prompt Engineering</h3><p>Showcase your AI communication skills.</p></div></div>
+                    <div class="event-card liquid-glass"><div class="time-badge">2:00 PM - 4:00 PM</div><div class="event-details"><h3>Front End Battle</h3><p>A live coding competition to design a landing page.</p></div></div>
+                </div>
+                <div id="day2List" style="display: none;">
+                    <div class="event-card liquid-glass"><div class="time-badge">9:30 AM</div><div class="event-details"><h3>Mega Entry & Welcome</h3><p>The grand inauguration of the main fest day.</p></div></div>
+                    <div class="event-card liquid-glass"><div class="time-badge">10:00 AM - 11:10 AM</div><div class="event-details"><h3>Front End Finals</h3><p>The top tier coders from Day 1 face off.</p></div></div>
+                    <div class="event-card liquid-glass" style="border-left: 5px solid #22d3ee;"><div class="time-badge">4:00 PM Onwards</div><div class="event-details"><h3>Open DJ Party 🎧🔥</h3><p>The ultimate closing celebration!</p></div></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Registration & Payment Form -->
+        <section id="register" class="page-view">
+            <div class="container">
+                <button class="back-btn" onclick="navigateTo('home')"><i class="fas fa-arrow-left"></i> Back to Home</button>
+                <div class="form-container liquid-glass" id="formBox">
+                    <h2 style="text-align: center; margin-bottom: 2rem;">Activity Registration</h2>
+                    <form id="regForm">
+                        <div class="form-group"><label>Full Name</label><input type="text" id="fullName" placeholder="Enter your full name" required></div>
+                        <div class="flex-row">
+                            <div class="form-group"><label>Roll Number</label><input type="text" id="rollNumber" placeholder="e.g., 0011223344" required></div>
+                            <div class="form-group">
+                                <label>Semester</label>
+                                <select id="semester" required>
+                                    <option value="" disabled selected>Select Semester</option>
+                                    <option value="1st Sem">1st Sem</option><option value="3rd Sem">3rd Sem</option>
+                                    <option value="5th Sem">5th Sem</option><option value="7th Sem">7th Sem</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="flex-row">
+                            <div class="form-group"><label>Section</label><input type="text" id="section" placeholder="e.g., CS-A" required></div>
+                            <div class="form-group">
+                                <label>Campus</label>
+                                <select id="campus" required>
+                                    <option value="" disabled selected>Select Campus</option>
+                                    <option value="DSEU Rajokri">DSEU Rajokri</option><option value="DSEU Dwarka">DSEU Dwarka</option>
+                                    <option value="DSEU Okhla">DSEU Okhla</option><option value="Other">Other</option>
+                                </select>
+                                <input type="text" id="otherCampusInput" placeholder="Type campus name..." style="display: none; margin-top: 15px;">
+                            </div>
+                        </div>
+                        <div class="form-group"><label>Email Address</label><input type="email" id="email" placeholder="student@dseu.ac.in" required></div>
+                        <div class="form-group"><label>Phone Number</label><input type="tel" id="phone" placeholder="10-digit mobile number" required></div>
+                        <div class="form-group">
+                            <label>Select Activity</label>
+                            <select id="eventChoice" required>
+                                <option value="" disabled selected>Choose an activity...</option>
+                                <option value="Viewer Pass">Viewer Pass (Non-Participant)</option>
+                                <option value="Prompt Engineering">Prompt Engineering</option><option value="Front End Battle">Front End Battle</option>
+                                <option value="Carrom Tournament">Carrom Tournament</option><option value="Dance Competition">Dance Competition</option>
+                                <option value="Singing Competition">Singing Competition</option><option value="Stand-up Comedy">Stand-up Comedy</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group" style="background: rgba(0,0,0,0.2); padding: 1.5rem; border-radius: 15px; text-align: center; border: 1px dashed rgba(34,211,238,0.5);">
+                            <label style="color: #22d3ee; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 1px;">Scan & Pay Registration Fee</label>
+                            <img src="img1.png" alt="Finance QR Code" style="width: 180px; height: 180px; object-fit: cover; border-radius: 10px; margin: 15px auto; display: block; border: 2px solid #22d3ee; box-shadow: 0 0 15px rgba(34,211,238,0.3);">
+                            <p style="font-size: 0.85rem; color: #cbd5e1; margin-bottom: 10px;">Upload payment screenshot (Max 1MB)</p>
+                            <input type="file" id="paymentScreenshot" accept="image/png, image/jpeg" required>
+                        </div>
+
+                        <button type="submit" id="submitBtn" class="btn-main" style="width: 100%; margin-top: 10px;">Register & Submit Payment</button>
+                        <p id="statusMsg" style="text-align:center; margin-top:15px; font-weight:bold;"></p>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- STUDENT PORTAL -->
+        <section id="student-portal" class="page-view">
+            <div class="container">
+                <button class="back-btn" onclick="navigateTo('home')"><i class="fas fa-arrow-left"></i> Back to Home</button>
+                <div class="form-container liquid-glass login-box" id="studentLoginBox">
+                    <h2 style="text-align: center; margin-bottom: 2rem; color: #a78bfa;">Student Portal 🎓</h2>
+                    <p style="text-align: center; margin-bottom: 1rem; color: #cbd5e1; font-size: 0.9rem;">Check your registration status & download your digital ticket.</p>
+                    <form id="studentLoginForm">
+                        <div class="form-group"><label>Roll Number</label><input type="text" id="studentRoll" placeholder="Enter Roll Number" required></div>
+                        <div class="form-group"><label>Phone Number</label><input type="tel" id="studentPhone" placeholder="Enter registered phone no." required></div>
+                        <button type="submit" id="studentLoginBtn" class="btn-main" style="width: 100%; margin-top: 10px; background: linear-gradient(135deg, #8b5cf6, #c084fc);">Check Status</button>
+                        <p id="studentError" style="color: #f87171; text-align: center; margin-top: 15px; display: none; font-weight: 600;"></p>
+                    </form>
+                </div>
+
+                <div class="digital-ticket-container" id="ticketDisplayContainer">
+                    <div class="digital-ticket liquid-glass" id="ticketContent">
+                        <h3>🎟️ TECH KRITI 2026 PASS</h3>
+                        <div class="ticket-id" id="tTicketId">DSEU-XXXX-XXXX</div> <br>
+                        <div class="ticket-info">
+                            Name: <span id="tName">--</span> <br>
+                            Roll No: <span id="tRoll">--</span> <br>
+                            Event: <span id="tEvent">--</span> <br>
+                            Status: <span id="tStatus" style="color: #10b981;">VERIFIED & APPROVED</span>
+                        </div>
+                        <br>
+                        <div style="font-family: 'Libre Barcode 39', cursive; font-size: 3rem; letter-spacing: 5px; opacity: 0.7;">*148741TECH*</div>
+                    </div>
+                    <button onclick="downloadTicket()" class="btn-main" style="margin-top: 25px; background: linear-gradient(135deg, #10b981, #34d399); width: 100%;">
+                        <i class="fas fa-download"></i> Download Pass (PNG)
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ADMIN LOGIN -->
+        <section id="admin-login" class="page-view">
+            <div class="container">
+                <button class="back-btn" onclick="navigateTo('home')"><i class="fas fa-arrow-left"></i> Back to Home</button>
+                <div class="form-container liquid-glass login-box">
+                    <h2 style="text-align: center; margin-bottom: 2rem; color: #ec4899;">Admin Login <i class="fas fa-lock"></i></h2>
+                    <form id="loginForm">
+                        <div class="form-group"><label>Username</label><input type="text" id="adminUser" placeholder="Enter username" required></div>
+                        <div class="form-group"><label>Password</label><input type="password" id="adminPass" placeholder="Enter password" required></div>
+                        <button type="submit" id="loginBtn" class="btn-main" style="width: 100%; margin-top: 10px; background: linear-gradient(135deg, #ec4899, #f43f5e);">Login to Dashboard</button>
+                        <p id="loginError" style="color: #f87171; text-align: center; margin-top: 15px; display: none; font-weight: 600;">Incorrect Credentials! Access Denied.</p>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- ADMIN DASHBOARD -->
+        <section id="admin-dashboard" class="page-view">
+            <div class="admin-container" id="adminDashboardView">
+                <button class="back-btn" onclick="logoutAdmin()"><i class="fas fa-sign-out-alt"></i> Logout</button>
+                <h2 style="margin-bottom: 2rem; font-size: 2.5rem;">Organizer Dashboard</h2>
+                
+                <div class="admin-stats">
+                    <div class="stat-card liquid-glass"><h3 id="statTotal">--</h3><p>Total Registrations</p></div>
+                    <div class="stat-card liquid-glass"><h3 id="statTopEvent" style="color: #ec4899;">--</h3><p>Most Popular Event</p></div>
+                </div>
+
+                <div class="admin-controls">
+                    <div class="search-box"><input type="text" id="adminSearch" placeholder="Search by name, roll no..." onkeyup="filterAdminTable()"></div>
+                    <div class="filter-box has-active">
+                        <select id="adminFilter" onchange="filterAdminTable()">
+                            <option value="All">All Events</option>
+                            <option value="Prompt Engineering">Prompt Engineering</option>
+                            <option value="Viewer Pass">Viewer Pass</option>
+                            <option value="Front End Battle">Front End Battle</option>
+                            <option value="Carrom Tournament">Carrom Tournament</option>
+                            <option value="Dance Competition">Dance Competition</option>
+                            <option value="Singing Competition">Singing Competition</option>
+                            <option value="Stand-up Comedy">Stand-up Comedy</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="glass-table-wrapper liquid-glass">
+                    <table class="glass-table">
+                        <thead>
+                            <tr><th>Name</th><th>Roll No</th><th>Event</th><th>Status</th><th>Actions</th></tr>
+                        </thead>
+                        <tbody id="adminTableBody">
+                            <tr><td colspan="5" class="empty-state"><i class="fas fa-spinner fa-spin"></i> Fetching Live Data...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="liquid-glass" style="border-radius: 0; border: none; border-top: 1px solid rgba(255,255,255,0.1);">
+        <p>TECH KRITI | DSEU Rajokri Campus</p>
+        <span class="contact-tag">Designed by: DSEU RAJOKRI INNOVATION CLUB </span>
+    </footer>
+
+    <script>
+        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwdJs-t1u5Fxa_sOl9EQ6lJVYnwmnrJC4RUYmbh_JHk-_CkRKNlgzFWrXkynv49TR_K/exec";
+
+        function navigateTo(pageId) {
+            if (pageId === 'admin') {
+                const token = sessionStorage.getItem("admin_token");
+                if (!token) { pageId = 'admin-login'; } else { pageId = 'admin-dashboard'; loadAdminData(); }
+            }
+            if (pageId === 'student-portal') {
+                document.getElementById('ticketDisplayContainer').style.display = 'none';
+                document.getElementById('studentLoginBox').style.display = 'block';
+                document.getElementById('studentLoginForm').reset();
+                document.getElementById('studentError').style.display = 'none';
+            }
+            document.querySelectorAll('.page-view').forEach(page => page.classList.remove('active'));
+            document.getElementById(pageId).classList.add('active');
+            window.scrollTo(0, 0);
+        }
+
+        function logoutAdmin() {
+            sessionStorage.removeItem("admin_token");
+            document.getElementById('loginForm').reset();
+            navigateTo('home');
+        }
+
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const user = document.getElementById('adminUser').value;
+            const pass = document.getElementById('adminPass').value;
+            const errorMsg = document.getElementById('loginError');
+            const btn = document.getElementById('loginBtn');
+            
+            btn.innerText = "Authenticating..."; btn.disabled = true; errorMsg.style.display = 'none';
+
+            fetch(SCRIPT_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                body: JSON.stringify({ action: "adminLogin", username: user, password: pass })
+            })
+            .then(res => res.json())
+            .then(res => {
+                btn.innerText = "Login to Dashboard"; btn.disabled = false;
+                if (res.status === "success" && res.token) {
+                    sessionStorage.setItem("admin_token", res.token);
+                    document.getElementById('loginForm').reset();
+                    navigateTo('admin');
+                } else { errorMsg.style.display = 'block'; }
+            })
+            .catch(err => {
+                btn.innerText = "Login to Dashboard"; btn.disabled = false;
+                errorMsg.style.display = 'block';
+            });
+        });
+
+        function showDay(day) {
+            const day1List = document.getElementById('day1List'); const day2List = document.getElementById('day2List');
+            const day1Btn = document.getElementById('day1Btn'); const day2Btn = document.getElementById('day2Btn');
+
+            if(day === 1) {
+                day1List.style.display = 'block'; day2List.style.display = 'none';
+                day1Btn.classList.add('active-day'); day2Btn.classList.remove('active-day');
+                day1Btn.style.background = 'rgba(99, 102, 241, 0.8)'; day2Btn.style.background = 'rgba(255,255,255,0.03)';
+            } else {
+                day1List.style.display = 'none'; day2List.style.display = 'block';
+                day2Btn.classList.add('active-day'); day1Btn.classList.remove('active-day');
+                day2Btn.style.background = 'rgba(99, 102, 241, 0.8)'; day1Btn.style.background = 'rgba(255,255,255,0.03)';
+            }
+        }
+
+        const overlay = document.createElement('div');
+        overlay.className = 'dropdown-overlay';
+        document.body.appendChild(overlay);
+
+        function initCustomSelects() {
+            document.querySelectorAll(".custom-select").forEach(el => {
+                const parent = el.parentNode; const select = el.querySelector("select");
+                if (select) { parent.insertBefore(select, el); } el.remove();
+            });
+
+            document.querySelectorAll("select").forEach(select => {
+                const wrapper = document.createElement("div"); wrapper.className = "custom-select";
+                select.parentNode.insertBefore(wrapper, select); wrapper.appendChild(select);
+
+                const selectedDiv = document.createElement("div"); selectedDiv.className = "select-selected";
+                selectedDiv.innerHTML = `<span>${select.options[select.selectedIndex].innerHTML}</span> <i class="fas fa-chevron-down"></i>`;
+                wrapper.appendChild(selectedDiv);
+
+                const optionsDiv = document.createElement("div"); optionsDiv.className = "select-items";
+                wrapper.appendChild(optionsDiv);
+
+                for (let i = 0; i < select.length; i++) {
+                    if(select.options[i].disabled) continue; 
+                    const optionDiv = document.createElement("div"); optionDiv.innerHTML = select.options[i].innerHTML;
+                    optionDiv.addEventListener("click", function(e) {
+                        select.selectedIndex = i; selectedDiv.querySelector("span").innerHTML = this.innerHTML;
+                        select.dispatchEvent(new Event('change')); closeAllSelect();
+                    });
+                    optionsDiv.appendChild(optionDiv);
+                }
+
+                selectedDiv.addEventListener("click", function(e) {
+                    e.stopPropagation(); const isClosed = !optionsDiv.classList.contains("select-show");
+                    closeAllSelect();
+                    if (isClosed) {
+                        optionsDiv.classList.add("select-show"); selectedDiv.classList.add("active"); overlay.classList.add("active"); 
+                        wrapper.style.zIndex = "1001"; const formBox = document.getElementById("formBox"); if(formBox) formBox.style.zIndex = "101"; 
+                        document.body.classList.add('dropdown-open');
+                        const regForm = document.getElementById('regForm'); const adminView = document.getElementById('adminDashboardView');
+                        if(wrapper.closest('#regForm')) regForm.classList.add('form-blur-active');
+                        if(wrapper.closest('#adminDashboardView')) adminView.classList.add('form-blur-active');
+                        const parentGroup = wrapper.closest('.form-group') || wrapper.closest('.filter-box');
+                        if(parentGroup) parentGroup.classList.add('has-active');
+                    }
+                });
+            });
+        }
+        initCustomSelects(); 
+
+        function closeAllSelect() {
+            document.querySelectorAll(".select-items").forEach(el => el.classList.remove("select-show"));
+            document.querySelectorAll(".select-selected").forEach(el => el.classList.remove("active"));
+            document.querySelectorAll(".custom-select").forEach(el => el.style.zIndex = "1");
+            const formBox = document.getElementById("formBox"); if(formBox) formBox.style.zIndex = "10";
+            overlay.classList.remove("active"); document.body.classList.remove('dropdown-open');
+            document.querySelectorAll('.form-blur-active').forEach(el => el.classList.remove('form-blur-active'));
+            document.querySelectorAll('.has-active').forEach(el => el.classList.remove('has-active'));
+        }
+        document.addEventListener("click", closeAllSelect); overlay.addEventListener("click", closeAllSelect);
+
+        document.getElementById('campus').addEventListener('change', function() {
+            const otherInput = document.getElementById('otherCampusInput');
+            if (this.value === 'Other') { otherInput.style.display = 'block'; otherInput.setAttribute('required', 'true'); } 
+            else { otherInput.style.display = 'none'; otherInput.removeAttribute('required'); otherInput.value = ''; }
+        });
+
+        let base64Image = ""; let mimeType = ""; let fileName = "";
+        document.getElementById('paymentScreenshot').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                if (file.size > 1024 * 1024) { alert("File is too large! Please upload a screenshot under 1MB."); this.value = ""; return; }
+                mimeType = file.type; fileName = file.name;
+                const reader = new FileReader();
+                reader.onload = function(evt) { base64Image = evt.target.result.split(',')[1]; }
+                reader.readAsDataURL(file);
+            }
+        });
+
+        document.getElementById('regForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const btn = document.getElementById('submitBtn'); const status = document.getElementById('statusMsg');
+            btn.innerText = "Processing & Saving..."; btn.disabled = true; status.innerText = "";
+            
+            let finalCampus = document.getElementById('campus').value;
+            if (finalCampus === 'Other') finalCampus = document.getElementById('otherCampusInput').value;
+            
+            const data = {
+                action: "register",
+                fullName: document.getElementById('fullName').value,
+                rollNumber: document.getElementById('rollNumber').value,
+                semester: document.getElementById('semester').value,
+                section: document.getElementById('section').value,
+                campus: finalCampus, 
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
+                eventChoice: document.getElementById('eventChoice').value,
+                imageBase64: base64Image, mimeType: mimeType, fileName: fileName
+            };
+
+            fetch(SCRIPT_URL, { 
+                method: 'POST', 
+                headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                body: JSON.stringify(data) 
+            })
+            .then(res => res.json())
+            .then(res => {
+                if(res.result === "success") {
+                    status.innerText = "🎉 Registration Submitted! Check Student Portal later.";
+                    status.style.color = "#22d3ee";
+                    btn.innerText = "Register & Submit Payment"; btn.disabled = false;
+                    document.getElementById('regForm').reset();
+                    document.querySelectorAll('#regForm .select-selected span').forEach(span => span.innerText = "Select Option");
+                    document.getElementById('otherCampusInput').style.display = 'none';
+                    base64Image = ""; 
+                }
+            }).catch(err => {
+                status.innerText = "❌ Connection error."; status.style.color = "red";
+                btn.innerText = "Register & Submit Payment"; btn.disabled = false;
+            });
+        });
+
+        // Student Portal & Custom Ticket ID Logic: DSEU-[PhoneLast4]-[NameFirst4]
+        document.getElementById('studentLoginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const roll = document.getElementById('studentRoll').value;
+            const phone = document.getElementById('studentPhone').value;
+            const btn = document.getElementById('studentLoginBtn');
+            const err = document.getElementById('studentError');
+            
+            btn.innerText = "Checking..."; btn.disabled = true; err.style.display = 'none';
+
+            fetch(SCRIPT_URL)
+            .then(res => res.json())
+            .then(data => {
+                btn.innerText = "Check Status"; btn.disabled = false;
+                const studentRecord = data.find(item => item.rollNumber == roll && item.phone == phone);
+                
+                if(studentRecord) {
+                    if(studentRecord.status === "Approved") {
+                        document.getElementById('studentLoginBox').style.display = 'none';
+                        document.getElementById('ticketDisplayContainer').style.display = 'block';
+                        
+                        let phoneSuffix = studentRecord.phone.toString().slice(-4);
+                        let namePrefix = studentRecord.fullName.replace(/\s+/g, '').substring(0, 4).toUpperCase();
+                        document.getElementById('tTicketId').innerText = `DSEU-${phoneSuffix}-${namePrefix}`;
+                        
+                        document.getElementById('tName').innerText = studentRecord.fullName;
+                        document.getElementById('tRoll').innerText = studentRecord.rollNumber;
+                        document.getElementById('tEvent').innerText = studentRecord.eventChoice;
+                    } else {
+                        err.innerText = "Payment verification is pending. Please check back later!";
+                        err.style.color = "#fbbf24"; err.style.display = 'block';
+                    }
+                } else {
+                    err.innerText = "No record found! Check your details.";
+                    err.style.color = "#f87171"; err.style.display = 'block';
+                }
+            })
+            .catch(e => {
+                btn.innerText = "Check Status"; btn.disabled = false;
+                err.innerText = "Network Error."; err.style.display = 'block';
+            });
+        });
+
+        function downloadTicket() {
+            const ticketEl = document.getElementById('ticketContent');
+            html2canvas(ticketEl, { backgroundColor: null, scale: 2 }).then(canvas => {
+                let link = document.createElement('a');
+                link.download = `TechKriti_Pass_${document.getElementById('tRoll').innerText}.png`;
+                link.href = canvas.toDataURL("image/png");
+                link.click();
+            });
+        }
+
+        let rawAdminData = [];
+
+        function loadAdminData() {
+            fetch(SCRIPT_URL)
+                .then(res => res.json())
+                .then(data => { rawAdminData = data; renderAdminTable(); })
+                .catch(err => {
+                    rawAdminData = [];
+                    renderAdminTable();
+                });
+        }
+
+        function renderAdminTable() {
+            const searchStr = document.getElementById('adminSearch').value.toLowerCase();
+            const filterStr = document.getElementById('adminFilter').value;
+            const tbody = document.getElementById('adminTableBody');
+            
+            let filteredData = rawAdminData.filter(item => {
+                if(!item.fullName) return false;
+                const matchesSearch = item.fullName.toLowerCase().includes(searchStr) || (item.rollNumber && item.rollNumber.toLowerCase().includes(searchStr));
+                const matchesFilter = filterStr === 'All' || item.eventChoice === filterStr;
+                return matchesSearch && matchesFilter;
+            });
+
+            document.getElementById('statTotal').innerText = filteredData.length;
+            
+            let eventCounts = {};
+            filteredData.forEach(item => { eventCounts[item.eventChoice] = (eventCounts[item.eventChoice] || 0) + 1; });
+            let topEvent = "--"; let maxCount = 0;
+            for(let event in eventCounts) { if(eventCounts[event] > maxCount) { maxCount = eventCounts[event]; topEvent = event; } }
+            document.getElementById('statTopEvent').innerText = topEvent !== "undefined" ? topEvent.split(" ")[0] : "--"; 
+
+            if(filteredData.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="5" class="empty-state">No records found.</td></tr>'; return;
+            }
+
+            let html = '';
+            filteredData.forEach(item => {
+                let statusBadge = item.status === "Approved" 
+                    ? `<span style="color:#10b981; font-weight:bold;">Approved</span>` 
+                    : `<span style="color:#fbbf24; font-weight:bold;">Pending</span>`;
+                
+                let actionButtons = `<a href="${item.paymentUrl}" target="_blank" class="action-btn"><i class="fas fa-eye"></i> View</a>`;
+                
+                if (item.status !== "Approved") {
+                    actionButtons += `<button class="action-btn approve-btn" onclick="approveStudent('${item.rollNumber}', '${item.eventChoice}')"><i class="fas fa-check"></i> Approve</button>`;
+                }
+
+                html += `
+                    <tr>
+                        <td><strong>${item.fullName}</strong></td>
+                        <td>${item.rollNumber || 'N/A'}</td>
+                        <td><span style="background: rgba(34,211,238,0.1); color: #22d3ee; padding: 4px 8px; border-radius: 4px; font-size: 0.85rem;">${item.eventChoice}</span></td>
+                        <td>${statusBadge}</td>
+                        <td>${actionButtons}</td>
+                    </tr>
+                `;
+            });
+            tbody.innerHTML = html;
+        }
+
+        function approveStudent(rollNo, eventName) {
+            if(confirm(`Are you sure you want to approve ticket for Roll No: ${rollNo}?`)) {
+                fetch(SCRIPT_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                    body: JSON.stringify({ action: "approve", rollNumber: rollNo, eventChoice: eventName })
+                }).then(res => res.json()).then(res => {
+                    if(res.result === "approved") {
+                        alert("Student Approved Successfully!");
+                        loadAdminData(); 
+                    }
+                });
+            }
+        }
+
+        document.getElementById('adminFilter').addEventListener('change', renderAdminTable);
+
+        const eventEmojis = ['💻', '🤖', '🧠', '🍔', '🎤', '💃', '😂', '🏆', '🎸'];
+        function spawnEmoji() {
+            const emojiEl = document.createElement('div'); emojiEl.className = 'floating-emoji';
+            emojiEl.innerText = eventEmojis[Math.floor(Math.random() * eventEmojis.length)];
+            emojiEl.style.left = (Math.random() * 90 + 5) + 'vw';
+            const duration = Math.random() * 6 + 8; emojiEl.style.animationDuration = duration + 's';
+            document.body.appendChild(emojiEl);
+            setTimeout(() => { emojiEl.remove(); }, duration * 1000);
+            setTimeout(spawnEmoji, Math.random() * 5000 + 10000); 
+        }
+        setTimeout(spawnEmoji, 2000);
+    </script>
+</body>
+</html>
