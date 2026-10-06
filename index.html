@@ -1,7 +1,6 @@
 <!-- 
 =========================================================
   TECH KRITI 2026 - OFFICIAL WEBSITE
-  Liquid Glass Edition (Fixed Payment URL Fetch & Ticket)
   Developed & Designed by: Subhankar Papil from Rajokri Campus
 =========================================================
 -->
@@ -13,6 +12,8 @@
     <title>TECH KRITI 2026 - DSEU Rajokri</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap');
 
@@ -370,6 +371,7 @@
                     <div class="digital-ticket liquid-glass" id="ticketContent">
                         <h3>🎟️ TECH KRITI 2026 PASS</h3>
                         <div class="ticket-id" id="tTicketId">DSEU-XXXX-XXXX</div> <br>
+                        <div id="qrcode" style="display: flex; justify-content: center; margin: 15px 0; background: #fff; padding: 10px; border-radius: 10px; width: fit-content; margin-left: auto; margin-right: auto;"></div>
                         <div class="ticket-info">
                             Name: <span id="tName">--</span> <br>
                             Roll No / ID: <span id="tRoll">--</span> <br>
@@ -408,6 +410,15 @@
                 <button class="back-btn" onclick="logoutAdmin()"><i class="fas fa-sign-out-alt"></i> Logout</button>
                 <h2 style="margin-bottom: 2rem; font-size: 2.5rem;">Organizer Dashboard 📊</h2>
                 
+                <!-- Gate QR Scanner Section -->
+                <div class="liquid-glass" style="margin-bottom: 2rem; padding: 2rem; border: 1px solid rgba(34, 211, 238, 0.3); border-radius: 20px; text-align: center;">
+                    <h3 style="color: #22d3ee; margin-bottom: 10px;"><i class="fas fa-qrcode"></i> Gate QR Pass Scanner</h3>
+                    <p style="color: #cbd5e1; font-size: 0.9rem; margin-bottom: 15px;">Scan student digital pass QR code at the entrance for instant verification.</p>
+                    <button type="button" class="action-btn" onclick="startScanner()" style="padding: 10px 20px; font-size: 1rem;"><i class="fas fa-camera"></i> Start Camera Scanner</button>
+                    <div id="reader" style="width: 100%; max-width: 400px; margin: 15px auto 0 auto; border-radius: 10px; overflow: hidden; border: 2px solid #22d3ee;"></div>
+                    <div id="scanResultBox" style="margin-top: 15px; font-size: 1.2rem; font-weight: bold; padding: 10px; border-radius: 10px; display: none;"></div>
+                </div>
+
                 <div class="admin-stats">
                     <div class="stat-card liquid-glass"><h3 id="statTotal">--</h3><p>Total Registrations</p></div>
                     <div class="stat-card liquid-glass"><h3 id="statTopEvent" style="color: #ec4899;">--</h3><p>Most Popular Event</p></div>
@@ -707,7 +718,7 @@
             });
         });
 
-        // 🚀 STUDENT PORTAL STATUS UPDATE (Includes Rejection Reason)
+        // 🚀 STUDENT PORTAL STATUS UPDATE (Includes QR Generation)
         document.getElementById('studentLoginForm').addEventListener('submit', function(e) {
             e.preventDefault();
             const roll = document.getElementById('studentRoll').value;
@@ -734,11 +745,21 @@
                         document.getElementById('ticketDisplayContainer').style.display = 'block';
                         let phoneSuffix = studentRecord.phone.toString().slice(-4);
                         let namePrefix = studentRecord.fullName.replace(/\s+/g, '').substring(0, 4).toUpperCase();
-                        document.getElementById('tTicketId').innerText = `DSEU-${phoneSuffix}-${namePrefix}`;
+                        
+                        let generatedTicketId = studentRecord.ticketId || `DSEU-${phoneSuffix}-${namePrefix}`;
+                        document.getElementById('tTicketId').innerText = generatedTicketId;
                         document.getElementById('tName').innerText = studentRecord.fullName;
                         document.getElementById('tRoll').innerText = studentRecord.rollNumber;
                         document.getElementById('tEvent').innerText = studentRecord.eventChoice;
                         document.getElementById('tStatus').innerText = "VERIFIED & APPROVED ✅";
+                        
+                        // Generate QR Code dynamically
+                        document.getElementById('qrcode').innerHTML = "";
+                        new QRCode(document.getElementById("qrcode"), {
+                            text: generatedTicketId,
+                            width: 130,
+                            height: 130
+                        });
                         
                     } else if (studentRecord.status === "Rejected") {
                         err.innerHTML = `❌ Registration Rejected.<br><span style="color:#cbd5e1; font-weight:normal;">Reason: ${studentRecord.rejectReason || "Issue with payment screenshot. Contact admin."}</span>`;
@@ -804,12 +825,8 @@
                 let statusBadge = "";
                 let actionButtons = "";
                 
-                // Fetch using requested backend URL format directly.
-                // Assuming paymentUrl in sheet has the google drive link. 
-                // If it fails, fallback to local search format.
                 let paymentImageLink = item.paymentUrl && item.paymentUrl.includes("http") ? item.paymentUrl : `${item.rollNumber}_payment.jpg`; 
 
-                // 🚀 SMART ADMIN VIEW/APPROVE/REJECT SYSTEM
                 if (item.status === "Approved") {
                     statusBadge = `<span style="color:#10b981; font-weight:bold;">Approved</span>`;
                     actionButtons = `<span style="background: rgba(16, 185, 129, 0.2); color: #10b981; padding: 4px 10px; border-radius: 6px; font-family: monospace; font-size: 0.9rem; border: 1px solid rgba(16, 185, 129, 0.4);"><i class="fas fa-ticket-alt"></i> ${item.ticketId}</span>`;
@@ -819,7 +836,6 @@
                     actionButtons = `<span style="color:#ef4444; font-size:0.85rem;"><i class="fas fa-times-circle"></i> Rejected</span>`;
                 } 
                 else {
-                    // Pending
                     statusBadge = `<span style="color:#fbbf24; font-weight:bold;">Pending</span>`;
                     actionButtons = `
                         <a href="${paymentImageLink}" target="_blank" class="action-btn"><i class="fas fa-eye"></i> View</a>
@@ -844,7 +860,6 @@
             }
         }
 
-        // 🚀 NEW REJECT FUNCTION
         function rejectStudent(rollNo, eventName) {
             let reason = prompt(`Reason for rejecting Roll No: ${rollNo}?\n(e.g., Fake Screenshot, Blur Image, Name Mismatch)`);
             if (reason !== null && reason.trim() !== "") {
@@ -859,6 +874,33 @@
             }
         }
         
+        // --- GATE QR SCANNER LOGIC ---
+        function startScanner() {
+            const scanner = new Html5QrcodeScanner("reader", { fps: 10, qrbox: 250 });
+            scanner.render((decodedText) => {
+                scanner.clear();
+                verifyScannedTicket(decodedText);
+            }, (error) => {});
+        }
+
+        function verifyScannedTicket(ticketId) {
+            const resultBox = document.getElementById('scanResultBox');
+            resultBox.style.display = 'block';
+            
+            const student = rawAdminData.find(item => item.ticketId === ticketId);
+            if(student && student.status === "Approved") {
+                resultBox.style.background = "rgba(16, 185, 129, 0.2)";
+                resultBox.style.color = "#10b981";
+                resultBox.style.border = "1px solid #10b981";
+                resultBox.innerHTML = `✅ ACCESS GRANTED!<br><small style="font-size:0.9rem; color:#fff;">${student.fullName} (${student.rollNumber}) - ${student.eventChoice}</small>`;
+            } else {
+                resultBox.style.background = "rgba(239, 68, 68, 0.2)";
+                resultBox.style.color = "#ef4444";
+                resultBox.style.border = "1px solid #ef4444";
+                resultBox.innerHTML = `❌ ACCESS DENIED!<br><small style="font-size:0.9rem; color:#fff;">Invalid Pass or Not Approved (${ticketId})</small>`;
+            }
+        }
+
         document.getElementById('adminTypeFilter').addEventListener('change', renderAdminTable);
 
         // --- PREMIUM & CLEAN EMOJI ANIMATION ---
