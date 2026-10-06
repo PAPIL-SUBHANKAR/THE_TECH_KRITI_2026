@@ -1,7 +1,7 @@
 <!-- 
 =========================================================
   TECH KRITI 2026 - OFFICIAL WEBSITE
-  Liquid Glass Edition (With Secure Admin, Payment & Student Portal)
+  Liquid Glass Edition (With Secure Admin, Payment, Student Portal & Mobile UI)
   Developed & Designed by: Subhankar Papil from rajokri campus
 =========================================================
 -->
@@ -30,11 +30,16 @@
 
         nav { position: fixed; top: 0; width: 100%; background: rgba(10, 10, 20, 0.4); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); display: flex; justify-content: space-between; align-items: center; padding: 1rem 5%; z-index: 1000; border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
         .logo { font-size: 1.5rem; font-weight: 800; background: linear-gradient(to right, #6366f1, #22d3ee); -webkit-background-clip: text; color: transparent; cursor: pointer; }
+        
         .nav-links { display: flex; gap: 2rem; align-items: center; }
         .nav-links button { background: none; border: none; color: #fff; font-size: 1rem; font-weight: 600; cursor: pointer; transition: color 0.3s; }
         .nav-links button:hover { color: #22d3ee; }
         .admin-link { color: #ec4899 !important; } .admin-link:hover { color: #f472b6 !important; }
         .student-link { color: #a78bfa !important; } .student-link:hover { color: #c4b5fd !important; }
+
+        /* Mobile Hamburger Icon */
+        .hamburger { display: none; flex-direction: column; cursor: pointer; gap: 5px; z-index: 1001; }
+        .hamburger span { width: 30px; height: 3px; background: #22d3ee; border-radius: 3px; transition: 0.3s; }
 
         .page-view { display: none; padding-top: 100px; min-height: 85vh; animation: fadeIn 0.4s ease; }
         .page-view.active { display: block; }
@@ -52,10 +57,6 @@
         .btn-main:hover { transform: translateY(-3px); box-shadow: 0 15px 25px -5px rgba(99, 102, 241, 0.9), inset 0 2px 5px rgba(255,255,255,0.4); }
         .btn-main:disabled { opacity: 0.5; cursor: not-allowed; }
 
-        .day-switch { display: flex; justify-content: center; gap: 1rem; margin-bottom: 2.5rem; }
-        .day-switch button { padding: 0.8rem 1.5rem; border-radius: 12px; font-weight: 600; cursor: pointer; color: #fff; transition: all 0.3s ease; }
-        .day-switch button.active-day { background: rgba(99, 102, 241, 0.8); border: 1px solid rgba(255,255,255,0.3); transform: scale(1.05); }
-        
         .event-card { padding: 1.5rem; margin-bottom: 1.5rem; display: flex; gap: 1.5rem; align-items: flex-start; transition: transform 0.3s, border-left 0.3s; }
         .event-card:hover { transform: translateY(-5px); border-left: 5px solid #22d3ee; background: rgba(255, 255, 255, 0.08); }
         .time-badge { background: rgba(99, 102, 241, 0.2); color: #22d3ee; padding: 0.5rem 1rem; border-radius: 10px; font-weight: bold; min-width: 160px; text-align: center; font-size: 0.9rem; border: 1px solid rgba(255,255,255,0.1); }
@@ -77,7 +78,7 @@
         input[type="file"]::file-selector-button:hover { background: #6366f1; color: #fff; }
 
         select { display: none !important; }
-        .dropdown-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0, 0, 0, 0.5); backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); z-index: 100; opacity: 0; visibility: hidden; transition: all 0.4s ease; }
+        .dropdown-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); z-index: 100; opacity: 0; visibility: hidden; transition: all 0.4s ease; display: flex; justify-content: center; align-items: center; }
         .dropdown-overlay.active { opacity: 1; visibility: visible; }
 
         .form-blur-active h2, .form-blur-active .btn-main, .form-blur-active p#statusMsg { filter: blur(6px); opacity: 0.3; pointer-events: none; }
@@ -132,8 +133,12 @@
         @keyframes floatDown { 0% { transform: translateY(0) rotate(-15deg); opacity: 0; } 10% { opacity: 0.8; } 90% { opacity: 0.8; } 100% { transform: translateY(110vh) rotate(360deg); opacity: 0; } }
         
         @media (max-width: 768px) {
+            .hamburger { display: flex; }
+            .nav-links { display: flex; flex-direction: column; position: absolute; top: 100%; right: -100%; width: 250px; background: rgba(10, 10, 20, 0.95); backdrop-filter: blur(20px); height: 100vh; padding-top: 2rem; transition: right 0.4s ease; border-left: 1px solid rgba(255,255,255,0.1); align-items: center; }
+            .nav-links.active { right: 0; }
+            
             .event-card { flex-direction: column; gap: 1rem; } .time-badge { width: 100%; text-align: left; }
-            .hero h1 { font-size: 2.5rem !important; } .nav-links { display: none; }
+            .hero h1 { font-size: 2.5rem !important; } 
             .container { padding: 1.5rem; } .flex-row { flex-direction: column; gap: 0; }
             .form-group { margin-bottom: 1.2rem; } .form-container { padding: 1.5rem; }
             .admin-stats { flex-direction: column; } .admin-controls { flex-direction: column; }
@@ -146,7 +151,10 @@
 
     <nav>
         <div class="logo" onclick="navigateTo('home')">TECH KRITI '26</div>
-        <div class="nav-links">
+        <div class="hamburger" onclick="toggleMenu()">
+            <span></span><span></span><span></span>
+        </div>
+        <div class="nav-links" id="navLinks">
             <button onclick="navigateTo('home')">Home</button>
             <button onclick="navigateTo('schedule')">Schedule</button>
             <button onclick="navigateTo('register')">Register</button>
@@ -161,14 +169,14 @@
             <div class="container hero" style="padding-top: 2rem;">
                 <div class="liquid-glass" style="display: inline-flex; align-items: center; gap: 8px; padding: 8px 20px; border-radius: 50px; margin-bottom: 20px; font-weight: 600; font-size: 0.9rem; color: #22d3ee;">
                     <span style="width: 10px; height: 10px; border-radius: 50%; background: #22d3ee; display: inline-block;"></span>
-                    22 & 23 October | DSEU Rajokri Campus
+                    23 October | DSEU Rajokri Campus
                 </div>
                 <h1 style="font-size: 4rem; line-height: 1.1; margin-bottom: 1.5rem; font-weight: 800; letter-spacing: -1px;">
                     Step Into the Future at <br>
                     <span style="background: linear-gradient(to right, #22d3ee, #6366f1); -webkit-background-clip: text; color: transparent;">TECH KRITI</span>
                 </h1>
                 <p style="font-size: 1.2rem; margin-bottom: 3rem; opacity: 0.9; max-width: 700px; margin-left: auto; margin-right: auto; line-height: 1.6;">
-                    DSEU Rajokri's biggest tech and cultural fest is here! Two days of intense coding battles, mind-bending AI challenges, electrifying performances, and non-stop entertainment. 
+                    DSEU Rajokri's biggest tech and cultural fest is here! Intense coding battles, mind-bending AI challenges, electrifying performances, and non-stop entertainment. 
                 </p>
                 <div style="display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap;">
                     <button class="btn-main" onclick="navigateTo('register')"><i class="fas fa-ticket-alt"></i> Get Digital Pass</button>
@@ -181,20 +189,22 @@
         <section id="schedule" class="page-view">
             <div class="container">
                 <button class="back-btn" onclick="navigateTo('home')"><i class="fas fa-arrow-left"></i> Back to Home</button>
-                <h2 style="text-align: center; font-size: 2.5rem; margin-bottom: 2rem;">Event Schedule</h2>
-                <div class="day-switch">
-                    <button id="day1Btn" class="liquid-glass active-day" onclick="showDay(1)">📅 22 Oct (Pre-Events)</button>
-                    <button id="day2Btn" class="liquid-glass" onclick="showDay(2)">📅 23 Oct (Main Event)</button>
-                </div>
-                <div id="day1List">
-                    <div class="event-card liquid-glass"><div class="time-badge">12:00 PM</div><div class="event-details"><h3>Entry & Check-in</h3><p>Gates open for pre-events! Collect your participant badges.</p></div></div>
-                    <div class="event-card liquid-glass"><div class="time-badge">1:00 PM - 2:00 PM</div><div class="event-details"><h3>Prompt Engineering</h3><p>Showcase your AI communication skills.</p></div></div>
-                    <div class="event-card liquid-glass"><div class="time-badge">2:00 PM - 4:00 PM</div><div class="event-details"><h3>Front End Battle</h3><p>A live coding competition to design a landing page.</p></div></div>
-                </div>
-                <div id="day2List" style="display: none;">
-                    <div class="event-card liquid-glass"><div class="time-badge">9:30 AM</div><div class="event-details"><h3>Mega Entry & Welcome</h3><p>The grand inauguration of the main fest day.</p></div></div>
-                    <div class="event-card liquid-glass"><div class="time-badge">10:00 AM - 11:10 AM</div><div class="event-details"><h3>Front End Finals</h3><p>The top tier coders from Day 1 face off.</p></div></div>
-                    <div class="event-card liquid-glass" style="border-left: 5px solid #22d3ee;"><div class="time-badge">4:00 PM Onwards</div><div class="event-details"><h3>Open DJ Party 🎧🔥</h3><p>The ultimate closing celebration!</p></div></div>
+                <h2 style="text-align: center; font-size: 2.5rem; margin-bottom: 2rem;">Event Schedule (23 October)</h2>
+                
+                <div id="mainEventList">
+                    <div class="event-card liquid-glass"><div class="time-badge">9:30 AM</div><div class="event-details"><h3>Mega Entry & Check-in</h3><p>Gates open! Collect your participant badges and get ready.</p></div></div>
+                    
+                    <div class="event-card liquid-glass"><div class="time-badge">10:00 AM - 11:30 AM</div><div class="event-details"><h3>Prompt Engineering & Carrom</h3><p>AI challenges and indoor sports competitions kick off.</p></div></div>
+                    
+                    <div class="event-card liquid-glass"><div class="time-badge">11:30 AM - 1:00 PM</div><div class="event-details"><h3>Front End Battle</h3><p>Live coding competition to design the ultimate landing page.</p></div></div>
+                    
+                    <div class="event-card liquid-glass"><div class="time-badge">1:00 PM - 2:00 PM</div><div class="event-details"><h3>Singing Competition</h3><p>Melodious performances by our talented students.</p></div></div>
+                    
+                    <div class="event-card liquid-glass"><div class="time-badge">2:00 PM - 3:30 PM</div><div class="event-details"><h3>Dance Competition</h3><p>Solo and group performances to rock the stage.</p></div></div>
+                    
+                    <div class="event-card liquid-glass"><div class="time-badge">3:30 PM - 4:30 PM</div><div class="event-details"><h3>Stand-up Comedy</h3><p>Laugh out loud with the best comedians on campus.</p></div></div>
+                    
+                    <div class="event-card liquid-glass" style="border-left: 5px solid #22d3ee;"><div class="time-badge">4:30 PM Onwards</div><div class="event-details"><h3>Open DJ Party 🎧🔥</h3><p>The ultimate closing celebration!</p></div></div>
                 </div>
             </div>
         </section>
@@ -245,7 +255,18 @@
                         
                         <div class="form-group" style="background: rgba(0,0,0,0.2); padding: 1.5rem; border-radius: 15px; text-align: center; border: 1px dashed rgba(34,211,238,0.5);">
                             <label style="color: #22d3ee; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 1px;">Scan & Pay Registration Fee</label>
-                            <img src="img1.png" alt="Finance QR Code" style="width: 180px; height: 180px; object-fit: cover; border-radius: 10px; margin: 15px auto; display: block; border: 2px solid #22d3ee; box-shadow: 0 0 15px rgba(34,211,238,0.3);">
+                            
+                            <!-- QR Code Clickable View -->
+                            <div style="position: relative; width: 180px; margin: 15px auto; cursor: pointer;" onclick="openQRModal()">
+                                <img src="img1.png" alt="Finance QR Code" style="width: 100%; height: 180px; object-fit: cover; border-radius: 10px; display: block; border: 2px solid #22d3ee; box-shadow: 0 0 15px rgba(34,211,238,0.3);">
+                                <div style="position: absolute; bottom: 8px; right: 8px; background: rgba(0,0,0,0.7); padding: 6px; border-radius: 5px;"><i class="fas fa-expand-arrows-alt" style="color: #22d3ee;"></i></div>
+                            </div>
+                            
+                            <!-- Deep Link UPI Payment Button -->
+                            <a href="upi://pay?pa=YOUR_UPI_ID_HERE@bank&pn=TechKriti2026&cu=INR" class="btn-main" style="display: block; margin-bottom: 20px; padding: 12px; background: linear-gradient(135deg, #10b981, #059669); font-size: 1rem; text-decoration: none;">
+                                <i class="fas fa-mobile-alt"></i> Pay directly via UPI Apps
+                            </a>
+
                             <p style="font-size: 0.85rem; color: #cbd5e1; margin-bottom: 10px;">Upload payment screenshot (Max 1MB)</p>
                             <input type="file" id="paymentScreenshot" accept="image/png, image/jpeg" required>
                         </div>
@@ -349,6 +370,14 @@
         </section>
     </main>
 
+    <!-- Full Screen QR Code Modal -->
+    <div id="qrModal" class="dropdown-overlay" onclick="closeQRModal()">
+        <div style="position: relative; max-width: 90vw; max-height: 90vh;">
+            <span style="position: absolute; top: -40px; right: 0; color: white; font-size: 2.5rem; cursor: pointer;">&times;</span>
+            <img src="img1.png" style="width: 100%; max-width: 400px; border-radius: 15px; border: 3px solid #22d3ee; box-shadow: 0 0 30px rgba(34,211,238,0.5);">
+        </div>
+    </div>
+
     <footer class="liquid-glass" style="border-radius: 0; border: none; border-top: 1px solid rgba(255,255,255,0.1);">
         <p>TECH KRITI | DSEU Rajokri Campus</p>
         <span class="contact-tag">Designed by: DSEU RAJOKRI INNOVATION CLUB </span>
@@ -357,7 +386,17 @@
     <script>
         const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwdJs-t1u5Fxa_sOl9EQ6lJVYnwmnrJC4RUYmbh_JHk-_CkRKNlgzFWrXkynv49TR_K/exec";
 
+        // Mobile Menu Toggle
+        function toggleMenu() {
+            document.getElementById('navLinks').classList.toggle('active');
+        }
+
+        // QR Modal Controls
+        function openQRModal() { document.getElementById('qrModal').classList.add('active'); }
+        function closeQRModal() { document.getElementById('qrModal').classList.remove('active'); }
+
         function navigateTo(pageId) {
+            document.getElementById('navLinks').classList.remove('active'); // Close menu on click
             if (pageId === 'admin') {
                 const token = sessionStorage.getItem("admin_token");
                 if (!token) { pageId = 'admin-login'; } else { pageId = 'admin-dashboard'; loadAdminData(); }
@@ -407,21 +446,6 @@
                 errorMsg.style.display = 'block';
             });
         });
-
-        function showDay(day) {
-            const day1List = document.getElementById('day1List'); const day2List = document.getElementById('day2List');
-            const day1Btn = document.getElementById('day1Btn'); const day2Btn = document.getElementById('day2Btn');
-
-            if(day === 1) {
-                day1List.style.display = 'block'; day2List.style.display = 'none';
-                day1Btn.classList.add('active-day'); day2Btn.classList.remove('active-day');
-                day1Btn.style.background = 'rgba(99, 102, 241, 0.8)'; day2Btn.style.background = 'rgba(255,255,255,0.03)';
-            } else {
-                day1List.style.display = 'none'; day2List.style.display = 'block';
-                day2Btn.classList.add('active-day'); day1Btn.classList.remove('active-day');
-                day2Btn.style.background = 'rgba(99, 102, 241, 0.8)'; day1Btn.style.background = 'rgba(255,255,255,0.03)';
-            }
-        }
 
         const overlay = document.createElement('div');
         overlay.className = 'dropdown-overlay';
@@ -544,7 +568,6 @@
             });
         });
 
-        // Student Portal & Custom Ticket ID Logic: DSEU-[PhoneLast4]-[NameFirst4]
         document.getElementById('studentLoginForm').addEventListener('submit', function(e) {
             e.preventDefault();
             const roll = document.getElementById('studentRoll').value;
