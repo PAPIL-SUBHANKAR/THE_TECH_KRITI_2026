@@ -1,8 +1,8 @@
 <!-- 
 =========================================================
   TECH KRITI 2026 - OFFICIAL WEBSITE
-  Liquid Glass Edition (With Secure Admin, Payment, Student Portal & Mobile UI)
-  Developed & Designed by: Subhankar Papil from rajokri campus
+  Liquid Glass Edition (Fixed Payment URL Fetch & Ticket)
+  Developed & Designed by: Subhankar Papil from Rajokri Campus
 =========================================================
 -->
 <!DOCTYPE html>
@@ -26,18 +26,21 @@
 
         @keyframes float { 0% { transform: translate(0, 0) scale(1); } 100% { transform: translate(10%, 10%) scale(1.1); } }
 
+        .floating-emoji { position: fixed; top: -60px; font-size: 2.5rem; z-index: -1; pointer-events: none; filter: drop-shadow(0 5px 10px rgba(0,0,0,0.5)); animation: floatDown linear forwards; opacity: 0.6; transition: filter 0.4s ease, opacity 0.4s ease; }
+        @keyframes floatDown { 0% { transform: translateY(0) rotate(-15deg); opacity: 0; } 10% { opacity: 0.8; } 90% { opacity: 0.8; } 100% { transform: translateY(110vh) rotate(360deg); opacity: 0; } }
+
         .liquid-glass { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.05); border-top: 1px solid rgba(255, 255, 255, 0.2); border-left: 1px solid rgba(255, 255, 255, 0.1); box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3), inset 0 0 10px rgba(255, 255, 255, 0.02); border-radius: 20px; }
 
         nav { position: fixed; top: 0; width: 100%; background: rgba(10, 10, 20, 0.4); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); display: flex; justify-content: space-between; align-items: center; padding: 1rem 5%; z-index: 1000; border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
-        .logo { font-size: 1.5rem; font-weight: 800; background: linear-gradient(to right, #6366f1, #22d3ee); -webkit-background-clip: text; color: transparent; cursor: pointer; }
+        .logo { font-size: 1.5rem; font-weight: 800; background: linear-gradient(to right, #6366f1, #22d3ee); -webkit-background-clip: text; color: transparent; cursor: pointer; transition: transform 0.3s ease; }
+        .logo:hover { transform: scale(1.05); }
         
         .nav-links { display: flex; gap: 2rem; align-items: center; }
-        .nav-links button { background: none; border: none; color: #fff; font-size: 1rem; font-weight: 600; cursor: pointer; transition: color 0.3s; }
-        .nav-links button:hover { color: #22d3ee; }
-        .admin-link { color: #ec4899 !important; } .admin-link:hover { color: #f472b6 !important; }
-        .student-link { color: #a78bfa !important; } .student-link:hover { color: #c4b5fd !important; }
+        .nav-links button { background: none; border: none; color: #fff; font-size: 1rem; font-weight: 600; cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; gap: 6px; }
+        .nav-links button:hover { color: #22d3ee; transform: translateY(-2px); text-shadow: 0 0 10px rgba(34, 211, 238, 0.5); }
+        .admin-link { color: #ec4899 !important; } .admin-link:hover { color: #f472b6 !important; text-shadow: 0 0 10px rgba(236, 72, 153, 0.5); }
+        .student-link { color: #a78bfa !important; } .student-link:hover { color: #c4b5fd !important; text-shadow: 0 0 10px rgba(167, 139, 250, 0.5); }
 
-        /* Mobile Hamburger Icon */
         .hamburger { display: none; flex-direction: column; cursor: pointer; gap: 5px; z-index: 1001; }
         .hamburger span { width: 30px; height: 3px; background: #22d3ee; border-radius: 3px; transition: 0.3s; }
 
@@ -48,53 +51,67 @@
         .container { max-width: 1000px; margin: 0 auto; padding: 2rem; }
         .admin-container { max-width: 1200px; margin: 0 auto; padding: 2rem; }
         
-        .back-btn { background: rgba(255, 255, 255, 0.05); color: #fff; border: 1px solid rgba(255, 255, 255, 0.2); padding: 0.6rem 1.2rem; border-radius: 25px; cursor: pointer; font-weight: 600; display: inline-flex; align-items: center; gap: 8px; backdrop-filter: blur(10px); margin-bottom: 1.5rem; transition: transform 0.3s, background 0.3s; }
-        .back-btn:hover { transform: translateX(-5px); background: rgba(255, 255, 255, 0.1); }
+        .back-btn { background: rgba(255, 255, 255, 0.05); color: #fff; border: 1px solid rgba(255, 255, 255, 0.2); padding: 0.6rem 1.2rem; border-radius: 25px; cursor: pointer; font-weight: 600; display: inline-flex; align-items: center; gap: 8px; backdrop-filter: blur(10px); margin-bottom: 1.5rem; transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); position: relative; overflow: hidden; }
+        .back-btn:hover { transform: translateX(-5px) scale(1.05); background: rgba(255, 255, 255, 0.1); box-shadow: 0 5px 15px rgba(255,255,255,0.1); }
 
-        .hero { text-align: center; margin-top: 4rem; }
+        .hero { text-align: center; margin-top: 2rem; }
         
-        .btn-main { background: linear-gradient(135deg, rgba(99, 102, 241, 0.6), rgba(14, 165, 233, 0.6)); color: white; border: 1px solid rgba(255,255,255,0.3); border-top: 1px solid rgba(255,255,255,0.5); padding: 1rem 2.5rem; font-size: 1.1rem; border-radius: 30px; font-weight: 600; cursor: pointer; backdrop-filter: blur(10px); box-shadow: 0 10px 20px -10px rgba(14, 165, 233, 0.8), inset 0 2px 5px rgba(255,255,255,0.2); transition: transform 0.3s, box-shadow 0.3s, filter 0.3s, opacity 0.3s; }
-        .btn-main:hover { transform: translateY(-3px); box-shadow: 0 15px 25px -5px rgba(99, 102, 241, 0.9), inset 0 2px 5px rgba(255,255,255,0.4); }
-        .btn-main:disabled { opacity: 0.5; cursor: not-allowed; }
+        .btn-main { background: linear-gradient(135deg, rgba(99, 102, 241, 0.8), rgba(14, 165, 233, 0.8)); color: white; border: 1px solid rgba(255,255,255,0.3); border-top: 1px solid rgba(255,255,255,0.6); padding: 1rem 2.5rem; font-size: 1.1rem; border-radius: 30px; font-weight: 600; cursor: pointer; backdrop-filter: blur(10px); box-shadow: 0 10px 20px -5px rgba(14, 165, 233, 0.6), inset 0 2px 5px rgba(255,255,255,0.3); transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); position: relative; overflow: hidden; z-index: 1; display: inline-flex; align-items: center; justify-content: center; gap: 10px; }
+        .btn-main::before { content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent); transform: skewX(-25deg); transition: all 0.5s ease; z-index: -1; }
+        .btn-main:hover::before { left: 150%; transition: all 0.7s ease; }
+        .btn-main:hover { transform: translateY(-5px) scale(1.03); box-shadow: 0 15px 30px -5px rgba(99, 102, 241, 0.8), 0 0 20px rgba(34, 211, 238, 0.5), inset 0 2px 5px rgba(255,255,255,0.5); }
+        .btn-main:active { transform: translateY(2px) scale(0.98); }
+        .btn-main:disabled { opacity: 0.5; cursor: not-allowed; transform: none !important; box-shadow: none !important; }
 
-        .event-card { padding: 1.5rem; margin-bottom: 1.5rem; display: flex; gap: 1.5rem; align-items: flex-start; transition: transform 0.3s, border-left 0.3s; }
-        .event-card:hover { transform: translateY(-5px); border-left: 5px solid #22d3ee; background: rgba(255, 255, 255, 0.08); }
-        .time-badge { background: rgba(99, 102, 241, 0.2); color: #22d3ee; padding: 0.5rem 1rem; border-radius: 10px; font-weight: bold; min-width: 160px; text-align: center; font-size: 0.9rem; border: 1px solid rgba(255,255,255,0.1); }
-        .event-details h3 { margin-bottom: 0.5rem; font-size: 1.2rem; }
-        .event-details p { font-size: 0.95rem; opacity: 0.8; line-height: 1.5; }
+        .btn-schedule { background: linear-gradient(135deg, rgba(236, 72, 153, 0.7), rgba(168, 85, 247, 0.7)); color: white; border: 1px solid rgba(255,255,255,0.4); border-top: 1px solid rgba(255,255,255,0.7); padding: 1rem 2.5rem; font-size: 1.1rem; border-radius: 30px; font-weight: 600; cursor: pointer; backdrop-filter: blur(10px); transition: all 0.3s ease; display: inline-flex; align-items: center; gap: 8px; animation: pulseGlow 2s infinite; }
+        .btn-schedule:hover { transform: translateY(-5px) scale(1.05); box-shadow: 0 0 25px rgba(236, 72, 153, 0.8), inset 0 2px 5px rgba(255,255,255,0.5); animation: none; }
+        .btn-schedule:hover i { animation: bounceIcon 0.5s ease infinite alternate; }
+        
+        @keyframes pulseGlow { 0% { box-shadow: 0 0 10px rgba(236, 72, 153, 0.4); } 50% { box-shadow: 0 0 25px rgba(236, 72, 153, 0.8); } 100% { box-shadow: 0 0 10px rgba(236, 72, 153, 0.4); } }
+        @keyframes bounceIcon { from { transform: translateY(0); } to { transform: translateY(-4px) scale(1.1); color: #fff; } }
+
+        .def-box { max-width: 750px; margin: 0 auto 3rem auto; padding: 2rem; border-left: 4px solid #22d3ee; text-align: left; transition: transform 0.3s, box-shadow 0.3s; }
+        .def-box:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(34,211,238,0.2); background: rgba(255, 255, 255, 0.05); }
+
+        .event-card { padding: 1.5rem; margin-bottom: 1.5rem; display: flex; gap: 1.5rem; align-items: flex-start; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); position: relative; overflow: hidden; border-left: 5px solid transparent; }
+        .event-card:hover { transform: translateY(-8px) scale(1.02); border-left: 5px solid #22d3ee; background: rgba(255, 255, 255, 0.08); box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4), inset 0 0 15px rgba(34, 211, 238, 0.1); }
+        .time-badge { background: rgba(99, 102, 241, 0.2); color: #22d3ee; padding: 0.5rem 1rem; border-radius: 10px; font-weight: bold; min-width: 190px; text-align: center; font-size: 0.9rem; border: 1px solid rgba(255,255,255,0.1); transition: all 0.3s ease; }
+        .event-card:hover .time-badge { background: rgba(34, 211, 238, 0.2); color: #fff; box-shadow: 0 0 15px rgba(34, 211, 238, 0.4); }
+        .event-details h3 { margin-bottom: 0.3rem; font-size: 1.2rem; display: flex; align-items: center; gap: 8px; transition: color 0.3s; }
+        .event-card:hover .event-details h3 { color: #22d3ee; }
+        .event-details p { font-size: 0.95rem; opacity: 0.8; line-height: 1.5; margin: 0; transition: opacity 0.3s; }
+        .event-card:hover .event-details p { opacity: 1; }
 
         .form-container { max-width: 650px; margin: 0 auto; padding: 2.5rem; position: relative; z-index: 10; }
         .login-box { max-width: 450px; margin: 4rem auto; }
-        .form-container h2 { transition: filter 0.3s, opacity 0.3s; }
-        .flex-row { display: flex; gap: 1rem; transition: filter 0.3s, opacity 0.3s; }
-        .form-group { margin-bottom: 1.5rem; flex: 1; text-align: left; position: relative; transition: filter 0.3s, opacity 0.3s; }
+        
+        .type-toggle { display: flex; background: rgba(0,0,0,0.4); border-radius: 30px; margin-bottom: 2rem; overflow: hidden; border: 1px solid rgba(255,255,255,0.1); padding: 5px; }
+        .type-btn { flex: 1; padding: 12px; text-align: center; font-weight: 600; cursor: pointer; border: none; background: transparent; color: #cbd5e1; border-radius: 25px; transition: 0.3s; font-size: 1rem; }
+        .type-btn.active { background: linear-gradient(135deg, #6366f1, #22d3ee); color: #fff; box-shadow: 0 5px 15px rgba(34, 211, 238, 0.4); }
+
+        .flex-row { display: flex; gap: 1rem; }
+        .form-group { margin-bottom: 1.5rem; flex: 1; text-align: left; position: relative; }
         .form-group label { display: block; margin-bottom: 0.5rem; font-weight: 600; font-size: 0.95rem; color: #e2e8f0; }
         
-        input[type="text"], input[type="email"], input[type="tel"], input[type="password"] { width: 100%; padding: 1rem; border-radius: 15px; background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1); border-top: 1px solid rgba(255, 255, 255, 0.2); color: white; font-size: 1rem; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); box-shadow: inset 0 2px 5px rgba(0,0,0,0.2); transition: all 0.3s ease; }
-        input:focus { outline: none; border-color: #22d3ee; background: rgba(255, 255, 255, 0.08); box-shadow: 0 0 15px rgba(34, 211, 238, 0.2), inset 0 2px 4px rgba(0,0,0,0.1); transform: translateY(-2px); }
+        input[type="text"], input[type="email"], input[type="tel"], input[type="password"] { width: 100%; padding: 1rem; border-radius: 15px; background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1); border-top: 1px solid rgba(255, 255, 255, 0.2); color: white; font-size: 1rem; backdrop-filter: blur(10px); transition: all 0.3s ease; }
+        input:focus { outline: none; border-color: #22d3ee; background: rgba(255, 255, 255, 0.08); box-shadow: 0 0 15px rgba(34, 211, 238, 0.2); transform: translateY(-2px); }
 
-        input[type="file"] { width: 100%; padding: 0.8rem; background: rgba(255,255,255,0.05); border-radius: 10px; border: 1px dashed rgba(255,255,255,0.3); color: #cbd5e1; cursor: pointer; }
+        input[type="file"] { width: 100%; padding: 0.8rem; background: rgba(255,255,255,0.05); border-radius: 10px; border: 1px dashed rgba(255,255,255,0.3); color: #cbd5e1; cursor: pointer; transition: 0.3s; }
         input[type="file"]::file-selector-button { background: #22d3ee; color: #000; border: none; padding: 5px 15px; border-radius: 8px; font-weight: 600; cursor: pointer; margin-right: 10px; transition: 0.3s; }
-        input[type="file"]::file-selector-button:hover { background: #6366f1; color: #fff; }
 
         select { display: none !important; }
-        .dropdown-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); z-index: 100; opacity: 0; visibility: hidden; transition: all 0.4s ease; display: flex; justify-content: center; align-items: center; }
-        .dropdown-overlay.active { opacity: 1; visibility: visible; }
 
-        .form-blur-active h2, .form-blur-active .btn-main, .form-blur-active p#statusMsg { filter: blur(6px); opacity: 0.3; pointer-events: none; }
-        .form-blur-active .form-group:not(.has-active) { filter: blur(6px); opacity: 0.3; pointer-events: none; }
-        .form-blur-active .admin-stats, .form-blur-active .glass-table-wrapper { filter: blur(6px); opacity: 0.3; pointer-events: none; }
-        .form-blur-active .admin-controls > *:not(.has-active) { filter: blur(6px); opacity: 0.3; pointer-events: none; }
+        .blur-sibling { filter: blur(6px) !important; opacity: 0.3 !important; pointer-events: none !important; transition: all 0.3s ease !important; }
 
         .custom-select { position: relative; width: 100%; }
-        .select-selected { width: 100%; padding: 1rem; border-radius: 15px; background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1); border-top: 1px solid rgba(255, 255, 255, 0.2); color: white; font-size: 1rem; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); box-shadow: inset 0 2px 5px rgba(0,0,0,0.2); cursor: pointer; display: flex; justify-content: space-between; align-items: center; transition: all 0.3s ease; }
+        .select-selected { width: 100%; padding: 1rem; border-radius: 15px; background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1); border-top: 1px solid rgba(255, 255, 255, 0.2); color: white; font-size: 1rem; backdrop-filter: blur(10px); cursor: pointer; display: flex; justify-content: space-between; align-items: center; transition: 0.3s; }
         .select-selected.active { border-color: #22d3ee; box-shadow: 0 0 15px rgba(34, 211, 238, 0.2); }
         
-        .select-items { position: absolute; top: 110%; left: 0; right: 0; z-index: 1000; border-radius: 15px; overflow: hidden; opacity: 0; visibility: hidden; transform: translateY(-15px); transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); background: linear-gradient(270deg, rgba(99,102,241,0.25), rgba(34,211,238,0.25), rgba(236,72,153,0.25)); background-size: 600% 600%; animation: gradientShift 4s ease infinite; backdrop-filter: blur(35px); -webkit-backdrop-filter: blur(35px); border: 1px solid rgba(255, 255, 255, 0.3); box-shadow: 0 15px 35px rgba(0,0,0,0.7); max-height: 250px; overflow-y: auto; }
+        .select-items { position: absolute; top: 110%; left: 0; right: 0; z-index: 10000; border-radius: 15px; overflow: hidden; opacity: 0; visibility: hidden; transform: translateY(-15px); transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); background: linear-gradient(270deg, rgba(99,102,241,0.25), rgba(34,211,238,0.25), rgba(236,72,153,0.25)); background-size: 600% 600%; animation: gradientShift 4s ease infinite; backdrop-filter: blur(35px); border: 1px solid rgba(255, 255, 255, 0.3); box-shadow: 0 15px 35px rgba(0,0,0,0.7); max-height: 250px; overflow-y: auto; }
         .select-items.select-show { opacity: 1; visibility: visible; transform: translateY(0); }
         
         @keyframes gradientShift { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
-        .select-items div { padding: 12px 16px; cursor: pointer; color: #fff; border-bottom: 1px solid rgba(255, 255, 255, 0.05); transition: all 0.3s ease; text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
+        .select-items div { padding: 12px 16px; cursor: pointer; color: #fff; border-bottom: 1px solid rgba(255, 255, 255, 0.05); transition: 0.3s; text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
         .select-items div:hover { background: rgba(255, 255, 255, 0.2); padding-left: 22px; border-left: 4px solid #22d3ee; }
         
         .admin-stats { display: flex; gap: 1.5rem; margin-bottom: 2rem; flex-wrap: wrap; transition: filter 0.3s; }
@@ -113,10 +130,12 @@
         .glass-table tr:hover { background: rgba(255,255,255,0.05); }
         .empty-state { text-align: center; padding: 3rem; color: #94a3b8; font-style: italic; }
         
-        .action-btn { background: rgba(34, 211, 238, 0.2); color: #22d3ee; border: 1px solid rgba(34, 211, 238, 0.4); padding: 6px 12px; border-radius: 8px; cursor: pointer; transition: 0.3s; margin-right: 5px; }
+        .action-btn { background: rgba(34, 211, 238, 0.2); color: #22d3ee; border: 1px solid rgba(34, 211, 238, 0.4); padding: 6px 12px; border-radius: 8px; cursor: pointer; transition: 0.3s; margin-right: 5px; text-decoration: none; display: inline-block; }
         .action-btn:hover { background: #22d3ee; color: #000; }
         .approve-btn { background: rgba(16, 185, 129, 0.2); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.4); }
         .approve-btn:hover { background: #10b981; color: #fff; }
+        .reject-btn { background: rgba(239, 68, 68, 0.2); color: #ef4444; border: 1px solid rgba(239, 68, 68, 0.4); }
+        .reject-btn:hover { background: #ef4444; color: #fff; }
 
         .digital-ticket-container { max-width: 500px; margin: 0 auto; text-align: center; display: none; }
         .digital-ticket { background: linear-gradient(135deg, rgba(99, 102, 241, 0.15), rgba(14, 165, 233, 0.15)); border: 2px solid #22d3ee; border-radius: 20px; padding: 2.5rem 2rem; text-align: center; box-shadow: 0 0 30px rgba(34,211,238,0.3); position: relative; }
@@ -125,20 +144,18 @@
         .ticket-info span { font-weight: bold; color: #22d3ee; }
         .ticket-id { font-size: 1.2rem; background: rgba(255,255,255,0.1); padding: 5px 15px; border-radius: 10px; color: #f472b6; letter-spacing: 2px; font-family: monospace; display: inline-block; margin-bottom: 15px; border: 1px solid rgba(244,114,182,0.3); }
 
-        footer { text-align: center; padding: 2rem; margin-top: 3rem; font-weight: 600; border-top: 1px solid rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); }
+        footer { text-align: center; padding: 2rem; margin-top: 3rem; font-weight: 600; border-top: 1px solid rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); position: relative; z-index: 10; }
         .contact-tag { color: #22d3ee; font-size: 1.1rem; margin-top: 0.5rem; display: block; }
         
-        .floating-emoji { position: fixed; top: -60px; font-size: 2.5rem; z-index: -1; pointer-events: none; filter: drop-shadow(0 5px 10px rgba(0,0,0,0.5)); animation: floatDown linear forwards; opacity: 0.6; transition: filter 0.4s ease, opacity 0.4s ease; }
-        body.dropdown-open .floating-emoji { filter: blur(12px) drop-shadow(0 5px 10px rgba(0,0,0,0.5)) !important; opacity: 0.1 !important; }
-        @keyframes floatDown { 0% { transform: translateY(0) rotate(-15deg); opacity: 0; } 10% { opacity: 0.8; } 90% { opacity: 0.8; } 100% { transform: translateY(110vh) rotate(360deg); opacity: 0; } }
+        .qr-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); z-index: 2000; opacity: 0; visibility: hidden; transition: all 0.3s ease; display: flex; justify-content: center; align-items: center; }
+        .qr-overlay.active { opacity: 1; visibility: visible; }
         
         @media (max-width: 768px) {
             .hamburger { display: flex; }
             .nav-links { display: flex; flex-direction: column; position: absolute; top: 100%; right: -100%; width: 250px; background: rgba(10, 10, 20, 0.95); backdrop-filter: blur(20px); height: 100vh; padding-top: 2rem; transition: right 0.4s ease; border-left: 1px solid rgba(255,255,255,0.1); align-items: center; }
             .nav-links.active { right: 0; }
-            
             .event-card { flex-direction: column; gap: 1rem; } .time-badge { width: 100%; text-align: left; }
-            .hero h1 { font-size: 2.5rem !important; } 
+            .hero h1 { font-size: 2.8rem !important; } 
             .container { padding: 1.5rem; } .flex-row { flex-direction: column; gap: 0; }
             .form-group { margin-bottom: 1.2rem; } .form-container { padding: 1.5rem; }
             .admin-stats { flex-direction: column; } .admin-controls { flex-direction: column; }
@@ -150,16 +167,16 @@
     <div class="bg-blobs"><div class="blob1"></div><div class="blob2"></div><div class="blob3"></div></div>
 
     <nav>
-        <div class="logo" onclick="navigateTo('home')">TECH KRITI '26</div>
+        <div class="logo" onclick="navigateTo('home')">TECH KRITI '26 ⚡</div>
         <div class="hamburger" onclick="toggleMenu()">
             <span></span><span></span><span></span>
         </div>
         <div class="nav-links" id="navLinks">
-            <button onclick="navigateTo('home')">Home</button>
-            <button onclick="navigateTo('schedule')">Schedule</button>
-            <button onclick="navigateTo('register')">Register</button>
-            <button onclick="navigateTo('student-portal')" class="student-link">Student Portal 🎓</button>
-            <button onclick="navigateTo('admin')" class="admin-link">Admin <i class="fas fa-lock"></i></button>
+            <button onclick="navigateTo('home')"><i class="fas fa-home"></i> Home</button>
+            <button onclick="navigateTo('schedule')"><i class="fas fa-calendar-check"></i> Schedule</button>
+            <button onclick="navigateTo('register')"><i class="fas fa-ticket-alt"></i> Register</button>
+            <button onclick="navigateTo('student-portal')" class="student-link">Portal 🎓</button>
+            <button onclick="navigateTo('admin')" class="admin-link">Admin 🔒</button>
         </div>
     </nav>
 
@@ -169,19 +186,32 @@
             <div class="container hero" style="padding-top: 2rem;">
                 <div class="liquid-glass" style="display: inline-flex; align-items: center; gap: 8px; padding: 8px 20px; border-radius: 50px; margin-bottom: 20px; font-weight: 600; font-size: 0.9rem; color: #22d3ee;">
                     <span style="width: 10px; height: 10px; border-radius: 50%; background: #22d3ee; display: inline-block;"></span>
-                    📍VENUE : DSEU Rajokri Campus At 23rd October
-            
+                    📍 VENUE : DSEU Rajokri Campus | 23rd October
                 </div>
-                <h1 style="font-size: 4rem; line-height: 1.1; margin-bottom: 1.5rem; font-weight: 800; letter-spacing: -1px;">
+                
+                <h1 style="font-size: 4.5rem; line-height: 1.1; margin-bottom: 1rem; font-weight: 800; letter-spacing: -1px;">
                     Step Into the Future at <br>
                     <span style="background: linear-gradient(to right, #22d3ee, #6366f1); -webkit-background-clip: text; color: transparent;">TECH KRITI</span>
                 </h1>
-                <p style="font-size: 1.2rem; margin-bottom: 3rem; opacity: 0.9; max-width: 700px; margin-left: auto; margin-right: auto; line-height: 1.6;">
-                    DSEU Rajokri's biggest tech and cultural fest is here! Intense coding battles, mind-bending AI challenges, electrifying performances, and non-stop entertainment. 
-                </p>
+
+                <div class="def-box liquid-glass">
+                    <h3 style="color: #22d3ee; margin-bottom: 5px; font-size: 1.5rem; display:flex; align-items:center; gap:10px;">
+                        Tech Kriti <span style="color: #cbd5e1; font-weight: 300; font-size: 1.1rem; font-family: monospace;">/tɛk ˈkriːti/</span>
+                    </h3>
+                    <p style="color: #a78bfa; font-style: italic; margin-bottom: 10px;">noun</p>
+                    <p style="font-size: 1.05rem; line-height: 1.6; color: #e2e8f0;">
+                        <strong>1.</strong> The ultimate convergence of technology, art, and human ingenuity.<br>
+                        <strong>2.</strong> A grand spectacle at DSEU Rajokri where brilliant minds battle in code, creativity, and culture.
+                    </p>
+                </div>
+                
                 <div style="display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap;">
-                    <button class="btn-main" onclick="navigateTo('register')"><i class="fas fa-ticket-alt"></i> Get Digital Pass</button>
-                    <button class="btn-main" onclick="navigateTo('schedule')" style="background: rgba(255,255,255,0.05); color: #fff; box-shadow: none;"><i class="fas fa-calendar-alt"></i> View Schedule</button>
+                    <button class="btn-main" onclick="navigateTo('register')">
+                        <i class="fas fa-ticket-alt"></i> Get Digital Pass
+                    </button>
+                    <button class="btn-schedule" onclick="navigateTo('schedule')">
+                        <i class="fas fa-calendar-alt"></i> View Schedule
+                    </button>
                 </div>
             </div>
         </section>
@@ -190,89 +220,131 @@
         <section id="schedule" class="page-view">
             <div class="container">
                 <button class="back-btn" onclick="navigateTo('home')"><i class="fas fa-arrow-left"></i> Back to Home</button>
-                <h2 style="text-align: center; font-size: 2.5rem; margin-bottom: 2rem;">Event Schedule (23 October)</h2>
+                <h2 style="text-align: center; font-size: 2.5rem; margin-bottom: 2rem;">🗓️ Event Schedule (23 October)</h2>
                 
                 <div id="mainEventList">
-                    <div class="event-card liquid-glass"><div class="time-badge">9:30 AM</div><div class="event-details"><h3>Mega Entry & Check-in</h3><p>Gates open! Collect your participant badges and get ready.</p></div></div>
-                    
-                    <div class="event-card liquid-glass"><div class="time-badge">10:00 AM - 11:30 AM</div><div class="event-details"><h3>Prompt Engineering & Carrom</h3><p>AI challenges and indoor sports competitions kick off.</p></div></div>
-                    
-                    <div class="event-card liquid-glass"><div class="time-badge">11:30 AM - 1:00 PM</div><div class="event-details"><h3>Front End Battle</h3><p>Live coding competition to design the ultimate landing page.</p></div></div>
-                    
-                    <div class="event-card liquid-glass"><div class="time-badge">1:00 PM - 2:00 PM</div><div class="event-details"><h3>Singing Competition</h3><p>Melodious performances by our talented students.</p></div></div>
-                    
-                    <div class="event-card liquid-glass"><div class="time-badge">2:00 PM - 3:30 PM</div><div class="event-details"><h3>Dance Competition</h3><p>Solo and group performances to rock the stage.</p></div></div>
-                    
-                    <div class="event-card liquid-glass"><div class="time-badge">3:30 PM - 4:30 PM</div><div class="event-details"><h3>Stand-up Comedy</h3><p>Laugh out loud with the best comedians on campus.</p></div></div>
-                    
-                    <div class="event-card liquid-glass" style="border-left: 5px solid #22d3ee;"><div class="time-badge">4:30 PM Onwards</div><div class="event-details"><h3>Open DJ Party 🎧🔥</h3><p>The ultimate closing celebration!</p></div></div>
+                    <div class="event-card liquid-glass"><div class="time-badge">9:30 AM</div><div class="event-details"><h3>Mega Entry & Check-in 🎟️</h3><p>Gates open! Collect your participant badges and get ready.</p></div></div>
+                    <div class="event-card liquid-glass"><div class="time-badge">10:00 AM - 11:10 AM</div><div class="event-details"><h3>Front End Battle 💻</h3><p>Live coding competition to design the ultimate landing page.</p></div></div>
+                    <div class="event-card liquid-glass"><div class="time-badge">11:00 AM - 12:15 PM</div><div class="event-details"><h3>Memory Challenge 🧠</h3><p>Test your limits and cognitive skills in this intense contest.</p></div></div>
+                    <div class="event-card liquid-glass"><div class="time-badge">11:10 AM - 11:40 AM</div><div class="event-details"><h3>Prompt Engineering 🤖</h3><p>AI challenges and creative prompt battles.</p></div></div>
+                    <div class="event-card liquid-glass"><div class="time-badge">11:30 AM Onwards</div><div class="event-details"><h3>Food Stall 🍔</h3><p>Grab a bite, relax, and recharge yourself for the next events!</p></div></div>
+                    <div class="event-card liquid-glass"><div class="time-badge">12:00 PM - 12:30 PM</div><div class="event-details"><h3>Singing 🎤</h3><p>Melodious and soulful performances by talented students.</p></div></div>
+                    <div class="event-card liquid-glass"><div class="time-badge">12:30 PM - 1:00 PM</div><div class="event-details"><h3>Poetry ✍️</h3><p>Expressive and heart-touching spoken word poetry sessions.</p></div></div>
+                    <div class="event-card liquid-glass"><div class="time-badge">1:00 PM - 1:30 PM</div><div class="event-details"><h3>Cosplay 🦸‍♂️</h3><p>Showcase your favorite characters with amazing costumes!</p></div></div>
+                    <div class="event-card liquid-glass"><div class="time-badge">1:30 PM - 2:10 PM</div><div class="event-details"><h3>Stand-up Comedy 😂</h3><p>Laugh out loud with the best comedians on campus.</p></div></div>
+                    <div class="event-card liquid-glass"><div class="time-badge">2:10 PM - 2:30 PM</div><div class="event-details"><h3>Tech Debate 🗣️</h3><p>Fierce discussions on the future of technology and AI.</p></div></div>
+                    <div class="event-card liquid-glass"><div class="time-badge">2:30 PM - 3:40 PM</div><div class="event-details"><h3>Dance 💃</h3><p>Electrifying solo and group performances to rock the stage.</p></div></div>
+                    <div class="event-card liquid-glass"><div class="time-badge">3:40 PM - 4:00 PM</div><div class="event-details"><h3>Certification 🏆</h3><p>Award ceremony, winner announcements, and certificates.</p></div></div>
+                    <div class="event-card liquid-glass" style="border-left: 5px solid #ec4899;"><div class="time-badge" style="background: rgba(236, 72, 153, 0.2); color:#ec4899;">4:00 PM Onwards</div><div class="event-details"><h3>Open DJ For All 🎧🔥</h3><p>The ultimate closing celebration! Dance the evening away.</p></div></div>
                 </div>
             </div>
         </section>
 
-        <!-- Registration & Payment Form -->
+        <!-- Registration Form -->
         <section id="register" class="page-view">
             <div class="container">
                 <button class="back-btn" onclick="navigateTo('home')"><i class="fas fa-arrow-left"></i> Back to Home</button>
                 <div class="form-container liquid-glass" id="formBox">
-                    <h2 style="text-align: center; margin-bottom: 2rem;">Activity Registration</h2>
+                    
+                    <div class="type-toggle">
+                        <button type="button" id="btnDseu" class="type-btn active" onclick="setStudentType('DSEU')">DSEU Student (₹50)</button>
+                        <button type="button" id="btnOutsider" class="type-btn" onclick="setStudentType('Outsider')">Outsider (₹100)</button>
+                    </div>
+
+                    <h2 style="text-align: center; margin-bottom: 2rem;">🚀 Activity Registration</h2>
                     <form id="regForm">
                         <div class="form-group"><label>Full Name</label><input type="text" id="fullName" placeholder="Enter your full name" required></div>
-                        <div class="flex-row">
-                            <div class="form-group"><label>Roll Number</label><input type="text" id="rollNumber" placeholder="e.g., 0011223344" required></div>
-                            <div class="form-group">
-                                <label>Semester</label>
-                                <select id="semester" required>
-                                    <option value="" disabled selected>Select Semester</option>
-                                    <option value="1st Sem">1st Sem</option><option value="3rd Sem">3rd Sem</option>
-                                    <option value="5th Sem">5th Sem</option><option value="7th Sem">7th Sem</option>
-                                </select>
+                        
+                        <div id="dseuFields">
+                            <div class="flex-row">
+                                <div class="form-group"><label>Roll Number</label><input type="text" id="rollNumber" placeholder="e.g., 0011223344" required></div>
+                                <div class="form-group">
+                                    <label>Semester</label>
+                                    <select id="semester" required>
+                                        <option value="" disabled selected>Select Semester</option>
+                                        <option value="1st Sem">1st Sem</option><option value="3rd Sem">3rd Sem</option>
+                                        <option value="5th Sem">5th Sem</option><option value="7th Sem">7th Sem</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="flex-row">
+                                <div class="form-group"><label>Section</label><input type="text" id="section" placeholder="e.g., CS-A" required></div>
+                                <div class="form-group">
+                                    <label>Campus</label>
+                                    <select id="campus" required>
+                                        <option value="" disabled selected>Select Campus</option>
+                                        <option value="DSEU RAJOKRI CAMPUS">DSEU RAJOKRI CAMPUS</option>
+                                        <option value="DSEU DWARKA CAMPUS">DSEU DWARKA CAMPUS</option>
+                                        <option value="AMBEDKAR DSEU SHAKARPUR CAMPUS">AMBEDKAR DSEU SHAKARPUR CAMPUS</option>
+                                        <option value="ARYABHATT DSEU CAMPUS">ARYABHATT DSEU CAMPUS</option>
+                                        <option value="BHAI PARMANAND DSEU CAMPUS">BHAI PARMANAND DSEU CAMPUS</option>
+                                        <option value="DSEU JAFFARPUR CAMPUS">DSEU JAFFARPUR CAMPUS</option>
+                                        <option value="DSEU JHANDEWALAN CAMPUS">DSEU JHANDEWALAN CAMPUS</option>
+                                        <option value="DSEU MAYUR VIHAR CAMPUS">DSEU MAYUR VIHAR CAMPUS</option>
+                                        <option value="DSEU MEERABAI MAHARANI BAGH CAMPUS">DSEU MEERABAI MAHARANI BAGH CAMPUS</option>
+                                        <option value="DSEU OKHLA-II CAMPUS">DSEU OKHLA-II CAMPUS</option>
+                                        <option value="DSEU PITAMPURA CAMPUS">DSEU PITAMPURA CAMPUS</option>
+                                        <option value="DSEU PUSA I CAMPUS">DSEU PUSA I CAMPUS</option>
+                                        <option value="DSEU PUSA II CAMPUS">DSEU PUSA II CAMPUS</option>
+                                        <option value="DSEU RANHOLA CAMPUS">DSEU RANHOLA CAMPUS</option>
+                                        <option value="DSEU ROHINI CAMPUS">DSEU ROHINI CAMPUS</option>
+                                        <option value="DSEU SIRI FORT CAMPUS">DSEU SIRI FORT CAMPUS</option>
+                                        <option value="DSEU VIVEK VIHAR CAMPUS">DSEU VIVEK VIHAR CAMPUS</option>
+                                        <option value="DSEU WAZIRPUR-I CAMPUS">DSEU WAZIRPUR-I CAMPUS</option>
+                                        <option value="GB PANT DSEU OKHLA-III CAMPUS">GB PANT DSEU OKHLA-III CAMPUS</option>
+                                        <option value="Other">Other</option>
+                                    </select>
+                                    <input type="text" id="otherCampusInput" placeholder="Type campus name..." style="display: none; margin-top: 15px;">
+                                </div>
                             </div>
                         </div>
-                        <div class="flex-row">
-                            <div class="form-group"><label>Section</label><input type="text" id="section" placeholder="e.g., CS-A" required></div>
-                            <div class="form-group">
-                                <label>Campus</label>
-                                <select id="campus" required>
-                                    <option value="" disabled selected>Select Campus</option>
-                                    <option value="DSEU Rajokri">DSEU Rajokri</option><option value="DSEU Dwarka">DSEU Dwarka</option>
-                                    <option value="DSEU Okhla">DSEU Okhla</option><option value="Other">Other</option>
-                                </select>
-                                <input type="text" id="otherCampusInput" placeholder="Type campus name..." style="display: none; margin-top: 15px;">
-                            </div>
+
+                        <div id="outsiderFields" style="display:none;">
+                            <div class="form-group"><label>College / School / Organization</label><input type="text" id="collegeName" placeholder="Enter your institute or city"></div>
                         </div>
-                        <div class="form-group"><label>Email Address</label><input type="email" id="email" placeholder="student@dseu.ac.in" required></div>
+
+                        <div class="form-group"><label>Email Address</label><input type="email" id="email" placeholder="student@example.com" required></div>
                         <div class="form-group"><label>Phone Number</label><input type="tel" id="phone" placeholder="10-digit mobile number" required></div>
+                        
                         <div class="form-group">
-                            <label>Select Activity</label>
+                            <label>Select Activity / Stall</label>
                             <select id="eventChoice" required>
-                                <option value="" disabled selected>Choose an activity...</option>
+                                <option value="" disabled selected>Choose an activity or stall...</option>
                                 <option value="Viewer Pass">Viewer Pass (Non-Participant)</option>
-                                <option value="Prompt Engineering">Prompt Engineering</option><option value="Front End Battle">Front End Battle</option>
-                                <option value="Carrom Tournament">Carrom Tournament</option><option value="Dance Competition">Dance Competition</option>
-                                <option value="Singing Competition">Singing Competition</option><option value="Stand-up Comedy">Stand-up Comedy</option>
+                                <option value="Front End Battle">Front End Battle</option>
+                                <option value="Prompt Engineering">Prompt Engineering</option>
+                                <option value="Memory Challenge">Memory Challenge</option>
+                                <option value="Singing">Singing</option>
+                                <option value="Poetry">Poetry</option>
+                                <option value="Cosplay">Cosplay</option>
+                                <option value="Stand-up Comedy">Stand-up Comedy</option>
+                                <option value="Tech Debate">Tech Debate</option>
+                                <option value="Dance">Dance</option>
+                                <option value="Food Stall">Food Stall</option>
+                                <option value="Game Stall">Game Stall</option>
                             </select>
                         </div>
                         
                         <div class="form-group" style="background: rgba(0,0,0,0.2); padding: 1.5rem; border-radius: 15px; text-align: center; border: 1px dashed rgba(34,211,238,0.5);">
-                            <label style="color: #22d3ee; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 1px;">Scan & Pay Registration Fee</label>
+                            <label style="color: #22d3ee; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 1px;">Registration Fee Details</label>
+                            <p id="paymentAmountText" style="font-size: 1rem; color: #f472b6; margin-top: 5px; font-weight: bold;">⭐ ₹50 for DSEU student participation</p>
                             
-                            <!-- QR Code Clickable View -->
-                            <div style="position: relative; width: 180px; margin: 15px auto; cursor: pointer;" onclick="openQRModal()">
-                                <img src="img1.png" alt="Finance QR Code" style="width: 100%; height: 180px; object-fit: cover; border-radius: 10px; display: block; border: 2px solid #22d3ee; box-shadow: 0 0 15px rgba(34,211,238,0.3);">
-                                <div style="position: absolute; bottom: 8px; right: 8px; background: rgba(0,0,0,0.7); padding: 6px; border-radius: 5px;"><i class="fas fa-expand-arrows-alt" style="color: #22d3ee;"></i></div>
-                            </div>
-                            
-                            <!-- Deep Link UPI Payment Button -->
-                            <a href="upi://pay?pa=shub159753@oksbi&pn=TechKriti2026&cu=INR" class="btn-main" style="display: block; margin-bottom: 20px; padding: 12px; background: linear-gradient(135deg, #10b981, #059669); font-size: 1rem; text-decoration: none;">
-                                <i class="fas fa-mobile-alt"></i> Pay directly via UPI Apps
-                            </a>
+                            <div id="paymentSectionBox" style="display: block;">
+                                <div style="position: relative; width: 180px; margin: 15px auto; cursor: pointer;" onclick="openQRModal()">
+                                    <img src="img1.png" alt="Finance QR Code" style="width: 100%; height: 180px; object-fit: cover; border-radius: 10px; display: block; border: 2px solid #22d3ee; box-shadow: 0 0 15px rgba(34,211,238,0.3);">
+                                    <div style="position: absolute; bottom: 8px; right: 8px; background: rgba(0,0,0,0.7); padding: 6px; border-radius: 5px;"><i class="fas fa-expand-arrows-alt" style="color: #22d3ee;"></i></div>
+                                </div>
+                                
+                                <a id="upiLink" href="upi://pay?pa=shub159753@oksbi&pn=TechKriti2026&am=50&cu=INR" class="btn-main" style="display: inline-flex; width: 100%; justify-content: center; margin-bottom: 20px; padding: 12px; background: linear-gradient(135deg, #10b981, #059669); font-size: 1rem; text-decoration: none;">
+                                    <i class="fas fa-mobile-alt"></i> Pay directly via UPI Apps
+                                </a>
 
-                            <p style="font-size: 0.85rem; color: #cbd5e1; margin-bottom: 10px;">Upload payment screenshot (Max 1MB)</p>
-                            <input type="file" id="paymentScreenshot" accept="image/png, image/jpeg" required>
+                                <p style="font-size: 0.85rem; color: #cbd5e1; margin-bottom: 10px;">Upload payment screenshot (Max 1MB)</p>
+                                <input type="file" id="paymentScreenshot" accept="image/png, image/jpeg" required>
+                            </div>
                         </div>
 
-                        <button type="submit" id="submitBtn" class="btn-main" style="width: 100%; margin-top: 10px;">Register & Submit Payment</button>
+                        <button type="submit" id="submitBtn" class="btn-main" style="width: 100%; margin-top: 10px;">Submit Registration ✨</button>
                         <p id="statusMsg" style="text-align:center; margin-top:15px; font-weight:bold;"></p>
                     </form>
                 </div>
@@ -287,9 +359,9 @@
                     <h2 style="text-align: center; margin-bottom: 2rem; color: #a78bfa;">Student Portal 🎓</h2>
                     <p style="text-align: center; margin-bottom: 1rem; color: #cbd5e1; font-size: 0.9rem;">Check your registration status & download your digital ticket.</p>
                     <form id="studentLoginForm">
-                        <div class="form-group"><label>Roll Number</label><input type="text" id="studentRoll" placeholder="Enter Roll Number" required></div>
+                        <div class="form-group"><label>Roll Number / OS Number</label><input type="text" id="studentRoll" placeholder="e.g. 00112233 or OS-9876" required></div>
                         <div class="form-group"><label>Phone Number</label><input type="tel" id="studentPhone" placeholder="Enter registered phone no." required></div>
-                        <button type="submit" id="studentLoginBtn" class="btn-main" style="width: 100%; margin-top: 10px; background: linear-gradient(135deg, #8b5cf6, #c084fc);">Check Status</button>
+                        <button type="submit" id="studentLoginBtn" class="btn-main" style="width: 100%; margin-top: 10px; background: linear-gradient(135deg, #8b5cf6, #c084fc);">Check Status 🔍</button>
                         <p id="studentError" style="color: #f87171; text-align: center; margin-top: 15px; display: none; font-weight: 600;"></p>
                     </form>
                 </div>
@@ -300,12 +372,12 @@
                         <div class="ticket-id" id="tTicketId">DSEU-XXXX-XXXX</div> <br>
                         <div class="ticket-info">
                             Name: <span id="tName">--</span> <br>
-                            Roll No: <span id="tRoll">--</span> <br>
-                            Event: <span id="tEvent">--</span> <br>
-                            Status: <span id="tStatus" style="color: #10b981;">VERIFIED & APPROVED</span>
+                            Roll No / ID: <span id="tRoll">--</span> <br>
+                            Event / Stall: <span id="tEvent">--</span> <br>
+                            Status: <span id="tStatus" style="color: #10b981;">VERIFIED & APPROVED ✅</span>
                         </div>
                         <br>
-                        <div style="font-family: 'Libre Barcode 39', cursive; font-size: 3rem; letter-spacing: 5px; opacity: 0.7;">*148741TECH*</div>
+                        <div style="font-family: 'Libre Barcode 39', cursive; font-size: 3rem; letter-spacing: 5px; opacity: 0.7;">*#TK26*</div>
                     </div>
                     <button onclick="downloadTicket()" class="btn-main" style="margin-top: 25px; background: linear-gradient(135deg, #10b981, #34d399); width: 100%;">
                         <i class="fas fa-download"></i> Download Pass (PNG)
@@ -319,7 +391,7 @@
             <div class="container">
                 <button class="back-btn" onclick="navigateTo('home')"><i class="fas fa-arrow-left"></i> Back to Home</button>
                 <div class="form-container liquid-glass login-box">
-                    <h2 style="text-align: center; margin-bottom: 2rem; color: #ec4899;">Admin Login <i class="fas fa-lock"></i></h2>
+                    <h2 style="text-align: center; margin-bottom: 2rem; color: #ec4899;">Admin Login 🔒</h2>
                     <form id="loginForm">
                         <div class="form-group"><label>Username</label><input type="text" id="adminUser" placeholder="Enter username" required></div>
                         <div class="form-group"><label>Password</label><input type="password" id="adminPass" placeholder="Enter password" required></div>
@@ -334,7 +406,7 @@
         <section id="admin-dashboard" class="page-view">
             <div class="admin-container" id="adminDashboardView">
                 <button class="back-btn" onclick="logoutAdmin()"><i class="fas fa-sign-out-alt"></i> Logout</button>
-                <h2 style="margin-bottom: 2rem; font-size: 2.5rem;">Organizer Dashboard</h2>
+                <h2 style="margin-bottom: 2rem; font-size: 2.5rem;">Organizer Dashboard 📊</h2>
                 
                 <div class="admin-stats">
                     <div class="stat-card liquid-glass"><h3 id="statTotal">--</h3><p>Total Registrations</p></div>
@@ -342,17 +414,31 @@
                 </div>
 
                 <div class="admin-controls">
-                    <div class="search-box"><input type="text" id="adminSearch" placeholder="Search by name, roll no..." onkeyup="filterAdminTable()"></div>
-                    <div class="filter-box has-active">
-                        <select id="adminFilter" onchange="filterAdminTable()">
-                            <option value="All">All Events</option>
-                            <option value="Prompt Engineering">Prompt Engineering</option>
+                    <div class="search-box"><input type="text" id="adminSearch" placeholder="Search by name, roll no..." onkeyup="renderAdminTable()"></div>
+                    
+                    <div class="filter-box">
+                        <select id="adminTypeFilter" onchange="renderAdminTable()">
+                            <option value="All">All Participants</option>
+                            <option value="DSEU">DSEU Students Only</option>
+                            <option value="Outsider">Outsiders Only</option>
+                        </select>
+                    </div>
+
+                    <div class="filter-box">
+                        <select id="adminFilter" onchange="renderAdminTable()">
+                            <option value="All">All Events & Stalls</option>
                             <option value="Viewer Pass">Viewer Pass</option>
                             <option value="Front End Battle">Front End Battle</option>
-                            <option value="Carrom Tournament">Carrom Tournament</option>
-                            <option value="Dance Competition">Dance Competition</option>
-                            <option value="Singing Competition">Singing Competition</option>
+                            <option value="Prompt Engineering">Prompt Engineering</option>
+                            <option value="Memory Challenge">Memory Challenge</option>
+                            <option value="Singing">Singing</option>
+                            <option value="Poetry">Poetry</option>
+                            <option value="Cosplay">Cosplay</option>
                             <option value="Stand-up Comedy">Stand-up Comedy</option>
+                            <option value="Tech Debate">Tech Debate</option>
+                            <option value="Dance">Dance</option>
+                            <option value="Food Stall">Food Stall</option>
+                            <option value="Game Stall">Game Stall</option>
                         </select>
                     </div>
                 </div>
@@ -360,7 +446,7 @@
                 <div class="glass-table-wrapper liquid-glass">
                     <table class="glass-table">
                         <thead>
-                            <tr><th>Name</th><th>Roll No</th><th>Event</th><th>Status</th><th>Actions</th></tr>
+                            <tr><th>Name</th><th>Roll No / College</th><th>Event / Stall</th><th>Status</th><th>Actions</th></tr>
                         </thead>
                         <tbody id="adminTableBody">
                             <tr><td colspan="5" class="empty-state"><i class="fas fa-spinner fa-spin"></i> Fetching Live Data...</td></tr>
@@ -372,7 +458,7 @@
     </main>
 
     <!-- Full Screen QR Code Modal -->
-    <div id="qrModal" class="dropdown-overlay" onclick="closeQRModal()">
+    <div id="qrModal" class="qr-overlay" onclick="closeQRModal()">
         <div style="position: relative; max-width: 90vw; max-height: 90vh;">
             <span style="position: absolute; top: -40px; right: 0; color: white; font-size: 2.5rem; cursor: pointer;">&times;</span>
             <img src="img1.png" style="width: 100%; max-width: 400px; border-radius: 15px; border: 3px solid #22d3ee; box-shadow: 0 0 30px rgba(34,211,238,0.5);">
@@ -381,23 +467,48 @@
 
     <footer class="liquid-glass" style="border-radius: 0; border: none; border-top: 1px solid rgba(255,255,255,0.1);">
         <p>TECH KRITI | DSEU Rajokri Campus</p>
-        <span class="contact-tag">Designed by: DSEU RAJOKRI  </span>
+        <span class="contact-tag">Designed by: DSEU RAJOKRI ✨</span>
     </footer>
 
     <script>
         const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwdJs-t1u5Fxa_sOl9EQ6lJVYnwmnrJC4RUYmbh_JHk-_CkRKNlgzFWrXkynv49TR_K/exec";
 
-        // Mobile Menu Toggle
-        function toggleMenu() {
-            document.getElementById('navLinks').classList.toggle('active');
+        let isOutsider = false;
+
+        function calculateFee() {
+            let currentFee = isOutsider ? 100 : 50;
+            let feeText = `⭐ ₹${currentFee} for ${isOutsider ? 'Outsider' : 'DSEU student'} participation`;
+            
+            const payBox = document.getElementById('paymentSectionBox');
+            const upiLink = document.getElementById('upiLink');
+            const ssInput = document.getElementById('paymentScreenshot');
+            const paymentAmountText = document.getElementById('paymentAmountText');
+            
+            paymentAmountText.innerText = feeText;
+            payBox.style.display = 'block'; 
+            ssInput.setAttribute('required', 'true');
+            upiLink.href = `upi://pay?pa=shub159753@oksbi&pn=TechKriti2026&am=${currentFee}&cu=INR`;
+            upiLink.innerHTML = `<i class="fas fa-mobile-alt"></i> Pay ₹${currentFee} directly via UPI Apps`;
         }
 
-        // QR Modal Controls
+        function setStudentType(type) {
+            isOutsider = (type === 'Outsider');
+            document.getElementById('btnDseu').classList.toggle('active', !isOutsider);
+            document.getElementById('btnOutsider').classList.toggle('active', isOutsider);
+            
+            document.getElementById('dseuFields').style.display = isOutsider ? 'none' : 'block';
+            document.getElementById('outsiderFields').style.display = isOutsider ? 'block' : 'none';
+            document.getElementById('rollNumber').required = !isOutsider;
+            
+            calculateFee();
+        }
+
+        function toggleMenu() { document.getElementById('navLinks').classList.toggle('active'); }
         function openQRModal() { document.getElementById('qrModal').classList.add('active'); }
         function closeQRModal() { document.getElementById('qrModal').classList.remove('active'); }
 
         function navigateTo(pageId) {
-            document.getElementById('navLinks').classList.remove('active'); // Close menu on click
+            document.getElementById('navLinks').classList.remove('active'); 
             if (pageId === 'admin') {
                 const token = sessionStorage.getItem("admin_token");
                 if (!token) { pageId = 'admin-login'; } else { pageId = 'admin-dashboard'; loadAdminData(); }
@@ -425,7 +536,6 @@
             const pass = document.getElementById('adminPass').value;
             const errorMsg = document.getElementById('loginError');
             const btn = document.getElementById('loginBtn');
-            
             btn.innerText = "Authenticating..."; btn.disabled = true; errorMsg.style.display = 'none';
 
             fetch(SCRIPT_URL, {
@@ -448,10 +558,7 @@
             });
         });
 
-        const overlay = document.createElement('div');
-        overlay.className = 'dropdown-overlay';
-        document.body.appendChild(overlay);
-
+        // --- DROPDOWN BLUR LOGIC ---
         function initCustomSelects() {
             document.querySelectorAll(".custom-select").forEach(el => {
                 const parent = el.parentNode; const select = el.querySelector("select");
@@ -483,14 +590,14 @@
                     e.stopPropagation(); const isClosed = !optionsDiv.classList.contains("select-show");
                     closeAllSelect();
                     if (isClosed) {
-                        optionsDiv.classList.add("select-show"); selectedDiv.classList.add("active"); overlay.classList.add("active"); 
-                        wrapper.style.zIndex = "1001"; const formBox = document.getElementById("formBox"); if(formBox) formBox.style.zIndex = "101"; 
-                        document.body.classList.add('dropdown-open');
-                        const regForm = document.getElementById('regForm'); const adminView = document.getElementById('adminDashboardView');
-                        if(wrapper.closest('#regForm')) regForm.classList.add('form-blur-active');
-                        if(wrapper.closest('#adminDashboardView')) adminView.classList.add('form-blur-active');
-                        const parentGroup = wrapper.closest('.form-group') || wrapper.closest('.filter-box');
-                        if(parentGroup) parentGroup.classList.add('has-active');
+                        optionsDiv.classList.add("select-show"); 
+                        selectedDiv.classList.add("active"); 
+                        wrapper.style.zIndex = "999"; 
+                        
+                        const elementsToBlur = document.querySelectorAll('.form-group, .admin-stats, .glass-table-wrapper, .search-box, .btn-main, h2, .type-toggle');
+                        elementsToBlur.forEach(el => {
+                            if (!el.contains(wrapper)) { el.classList.add('blur-sibling'); }
+                        });
                     }
                 });
             });
@@ -501,17 +608,14 @@
             document.querySelectorAll(".select-items").forEach(el => el.classList.remove("select-show"));
             document.querySelectorAll(".select-selected").forEach(el => el.classList.remove("active"));
             document.querySelectorAll(".custom-select").forEach(el => el.style.zIndex = "1");
-            const formBox = document.getElementById("formBox"); if(formBox) formBox.style.zIndex = "10";
-            overlay.classList.remove("active"); document.body.classList.remove('dropdown-open');
-            document.querySelectorAll('.form-blur-active').forEach(el => el.classList.remove('form-blur-active'));
-            document.querySelectorAll('.has-active').forEach(el => el.classList.remove('has-active'));
+            document.querySelectorAll('.blur-sibling').forEach(el => el.classList.remove('blur-sibling'));
         }
-        document.addEventListener("click", closeAllSelect); overlay.addEventListener("click", closeAllSelect);
+        document.addEventListener("click", closeAllSelect);
 
         document.getElementById('campus').addEventListener('change', function() {
             const otherInput = document.getElementById('otherCampusInput');
-            if (this.value === 'Other') { otherInput.style.display = 'block'; otherInput.setAttribute('required', 'true'); } 
-            else { otherInput.style.display = 'none'; otherInput.removeAttribute('required'); otherInput.value = ''; }
+            if (this.value === 'Other') { otherInput.style.display = 'block'; } 
+            else { otherInput.style.display = 'none'; }
         });
 
         let base64Image = ""; let mimeType = ""; let fileName = "";
@@ -531,81 +635,123 @@
             const btn = document.getElementById('submitBtn'); const status = document.getElementById('statusMsg');
             btn.innerText = "Processing & Saving..."; btn.disabled = true; status.innerText = "";
             
-            let finalCampus = document.getElementById('campus').value;
-            if (finalCampus === 'Other') finalCampus = document.getElementById('otherCampusInput').value;
+            let phoneVal = document.getElementById('phone').value;
+            let nameVal = document.getElementById('fullName').value;
             
-            const data = {
-                action: "register",
-                fullName: document.getElementById('fullName').value,
-                rollNumber: document.getElementById('rollNumber').value,
-                semester: document.getElementById('semester').value,
-                section: document.getElementById('section').value,
-                campus: finalCampus, 
-                email: document.getElementById('email').value,
-                phone: document.getElementById('phone').value,
-                eventChoice: document.getElementById('eventChoice').value,
-                imageBase64: base64Image, mimeType: mimeType, fileName: fileName
-            };
+            let finalCampus = "N/A";
+            let finalRoll = "N/A";
+            let finalSem = "N/A";
+            let finalSec = "N/A";
+            
+            if(isOutsider) {
+                finalCampus = document.getElementById('collegeName').value || "Outsider";
+                finalRoll = "OS-" + (phoneVal.length >= 4 ? phoneVal.slice(-4) : "1234");
+            } else {
+                finalCampus = document.getElementById('campus').value;
+                if (finalCampus === 'Other') finalCampus = document.getElementById('otherCampusInput').value;
+                finalRoll = document.getElementById('rollNumber').value;
+                finalSem = document.getElementById('semester').value;
+                finalSec = document.getElementById('section').value;
+            }
 
-            fetch(SCRIPT_URL, { 
-                method: 'POST', 
-                headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-                body: JSON.stringify(data) 
-            })
+            let finalEvent = document.getElementById('eventChoice').value;
+
+            fetch(SCRIPT_URL)
             .then(res => res.json())
+            .then(existingData => {
+                let isDuplicate = false;
+                if(Array.isArray(existingData)) {
+                     isDuplicate = existingData.some(item => 
+                        item && item.fullName && typeof item.fullName === 'string' &&
+                        item.fullName.toLowerCase() === nameVal.toLowerCase() && 
+                        item.phone === phoneVal
+                    );
+                }
+
+                if(isDuplicate) {
+                    status.innerText = "❌ Error: A registration with this Name and Phone Number already exists!";
+                    status.style.color = "#f87171";
+                    btn.innerText = "Submit Registration ✨"; btn.disabled = false;
+                    return; 
+                }
+
+                let phoneSuffix = phoneVal.length >= 4 ? phoneVal.slice(-4) : "0000";
+                let namePrefix = nameVal.replace(/\s+/g, '').substring(0, 4).toUpperCase();
+                let generatedTicket = `DSEU-${phoneSuffix}-${namePrefix}`;
+                
+                const data = {
+                    action: "register", fullName: nameVal, rollNumber: finalRoll,
+                    semester: finalSem, section: finalSec,
+                    campus: finalCampus, email: document.getElementById('email').value, phone: phoneVal,
+                    eventChoice: finalEvent, ticketId: generatedTicket,
+                    imageBase64: base64Image, mimeType: mimeType, fileName: fileName,
+                    studentType: isOutsider ? "Outsider" : "DSEU"
+                };
+
+                return fetch(SCRIPT_URL, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(data) });
+            })
+            .then(res => res ? res.json() : null)
             .then(res => {
-                if(res.result === "success") {
-                    status.innerText = "🎉 Registration Submitted! Check Student Portal later.";
-                    status.style.color = "#22d3ee";
-                    btn.innerText = "Register & Submit Payment"; btn.disabled = false;
+                if(res && res.result === "success") {
+                    status.innerText = "🎉 Registration Submitted! Check Student Portal later."; status.style.color = "#22d3ee";
+                    btn.innerText = "Submit Registration ✨"; btn.disabled = false;
                     document.getElementById('regForm').reset();
                     document.querySelectorAll('#regForm .select-selected span').forEach(span => span.innerText = "Select Option");
-                    document.getElementById('otherCampusInput').style.display = 'none';
+                    document.getElementById('otherCampusInput').style.display = 'none'; 
+                    setStudentType('DSEU');
                     base64Image = ""; 
                 }
             }).catch(err => {
                 status.innerText = "❌ Connection error."; status.style.color = "red";
-                btn.innerText = "Register & Submit Payment"; btn.disabled = false;
+                btn.innerText = "Submit Registration ✨"; btn.disabled = false;
             });
         });
 
+        // 🚀 STUDENT PORTAL STATUS UPDATE (Includes Rejection Reason)
         document.getElementById('studentLoginForm').addEventListener('submit', function(e) {
             e.preventDefault();
             const roll = document.getElementById('studentRoll').value;
             const phone = document.getElementById('studentPhone').value;
             const btn = document.getElementById('studentLoginBtn');
             const err = document.getElementById('studentError');
-            
             btn.innerText = "Checking..."; btn.disabled = true; err.style.display = 'none';
 
             fetch(SCRIPT_URL)
             .then(res => res.json())
             .then(data => {
                 btn.innerText = "Check Status"; btn.disabled = false;
-                const studentRecord = data.find(item => item.rollNumber == roll && item.phone == phone);
                 
+                if(!Array.isArray(data)) {
+                    err.innerText = "Network Error. Invalid data.";
+                    err.style.display = 'block';
+                    return;
+                }
+
+                const studentRecord = data.find(item => item && String(item.rollNumber).toLowerCase() == String(roll).toLowerCase() && item.phone == phone);
                 if(studentRecord) {
                     if(studentRecord.status === "Approved") {
                         document.getElementById('studentLoginBox').style.display = 'none';
                         document.getElementById('ticketDisplayContainer').style.display = 'block';
-                        
                         let phoneSuffix = studentRecord.phone.toString().slice(-4);
                         let namePrefix = studentRecord.fullName.replace(/\s+/g, '').substring(0, 4).toUpperCase();
                         document.getElementById('tTicketId').innerText = `DSEU-${phoneSuffix}-${namePrefix}`;
-                        
                         document.getElementById('tName').innerText = studentRecord.fullName;
                         document.getElementById('tRoll').innerText = studentRecord.rollNumber;
                         document.getElementById('tEvent').innerText = studentRecord.eventChoice;
+                        document.getElementById('tStatus').innerText = "VERIFIED & APPROVED ✅";
+                        
+                    } else if (studentRecord.status === "Rejected") {
+                        err.innerHTML = `❌ Registration Rejected.<br><span style="color:#cbd5e1; font-weight:normal;">Reason: ${studentRecord.rejectReason || "Issue with payment screenshot. Contact admin."}</span>`;
+                        err.style.color = "#f87171"; err.style.display = 'block';
                     } else {
-                        err.innerText = "Payment verification is pending. Please check back later!";
+                        err.innerText = "⏳ Payment verification is pending. Please check back later!";
                         err.style.color = "#fbbf24"; err.style.display = 'block';
                     }
                 } else {
                     err.innerText = "No record found! Check your details.";
                     err.style.color = "#f87171"; err.style.display = 'block';
                 }
-            })
-            .catch(e => {
+            }).catch(e => {
                 btn.innerText = "Check Status"; btn.disabled = false;
                 err.innerText = "Network Error."; err.style.display = 'block';
             });
@@ -616,100 +762,125 @@
             html2canvas(ticketEl, { backgroundColor: null, scale: 2 }).then(canvas => {
                 let link = document.createElement('a');
                 link.download = `TechKriti_Pass_${document.getElementById('tRoll').innerText}.png`;
-                link.href = canvas.toDataURL("image/png");
-                link.click();
+                link.href = canvas.toDataURL("image/png"); link.click();
             });
         }
 
         let rawAdminData = [];
-
-        function loadAdminData() {
-            fetch(SCRIPT_URL)
-                .then(res => res.json())
-                .then(data => { rawAdminData = data; renderAdminTable(); })
-                .catch(err => {
-                    rawAdminData = [];
-                    renderAdminTable();
-                });
-        }
+        function loadAdminData() { fetch(SCRIPT_URL).then(res => res.json()).then(data => { rawAdminData = data; renderAdminTable(); }).catch(err => { rawAdminData = []; renderAdminTable(); }); }
 
         function renderAdminTable() {
             const searchStr = document.getElementById('adminSearch').value.toLowerCase();
             const filterStr = document.getElementById('adminFilter').value;
+            const typeFilterStr = document.getElementById('adminTypeFilter').value;
             const tbody = document.getElementById('adminTableBody');
             
-            let filteredData = rawAdminData.filter(item => {
-                if(!item.fullName) return false;
-                const matchesSearch = item.fullName.toLowerCase().includes(searchStr) || (item.rollNumber && item.rollNumber.toLowerCase().includes(searchStr));
-                const matchesFilter = filterStr === 'All' || item.eventChoice === filterStr;
-                return matchesSearch && matchesFilter;
-            });
+            if(!Array.isArray(rawAdminData)){
+                tbody.innerHTML = '<tr><td colspan="5" class="empty-state">No records found.</td></tr>'; 
+                return;
+            }
 
+            let filteredData = rawAdminData.filter(item => {
+                if(!item || !item.fullName) return false;
+                const matchesSearch = item.fullName.toLowerCase().includes(searchStr) || (item.rollNumber && item.rollNumber.toLowerCase().includes(searchStr));
+                const matchesFilter = filterStr === 'All' || (item.eventChoice && item.eventChoice.includes(filterStr));
+                
+                const isOS = item.studentType === 'Outsider' || (item.rollNumber && item.rollNumber.startsWith('OS-'));
+                const matchesType = typeFilterStr === 'All' || (typeFilterStr === 'Outsider' && isOS) || (typeFilterStr === 'DSEU' && !isOS);
+
+                return matchesSearch && matchesFilter && matchesType;
+            });
             document.getElementById('statTotal').innerText = filteredData.length;
             
-            let eventCounts = {};
-            filteredData.forEach(item => { eventCounts[item.eventChoice] = (eventCounts[item.eventChoice] || 0) + 1; });
+            let eventCounts = {}; filteredData.forEach(item => { eventCounts[item.eventChoice] = (eventCounts[item.eventChoice] || 0) + 1; });
             let topEvent = "--"; let maxCount = 0;
             for(let event in eventCounts) { if(eventCounts[event] > maxCount) { maxCount = eventCounts[event]; topEvent = event; } }
             document.getElementById('statTopEvent').innerText = topEvent !== "undefined" ? topEvent.split(" ")[0] : "--"; 
 
-            if(filteredData.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="5" class="empty-state">No records found.</td></tr>'; return;
-            }
+            if(filteredData.length === 0) { tbody.innerHTML = '<tr><td colspan="5" class="empty-state">No records found.</td></tr>'; return; }
 
             let html = '';
             filteredData.forEach(item => {
-                let statusBadge = item.status === "Approved" 
-                    ? `<span style="color:#10b981; font-weight:bold;">Approved</span>` 
-                    : `<span style="color:#fbbf24; font-weight:bold;">Pending</span>`;
+                let statusBadge = "";
+                let actionButtons = "";
                 
-                let actionButtons = `<a href="${item.paymentUrl}" target="_blank" class="action-btn"><i class="fas fa-eye"></i> View</a>`;
-                
-                if (item.status !== "Approved") {
-                    actionButtons += `<button class="action-btn approve-btn" onclick="approveStudent('${item.rollNumber}', '${item.eventChoice}')"><i class="fas fa-check"></i> Approve</button>`;
-                }
+                // Fetch using requested backend URL format directly.
+                // Assuming paymentUrl in sheet has the google drive link. 
+                // If it fails, fallback to local search format.
+                let paymentImageLink = item.paymentUrl && item.paymentUrl.includes("http") ? item.paymentUrl : `${item.rollNumber}_payment.jpg`; 
 
-                html += `
-                    <tr>
-                        <td><strong>${item.fullName}</strong></td>
-                        <td>${item.rollNumber || 'N/A'}</td>
-                        <td><span style="background: rgba(34,211,238,0.1); color: #22d3ee; padding: 4px 8px; border-radius: 4px; font-size: 0.85rem;">${item.eventChoice}</span></td>
-                        <td>${statusBadge}</td>
-                        <td>${actionButtons}</td>
-                    </tr>
-                `;
+                // 🚀 SMART ADMIN VIEW/APPROVE/REJECT SYSTEM
+                if (item.status === "Approved") {
+                    statusBadge = `<span style="color:#10b981; font-weight:bold;">Approved</span>`;
+                    actionButtons = `<span style="background: rgba(16, 185, 129, 0.2); color: #10b981; padding: 4px 10px; border-radius: 6px; font-family: monospace; font-size: 0.9rem; border: 1px solid rgba(16, 185, 129, 0.4);"><i class="fas fa-ticket-alt"></i> ${item.ticketId}</span>`;
+                } 
+                else if (item.status === "Rejected") {
+                    statusBadge = `<span style="color:#ef4444; font-weight:bold;">Rejected</span>`;
+                    actionButtons = `<span style="color:#ef4444; font-size:0.85rem;"><i class="fas fa-times-circle"></i> Rejected</span>`;
+                } 
+                else {
+                    // Pending
+                    statusBadge = `<span style="color:#fbbf24; font-weight:bold;">Pending</span>`;
+                    actionButtons = `
+                        <a href="${paymentImageLink}" target="_blank" class="action-btn"><i class="fas fa-eye"></i> View</a>
+                        <button class="action-btn approve-btn" onclick="approveStudent('${item.rollNumber}', '${item.eventChoice}')" title="Approve"><i class="fas fa-check"></i></button>
+                        <button class="action-btn reject-btn" onclick="rejectStudent('${item.rollNumber}', '${item.eventChoice}')" title="Reject"><i class="fas fa-times"></i></button>
+                    `;
+                }
+                
+                const isOS = item.studentType === 'Outsider' || (item.rollNumber && item.rollNumber.startsWith('OS-'));
+                let osBadge = isOS ? `<span style="background:#ef4444; color:#fff; padding:2px 6px; border-radius:4px; font-size:0.7rem; margin-left:5px;">OS</span>` : '';
+                let displayRoll = isOS ? item.campus : item.rollNumber;
+
+                html += `<tr><td><strong>${item.fullName}</strong> ${osBadge}</td><td>${displayRoll || 'N/A'}</td><td><span style="background: rgba(34,211,238,0.1); color: #22d3ee; padding: 4px 8px; border-radius: 4px; font-size: 0.85rem; white-space: normal;">${item.eventChoice}</span></td><td>${statusBadge}</td><td>${actionButtons}</td></tr>`;
             });
             tbody.innerHTML = html;
         }
 
         function approveStudent(rollNo, eventName) {
-            if(confirm(`Are you sure you want to approve ticket for Roll No: ${rollNo}?`)) {
-                fetch(SCRIPT_URL, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-                    body: JSON.stringify({ action: "approve", rollNumber: rollNo, eventChoice: eventName })
-                }).then(res => res.json()).then(res => {
-                    if(res.result === "approved") {
-                        alert("Student Approved Successfully!");
-                        loadAdminData(); 
-                    }
-                });
+            if(confirm(`Approve ticket for Roll No: ${rollNo}?`)) {
+                fetch(SCRIPT_URL, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify({ action: "approve", rollNumber: rollNo, eventChoice: eventName }) })
+                .then(res => res.json()).then(res => { if(res.result === "approved") { loadAdminData(); } });
             }
         }
 
-        document.getElementById('adminFilter').addEventListener('change', renderAdminTable);
+        // 🚀 NEW REJECT FUNCTION
+        function rejectStudent(rollNo, eventName) {
+            let reason = prompt(`Reason for rejecting Roll No: ${rollNo}?\n(e.g., Fake Screenshot, Blur Image, Name Mismatch)`);
+            if (reason !== null && reason.trim() !== "") {
+                fetch(SCRIPT_URL, { 
+                    method: 'POST', 
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' }, 
+                    body: JSON.stringify({ action: "reject", rollNumber: rollNo, eventChoice: eventName, reason: reason }) 
+                })
+                .then(res => res.json()).then(res => { 
+                    if(res.result === "rejected") { alert("Student Rejected Successfully."); loadAdminData(); } 
+                });
+            }
+        }
+        
+        document.getElementById('adminTypeFilter').addEventListener('change', renderAdminTable);
 
-        const eventEmojis = ['💻', '🤖', '🧠', '🍔', '🎤', '💃', '😂', '🏆', '🎸'];
-        function spawnEmoji() {
+        // --- PREMIUM & CLEAN EMOJI ANIMATION ---
+        const eventEmojis = ['💻', '🤖', '🧠', '🍔', '🎤', '💃', '😂', '🏆', '🎸', '✨', '🔥'];
+        function createSingleEmoji() {
             const emojiEl = document.createElement('div'); emojiEl.className = 'floating-emoji';
             emojiEl.innerText = eventEmojis[Math.floor(Math.random() * eventEmojis.length)];
-            emojiEl.style.left = (Math.random() * 90 + 5) + 'vw';
-            const duration = Math.random() * 6 + 8; emojiEl.style.animationDuration = duration + 's';
+            emojiEl.style.left = (Math.random() * 90 + 5) + 'vw'; 
+            const duration = Math.random() * 4 + 10; 
+            emojiEl.style.animationDuration = duration + 's';
             document.body.appendChild(emojiEl);
             setTimeout(() => { emojiEl.remove(); }, duration * 1000);
-            setTimeout(spawnEmoji, Math.random() * 5000 + 10000); 
         }
-        setTimeout(spawnEmoji, 2000);
+
+        function runEmojiRoutine() {
+            let count = Math.random() > 0.5 ? 1 : 2; 
+            for (let i = 0; i < count; i++) { setTimeout(createSingleEmoji, i * 2000); }
+        }
+        setInterval(runEmojiRoutine, 8000);
+        setTimeout(runEmojiRoutine, 2000);
+
+        calculateFee();
     </script>
 </body>
 </html>
