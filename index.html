@@ -30,15 +30,15 @@
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Space Grotesk', sans-serif; }
-        body { background-color: var(--bg-color); color: var(--text-main); overflow-x: hidden; }
+        body { background: linear-gradient(135deg, #ffffff 0%, #f7fbff 48%, #ffffff 100%) !important; color: var(--text-main); overflow-x: hidden; }
 
         /* Typography */
         h1, h2, h3, h4 { font-family: 'Montserrat', sans-serif; text-transform: uppercase; }
 
         /* Animated Blobs */
-        .bg-blobs { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -2; background: var(--bg-color); overflow: hidden; }
-        .blob1 { position: absolute; width: 50vw; height: 50vw; background: rgba(0, 180, 216, 0.15); border-radius: 50%; filter: blur(100px); top: -10%; left: -10%; animation: float 12s infinite alternate ease-in-out; pointer-events: none; }
-        .blob2 { position: absolute; width: 40vw; height: 40vw; background: rgba(255, 0, 85, 0.1); border-radius: 50%; filter: blur(100px); bottom: -10%; right: -10%; animation: float 15s infinite alternate-reverse ease-in-out; pointer-events: none; }
+        .bg-blobs { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -2; background: linear-gradient(135deg, #ffffff 0%, #f7fbff 48%, #ffffff 100%); overflow: hidden; }
+        .blob1 { position: absolute; width: 50vw; height: 50vw; background: rgba(0, 180, 216, 0.08); border-radius: 50%; filter: blur(100px); top: -10%; left: -10%; animation: float 12s infinite alternate ease-in-out; pointer-events: none; }
+        .blob2 { position: absolute; width: 40vw; height: 40vw; background: rgba(255, 0, 85, 0.06); border-radius: 50%; filter: blur(100px); bottom: -10%; right: -10%; animation: float 15s infinite alternate-reverse ease-in-out; pointer-events: none; }
         @keyframes float { 0% { transform: translate(0, 0) scale(1); } 100% { transform: translate(5%, 5%) scale(1.1); } }
 
         /* Navbar */
