@@ -1,11 +1,11 @@
 <!-- 
 =========================================================
-  TECH KRITI 2026 - OFFICIAL WEBSITE
-  Developed & Designed by: Subhankar Papil from Rajokri Campus
+  TECH KRITI 2026 - OFFICIAL PLATFORM
+  Vibrant Light Theme | Full Fixed Code | Mobile Optimized
 =========================================================
 -->
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -15,575 +15,620 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Space+Grotesk:wght@400;600;700&display=swap');
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
-        body { background-color: #050505; color: #ffffff; overflow-x: hidden; position: relative; min-height: 100vh; }
+        :root {
+            --bg-color: #F8FAFC;      
+            --text-main: #0F172A;     
+            --text-muted: #475569;    
+            --primary: #FF0055;       
+            --secondary: #00B4D8;     
+            --tertiary: #7000FF;      
+            --accent: #FFD600;        
+            --card-bg: #FFFFFF;       
+            --border-color: #E2E8F0;  
+        }
 
-        .bg-blobs { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -2; background: #0a0a1a; overflow: hidden; }
-        .blob1 { position: absolute; width: 50vw; height: 50vw; background: rgba(99, 102, 241, 0.4); border-radius: 50%; filter: blur(100px); top: -10%; left: -10%; animation: float 12s infinite alternate ease-in-out; }
-        .blob2 { position: absolute; width: 40vw; height: 40vw; background: rgba(236, 72, 153, 0.3); border-radius: 50%; filter: blur(100px); bottom: -10%; right: -10%; animation: float 15s infinite alternate-reverse ease-in-out; }
-        .blob3 { position: absolute; width: 35vw; height: 35vw; background: rgba(14, 165, 233, 0.3); border-radius: 50%; filter: blur(100px); top: 40%; left: 30%; animation: float 18s infinite alternate ease-in-out; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Space Grotesk', sans-serif; }
+        body { background-color: var(--bg-color); color: var(--text-main); overflow-x: hidden; }
 
-        @keyframes float { 0% { transform: translate(0, 0) scale(1); } 100% { transform: translate(10%, 10%) scale(1.1); } }
+        /* Typography */
+        h1, h2, h3, h4 { font-family: 'Montserrat', sans-serif; text-transform: uppercase; }
 
-        .floating-emoji { position: fixed; top: -60px; font-size: 2.5rem; z-index: -1; pointer-events: none; filter: drop-shadow(0 5px 10px rgba(0,0,0,0.5)); animation: floatDown linear forwards; opacity: 0.6; transition: filter 0.4s ease, opacity 0.4s ease; }
-        @keyframes floatDown { 0% { transform: translateY(0) rotate(-15deg); opacity: 0; } 10% { opacity: 0.8; } 90% { opacity: 0.8; } 100% { transform: translateY(110vh) rotate(360deg); opacity: 0; } }
+        /* Animated Blobs */
+        .bg-blobs { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -2; background: var(--bg-color); overflow: hidden; }
+        .blob1 { position: absolute; width: 50vw; height: 50vw; background: rgba(0, 180, 216, 0.15); border-radius: 50%; filter: blur(100px); top: -10%; left: -10%; animation: float 12s infinite alternate ease-in-out; pointer-events: none; }
+        .blob2 { position: absolute; width: 40vw; height: 40vw; background: rgba(255, 0, 85, 0.1); border-radius: 50%; filter: blur(100px); bottom: -10%; right: -10%; animation: float 15s infinite alternate-reverse ease-in-out; pointer-events: none; }
+        @keyframes float { 0% { transform: translate(0, 0) scale(1); } 100% { transform: translate(5%, 5%) scale(1.1); } }
 
-        .liquid-glass { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.05); border-top: 1px solid rgba(255, 255, 255, 0.2); border-left: 1px solid rgba(255, 255, 255, 0.1); box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3), inset 0 0 10px rgba(255, 255, 255, 0.02); border-radius: 20px; }
-
-        nav { position: fixed; top: 0; width: 100%; background: rgba(10, 10, 20, 0.4); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); display: flex; justify-content: space-between; align-items: center; padding: 1rem 5%; z-index: 1000; border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
-        .logo { font-size: 1.5rem; font-weight: 800; background: linear-gradient(to right, #6366f1, #22d3ee); -webkit-background-clip: text; color: transparent; cursor: pointer; transition: transform 0.3s ease; }
-        .logo:hover { transform: scale(1.05); }
+        /* Navbar */
+        nav { position: fixed; top: 0; width: 100%; background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); display: flex; justify-content: space-between; align-items: center; padding: 1rem 5%; z-index: 1000; box-shadow: 0 4px 20px rgba(0,0,0,0.05); }
+        .logo { font-size: 1.8rem; font-weight: 900; color: var(--text-main); cursor: pointer; letter-spacing: -1px; display: flex; align-items: center; gap: 8px; }
+        .logo span { background: var(--tertiary); color: #fff; padding: 2px 8px; font-size: 1.2rem; transform: skewX(-10deg); }
         
         .nav-links { display: flex; gap: 2rem; align-items: center; }
-        .nav-links button { background: none; border: none; color: #fff; font-size: 1rem; font-weight: 600; cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; gap: 6px; }
-        .nav-links button:hover { color: #22d3ee; transform: translateY(-2px); text-shadow: 0 0 10px rgba(34, 211, 238, 0.5); }
-        .admin-link { color: #ec4899 !important; } .admin-link:hover { color: #f472b6 !important; text-shadow: 0 0 10px rgba(236, 72, 153, 0.5); }
-        .student-link { color: #a78bfa !important; } .student-link:hover { color: #c4b5fd !important; text-shadow: 0 0 10px rgba(167, 139, 250, 0.5); }
+        .nav-links button { background: none; border: none; color: var(--text-muted); font-size: 1rem; font-weight: 700; cursor: pointer; transition: 0.3s; text-transform: uppercase; position: relative; z-index: 10; }
+        .nav-links button:hover { color: var(--primary); }
+        .admin-link { background: var(--text-main) !important; color: #fff !important; padding: 8px 20px; border-radius: 30px; border: 2px solid transparent; transition: 0.3s; }
+        .admin-link:hover { background: transparent !important; color: var(--text-main) !important; border: 2px solid var(--text-main); }
 
-        .hamburger { display: none; flex-direction: column; cursor: pointer; gap: 5px; z-index: 1001; }
-        .hamburger span { width: 30px; height: 3px; background: #22d3ee; border-radius: 3px; transition: 0.3s; }
+        .hamburger { display: none; flex-direction: column; cursor: pointer; gap: 6px; z-index: 1001; }
+        .hamburger span { width: 35px; height: 4px; background: var(--text-main); border-radius: 2px; }
 
-        .page-view { display: none; padding-top: 100px; min-height: 85vh; animation: fadeIn 0.4s ease; }
+        /* Page Views */
+        .page-view { display: none; padding-top: 130px; min-height: 100vh; animation: fadeUp 0.4s ease; padding-bottom: 60px; position: relative; z-index: 1; }
         .page-view.active { display: block; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
 
-        .container { max-width: 1000px; margin: 0 auto; padding: 2rem; }
-        .admin-container { max-width: 1200px; margin: 0 auto; padding: 2rem; }
+        .container { max-width: 1250px; margin: 0 auto; padding: 0 2rem; }
+
+        /* Buttons */
+        .btn-main { background: var(--primary); color: white; border: none; padding: 1.2rem 2.5rem; font-size: 1.1rem; font-weight: 900; font-family: 'Montserrat', sans-serif; cursor: pointer; transition: 0.3s; text-transform: uppercase; letter-spacing: 1px; display: inline-flex; align-items: center; justify-content: center; gap: 10px; border-radius: 50px; box-shadow: 0 10px 20px rgba(255, 0, 85, 0.3); position: relative; z-index: 10; }
+        .btn-main:hover { transform: translateY(-4px); box-shadow: 0 15px 25px rgba(255, 0, 85, 0.4); }
+        .btn-alt { background: #fff; border: 2px solid var(--border-color); color: var(--text-main); padding: 1.2rem 2.5rem; font-size: 1.1rem; font-weight: 900; cursor: pointer; transition: 0.3s; text-transform: uppercase; border-radius: 50px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); position: relative; z-index: 10; }
+        .btn-alt:hover { border-color: var(--secondary); color: var(--secondary); transform: translateY(-4px); }
         
-        .back-btn { background: rgba(255, 255, 255, 0.05); color: #fff; border: 1px solid rgba(255, 255, 255, 0.2); padding: 0.6rem 1.2rem; border-radius: 25px; cursor: pointer; font-weight: 600; display: inline-flex; align-items: center; gap: 8px; backdrop-filter: blur(10px); margin-bottom: 1.5rem; transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); position: relative; overflow: hidden; }
-        .back-btn:hover { transform: translateX(-5px) scale(1.05); background: rgba(255, 255, 255, 0.1); box-shadow: 0 5px 15px rgba(255,255,255,0.1); }
+        .back-btn { background: #fff; color: var(--text-main); padding: 10px 20px; border: 2px solid var(--border-color); font-weight: bold; cursor: pointer; margin-bottom: 2rem; display: inline-block; text-transform: uppercase; border-radius: 30px; transition: 0.3s; }
+        .back-btn:hover { border-color: var(--text-main); background: var(--text-main); color: #fff; }
 
-        .hero { text-align: center; margin-top: 2rem; }
+        /* --- HERO SECTION --- */
+        .hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+        .hero-tag { display: inline-block; background: var(--accent); color: var(--text-main); padding: 6px 18px; font-weight: 800; font-size: 0.9rem; text-transform: uppercase; margin-bottom: 1.5rem; border-radius: 30px; box-shadow: 0 4px 10px rgba(255, 214, 0, 0.3); }
         
-        .btn-main { background: linear-gradient(135deg, rgba(99, 102, 241, 0.8), rgba(14, 165, 233, 0.8)); color: white; border: 1px solid rgba(255,255,255,0.3); border-top: 1px solid rgba(255,255,255,0.6); padding: 1rem 2.5rem; font-size: 1.1rem; border-radius: 30px; font-weight: 600; cursor: pointer; backdrop-filter: blur(10px); box-shadow: 0 10px 20px -5px rgba(14, 165, 233, 0.6), inset 0 2px 5px rgba(255,255,255,0.3); transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); position: relative; overflow: hidden; z-index: 1; display: inline-flex; align-items: center; justify-content: center; gap: 10px; }
-        .btn-main::before { content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent); transform: skewX(-25deg); transition: all 0.5s ease; z-index: -1; }
-        .btn-main:hover::before { left: 150%; transition: all 0.7s ease; }
-        .btn-main:hover { transform: translateY(-5px) scale(1.03); box-shadow: 0 15px 30px -5px rgba(99, 102, 241, 0.8), 0 0 20px rgba(34, 211, 238, 0.5), inset 0 2px 5px rgba(255,255,255,0.5); }
-        .btn-main:active { transform: translateY(2px) scale(0.98); }
-        .btn-main:disabled { opacity: 0.5; cursor: not-allowed; transform: none !important; box-shadow: none !important; }
+        .hero-text h1 { font-size: 5.5rem; line-height: 0.95; font-weight: 900; letter-spacing: -3px; margin-bottom: 1.5rem; color: var(--text-main); }
+        .hero-text h1 .highlight { color: transparent; -webkit-text-stroke: 2px var(--tertiary); background: linear-gradient(90deg, var(--tertiary), var(--primary)); -webkit-background-clip: text; background-clip: text; }
+        .hero-desc { font-size: 1.15rem; color: var(--text-muted); max-width: 500px; line-height: 1.6; margin-bottom: 2.5rem; font-weight: 600; }
+        .hero-actions { display: flex; gap: 1.5rem; flex-wrap: wrap; align-items: center; }
 
-        .btn-schedule { background: linear-gradient(135deg, rgba(236, 72, 153, 0.7), rgba(168, 85, 247, 0.7)); color: white; border: 1px solid rgba(255,255,255,0.4); border-top: 1px solid rgba(255,255,255,0.7); padding: 1rem 2.5rem; font-size: 1.1rem; border-radius: 30px; font-weight: 600; cursor: pointer; backdrop-filter: blur(10px); transition: all 0.3s ease; display: inline-flex; align-items: center; gap: 8px; animation: pulseGlow 2s infinite; }
-        .btn-schedule:hover { transform: translateY(-5px) scale(1.05); box-shadow: 0 0 25px rgba(236, 72, 153, 0.8), inset 0 2px 5px rgba(255,255,255,0.5); animation: none; }
-        .btn-schedule:hover i { animation: bounceIcon 0.5s ease infinite alternate; }
+        /* 2 Images in Hero - Dance & Tech */
+        .hero-visual { position: relative; height: 500px; width: 100%; pointer-events: none; }
+        .comp-img { position: absolute; border: 6px solid #fff; box-shadow: 0 25px 50px rgba(0,0,0,0.15); object-fit: cover; border-radius: 20px; }
+        .img-1 { width: 70%; height: 350px; top: 10px; right: 0; z-index: 3; } 
+        .img-2 { width: 65%; height: 300px; bottom: 20px; left: 0; z-index: 2; border-color: var(--secondary); } 
+
+        /* TIMER */
+        .timer-wrapper { display: flex; justify-content: center; margin-top: 4rem; position: relative; z-index: 10; }
+        .countdown-bar { background: linear-gradient(135deg, var(--tertiary), var(--primary)); border-radius: 100px; padding: 1.5rem 4rem; display: inline-flex; align-items: center; gap: 3rem; flex-wrap: wrap; box-shadow: 0 20px 40px rgba(112, 0, 255, 0.25); border: 4px solid rgba(255,255,255,0.5); }
+        .cd-title { font-family: 'Montserrat'; font-weight: 900; font-size: 1.2rem; color: #fff; line-height: 1.2; text-align: right; }
+        .cd-blocks { display: flex; gap: 2.5rem; }
+        .cd-box { text-align: center; position: relative; }
+        .cd-box:not(:last-child)::after { content: ':'; position: absolute; right: -1.5rem; top: 0; font-size: 2.5rem; font-weight: 900; color: rgba(255,255,255,0.5); }
+        .cd-num { font-size: 3rem; font-weight: 900; line-height: 1; color: #fff; font-family: 'Montserrat'; }
+        .cd-lbl { font-size: 0.75rem; color: rgba(255,255,255,0.8); text-transform: uppercase; font-weight: 700; letter-spacing: 2px; margin-top: 5px; }
+
+        /* --- EVENTS SECTION --- */
+        .section-title { font-size: 3.5rem; font-weight: 900; margin-bottom: 3rem; text-align: center; color: var(--text-main); }
+        .section-title span { color: var(--secondary); }
         
-        @keyframes pulseGlow { 0% { box-shadow: 0 0 10px rgba(236, 72, 153, 0.4); } 50% { box-shadow: 0 0 25px rgba(236, 72, 153, 0.8); } 100% { box-shadow: 0 0 10px rgba(236, 72, 153, 0.4); } }
-        @keyframes bounceIcon { from { transform: translateY(0); } to { transform: translateY(-4px) scale(1.1); color: #fff; } }
+        .schedule-table-wrap { overflow-x: auto; background: var(--card-bg); border-radius: 20px; border: 2px solid var(--border-color); box-shadow: 0 10px 30px rgba(0,0,0,0.03); padding: 2rem; max-width: 800px; margin: 0 auto;}
+        .schedule-row { display: flex; justify-content: space-between; border-bottom: 2px dashed var(--border-color); padding: 1rem 0; align-items: center;}
+        .schedule-row:last-child { border-bottom: none; }
+        .schedule-time { font-size: 1.1rem; font-weight: 800; color: var(--tertiary); width: 40%;}
+        .schedule-event { font-size: 1.2rem; font-weight: 900; color: var(--text-main); width: 60%;}
 
-        .def-box { max-width: 750px; margin: 0 auto 3rem auto; padding: 2rem; border-left: 4px solid #22d3ee; text-align: left; transition: transform 0.3s, box-shadow 0.3s; }
-        .def-box:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(34,211,238,0.2); background: rgba(255, 255, 255, 0.05); }
-
-        .event-card { padding: 1.5rem; margin-bottom: 1.5rem; display: flex; gap: 1.5rem; align-items: flex-start; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); position: relative; overflow: hidden; border-left: 5px solid transparent; }
-        .event-card:hover { transform: translateY(-8px) scale(1.02); border-left: 5px solid #22d3ee; background: rgba(255, 255, 255, 0.08); box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4), inset 0 0 15px rgba(34, 211, 238, 0.1); }
-        .time-badge { background: rgba(99, 102, 241, 0.2); color: #22d3ee; padding: 0.5rem 1rem; border-radius: 10px; font-weight: bold; min-width: 190px; text-align: center; font-size: 0.9rem; border: 1px solid rgba(255,255,255,0.1); transition: all 0.3s ease; }
-        .event-card:hover .time-badge { background: rgba(34, 211, 238, 0.2); color: #fff; box-shadow: 0 0 15px rgba(34, 211, 238, 0.4); }
-        .event-details h3 { margin-bottom: 0.3rem; font-size: 1.2rem; display: flex; align-items: center; gap: 8px; transition: color 0.3s; }
-        .event-card:hover .event-details h3 { color: #22d3ee; }
-        .event-details p { font-size: 0.95rem; opacity: 0.8; line-height: 1.5; margin: 0; transition: opacity 0.3s; }
-        .event-card:hover .event-details p { opacity: 1; }
-
-        .form-container { max-width: 650px; margin: 0 auto; padding: 2.5rem; position: relative; z-index: 10; }
-        .login-box { max-width: 450px; margin: 4rem auto; }
+        /* --- REGISTRATION FORM --- */
+        .reg-layout { display: grid; grid-template-columns: 1fr 1.5fr; gap: 4rem; align-items: start; }
         
-        .type-toggle { display: flex; background: rgba(0,0,0,0.4); border-radius: 30px; margin-bottom: 2rem; overflow: hidden; border: 1px solid rgba(255,255,255,0.1); padding: 5px; }
-        .type-btn { flex: 1; padding: 12px; text-align: center; font-weight: 600; cursor: pointer; border: none; background: transparent; color: #cbd5e1; border-radius: 25px; transition: 0.3s; font-size: 1rem; }
-        .type-btn.active { background: linear-gradient(135deg, #6366f1, #22d3ee); color: #fff; box-shadow: 0 5px 15px rgba(34, 211, 238, 0.4); }
-
-        .flex-row { display: flex; gap: 1rem; }
-        .form-group { margin-bottom: 1.5rem; flex: 1; text-align: left; position: relative; }
-        .form-group label { display: block; margin-bottom: 0.5rem; font-weight: 600; font-size: 0.95rem; color: #e2e8f0; }
+        @media (min-width: 993px) { .reg-info { position: sticky; top: 120px; } }
         
-        input[type="text"], input[type="email"], input[type="tel"], input[type="password"] { width: 100%; padding: 1rem; border-radius: 15px; background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1); border-top: 1px solid rgba(255, 255, 255, 0.2); color: white; font-size: 1rem; backdrop-filter: blur(10px); transition: all 0.3s ease; }
-        input:focus { outline: none; border-color: #22d3ee; background: rgba(255, 255, 255, 0.08); box-shadow: 0 0 15px rgba(34, 211, 238, 0.2); transform: translateY(-2px); }
+        .reg-info h2 { font-size: 4rem; line-height: 1; margin-bottom: 1.5rem; }
+        .reg-info p { font-size: 1.1rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 2rem; font-weight: 600; }
+        
+        .form-box { background: var(--card-bg); border: 2px solid var(--border-color); padding: 3rem; border-radius: 24px; box-shadow: 0 20px 50px rgba(0,0,0,0.05); position: relative; z-index: 10; }
+        
+        .type-toggle { display: flex; gap: 10px; margin-bottom: 2.5rem; background: #F1F5F9; padding: 6px; border-radius: 50px; }
+        .type-btn { flex: 1; padding: 12px; text-align: center; font-weight: 800; cursor: pointer; background: transparent; color: var(--text-muted); border: none; transition: 0.3s; text-transform: uppercase; border-radius: 40px; font-size: 0.9rem; }
+        .type-btn.active { background: #fff; color: var(--primary); box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
 
-        input[type="file"] { width: 100%; padding: 0.8rem; background: rgba(255,255,255,0.05); border-radius: 10px; border: 1px dashed rgba(255,255,255,0.3); color: #cbd5e1; cursor: pointer; transition: 0.3s; }
-        input[type="file"]::file-selector-button { background: #22d3ee; color: #000; border: none; padding: 5px 15px; border-radius: 8px; font-weight: 600; cursor: pointer; margin-right: 10px; transition: 0.3s; }
+        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 2rem; }
+        .fg-full { grid-column: span 2; }
+        .form-group label { display: block; margin-bottom: 8px; font-weight: 800; font-size: 0.8rem; color: var(--text-main); text-transform: uppercase; letter-spacing: 1px; }
+        
+        input[type="text"], input[type="email"], input[type="tel"], input[type="password"], select { 
+            width: 100%; padding: 14px 18px; background: #F8FAFC; border: 2px solid #E2E8F0; color: var(--text-main); font-size: 1rem; font-weight: 600; border-radius: 12px; outline: none; transition: 0.3s; appearance: none; 
+        }
+        input:focus, select:focus { border-color: var(--secondary); background: #fff; box-shadow: 0 0 0 4px rgba(0, 180, 216, 0.1); }
+        input[type="file"] { padding: 12px; background: #F8FAFC; border: 2px dashed #CBD5E1; cursor: pointer; color: var(--text-muted); width: 100%; border-radius: 12px; }
 
+        /* Custom Select */
         select { display: none !important; }
-
-        .blur-sibling { filter: blur(6px) !important; opacity: 0.3 !important; pointer-events: none !important; transition: all 0.3s ease !important; }
-
         .custom-select { position: relative; width: 100%; }
-        .select-selected { width: 100%; padding: 1rem; border-radius: 15px; background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1); border-top: 1px solid rgba(255, 255, 255, 0.2); color: white; font-size: 1rem; backdrop-filter: blur(10px); cursor: pointer; display: flex; justify-content: space-between; align-items: center; transition: 0.3s; }
-        .select-selected.active { border-color: #22d3ee; box-shadow: 0 0 15px rgba(34, 211, 238, 0.2); }
-        
-        .select-items { position: absolute; top: 110%; left: 0; right: 0; z-index: 10000; border-radius: 15px; overflow: hidden; opacity: 0; visibility: hidden; transform: translateY(-15px); transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); background: linear-gradient(270deg, rgba(99,102,241,0.25), rgba(34,211,238,0.25), rgba(236,72,153,0.25)); background-size: 600% 600%; animation: gradientShift 4s ease infinite; backdrop-filter: blur(35px); border: 1px solid rgba(255, 255, 255, 0.3); box-shadow: 0 15px 35px rgba(0,0,0,0.7); max-height: 250px; overflow-y: auto; }
-        .select-items.select-show { opacity: 1; visibility: visible; transform: translateY(0); }
-        
-        @keyframes gradientShift { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
-        .select-items div { padding: 12px 16px; cursor: pointer; color: #fff; border-bottom: 1px solid rgba(255, 255, 255, 0.05); transition: 0.3s; text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
-        .select-items div:hover { background: rgba(255, 255, 255, 0.2); padding-left: 22px; border-left: 4px solid #22d3ee; }
-        
-        .admin-stats { display: flex; gap: 1.5rem; margin-bottom: 2rem; flex-wrap: wrap; transition: filter 0.3s; }
-        .stat-card { flex: 1; padding: 1.5rem; text-align: center; min-width: 200px; display: flex; flex-direction: column; justify-content: center; }
-        .stat-card h3 { font-size: 3rem; color: #22d3ee; margin-bottom: 0.2rem; font-weight: 800; text-shadow: 0 0 20px rgba(34,211,238,0.4); }
-        .stat-card p { font-size: 1.1rem; color: #cbd5e1; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
+        .select-selected { width: 100%; padding: 14px 18px; border-radius: 12px; background: #F8FAFC; border: 2px solid #E2E8F0; font-weight: 600; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+        .select-items { position: absolute; top: 105%; left: 0; right: 0; z-index: 9999; background: #fff; border: 2px solid var(--border-color); border-radius: 12px; box-shadow: 0 15px 30px rgba(0,0,0,0.1); max-height: 250px; overflow-y: auto; opacity: 0; visibility: hidden; transition: 0.2s; }
+        .select-items.select-show { opacity: 1; visibility: visible; }
+        .select-items div { padding: 14px 18px; cursor: pointer; font-weight: 600; border-bottom: 1px solid var(--border-color); }
+        .select-items div:hover { background: var(--primary); color: #fff; }
 
-        .admin-controls { display: flex; gap: 1.5rem; margin-bottom: 2rem; flex-wrap: wrap; position: relative; z-index: 10; transition: filter 0.3s; }
-        .admin-controls .search-box { flex: 2; min-width: 250px; }
-        .admin-controls .filter-box { flex: 1; min-width: 200px; position: relative; }
-        
-        .glass-table-wrapper { overflow-x: auto; border-radius: 15px; transition: filter 0.3s; }
-        .glass-table { width: 100%; border-collapse: collapse; text-align: left; white-space: nowrap; }
-        .glass-table th, .glass-table td { padding: 1.2rem; border-bottom: 1px solid rgba(255,255,255,0.05); }
-        .glass-table th { background: rgba(0,0,0,0.3); font-weight: 600; color: #22d3ee; letter-spacing: 0.5px; }
-        .glass-table tr:hover { background: rgba(255,255,255,0.05); }
-        .empty-state { text-align: center; padding: 3rem; color: #94a3b8; font-style: italic; }
-        
-        .action-btn { background: rgba(34, 211, 238, 0.2); color: #22d3ee; border: 1px solid rgba(34, 211, 238, 0.4); padding: 6px 12px; border-radius: 8px; cursor: pointer; transition: 0.3s; margin-right: 5px; text-decoration: none; display: inline-block; }
-        .action-btn:hover { background: #22d3ee; color: #000; }
-        .approve-btn { background: rgba(16, 185, 129, 0.2); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.4); }
-        .approve-btn:hover { background: #10b981; color: #fff; }
-        .reject-btn { background: rgba(239, 68, 68, 0.2); color: #ef4444; border: 1px solid rgba(239, 68, 68, 0.4); }
-        .reject-btn:hover { background: #ef4444; color: #fff; }
+        .event-select-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 12px; }
+        .es-item { background: #F8FAFC; border: 2px solid #E2E8F0; padding: 15px 10px; text-align: center; font-weight: 700; cursor: pointer; transition: 0.3s; color: var(--text-muted); font-size: 0.85rem; text-transform: uppercase; border-radius: 12px; }
+        .es-item:hover { border-color: var(--tertiary); color: var(--tertiary); }
+        .es-item.selected { background: var(--tertiary); border-color: var(--tertiary); color: #fff; box-shadow: 0 10px 20px rgba(112, 0, 255, 0.2); }
 
-        .digital-ticket-container { max-width: 500px; margin: 0 auto; text-align: center; display: none; }
-        .digital-ticket { background: linear-gradient(135deg, rgba(99, 102, 241, 0.15), rgba(14, 165, 233, 0.15)); border: 2px solid #22d3ee; border-radius: 20px; padding: 2.5rem 2rem; text-align: center; box-shadow: 0 0 30px rgba(34,211,238,0.3); position: relative; }
-        .digital-ticket h3 { color: #c4b5fd; font-size: 1.8rem; margin-bottom: 15px; letter-spacing: 1px; }
-        .ticket-info { font-size: 1.1rem; color: #fff; line-height: 1.8; margin-bottom: 20px; text-align: left; display: inline-block; }
-        .ticket-info span { font-weight: bold; color: #22d3ee; }
-        .ticket-id { font-size: 1.2rem; background: rgba(255,255,255,0.1); padding: 5px 15px; border-radius: 10px; color: #f472b6; letter-spacing: 2px; font-family: monospace; display: inline-block; margin-bottom: 15px; border: 1px solid rgba(244,114,182,0.3); }
+        .payment-box { background: rgba(0, 180, 216, 0.05); border: 2px dashed var(--secondary); padding: 2rem; text-align: center; margin-bottom: 2rem; border-radius: 16px; }
+        .payment-amt { font-size: 2.5rem; font-weight: 900; color: var(--text-main); margin-bottom: 15px; font-family: 'Montserrat'; }
 
-        footer { text-align: center; padding: 2rem; margin-top: 3rem; font-weight: 600; border-top: 1px solid rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); position: relative; z-index: 10; }
-        .contact-tag { color: #22d3ee; font-size: 1.1rem; margin-top: 0.5rem; display: block; }
+        /* --- DIGITAL PASS (QR CARD) --- */
+        .pass-container { max-width: 450px; margin: 0 auto; display: none; }
+        .white-pass { background: #FFFFFF; color: var(--text-main); border-radius: 20px; padding: 2.5rem; text-align: left; box-shadow: 0 30px 60px rgba(0,0,0,0.1); position: relative; overflow: hidden; border: 1px solid var(--border-color); }
+        .white-pass::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 8px; background: linear-gradient(90deg, var(--secondary), var(--primary)); }
+        .pass-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 25px; border-bottom: 2px dashed #CBD5E1; padding-bottom: 20px; }
+        .pass-brand { font-size: 1.6rem; font-weight: 900; font-family: 'Montserrat'; line-height: 1.1; }
+        .pass-brand span { color: var(--primary); display: block; font-size: 0.9rem; margin-top: 5px; }
+        .pass-id { background: #F1F5F9; padding: 6px 12px; font-family: monospace; font-weight: bold; font-size: 1rem; border-radius: 8px; color: var(--tertiary); border: 1px solid #E2E8F0; }
         
-        .qr-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); z-index: 2000; opacity: 0; visibility: hidden; transition: all 0.3s ease; display: flex; justify-content: center; align-items: center; }
-        .qr-overlay.active { opacity: 1; visibility: visible; }
+        .pass-qr-wrap { display: flex; justify-content: center; margin-bottom: 25px; }
+        #qrcode { padding: 15px; background: #fff; border: 2px solid #E2E8F0; border-radius: 12px; box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
         
-        @media (max-width: 768px) {
+        .pass-details { display: flex; flex-direction: column; gap: 15px; }
+        .pd-row { display: flex; flex-direction: column; }
+        .pd-lbl { font-size: 0.75rem; font-weight: 800; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; }
+        .pd-val { font-size: 1.1rem; font-weight: 800; color: var(--text-main); text-transform: uppercase; }
+        
+        .pass-status { margin-top: 25px; background: rgba(16, 185, 129, 0.1); color: #10B981; border: 2px solid #10B981; text-align: center; padding: 12px; font-weight: 900; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 2px; border-radius: 10px; }
+
+        /* --- ADMIN DASHBOARD --- */
+        .dash-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.5rem; margin-bottom: 3rem; }
+        .stat-card { background: var(--card-bg); border: 2px solid var(--border-color); padding: 2rem; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.02); }
+        .stat-card h3 { font-size: 3.5rem; margin-bottom: 5px; color: var(--text-main); }
+        .stat-card p { color: var(--text-muted); font-weight: 800; text-transform: uppercase; letter-spacing: 1px; font-size: 0.85rem; }
+
+        .admin-flex { display: flex; gap: 2rem; align-items: flex-start; }
+        .scanner-section { flex: 1; background: var(--card-bg); border: 2px solid var(--border-color); padding: 2rem; text-align: center; border-radius: 20px; }
+        .scanner-box { width: 100%; border: 4px solid var(--border-color); margin: 20px 0; background: #F8FAFC; min-height: 250px; border-radius: 12px; overflow: hidden; }
+        
+        .logs-section { flex: 2; width: 100%; }
+        .admin-controls { display: flex; gap: 1rem; margin-bottom: 1.5rem; }
+        .admin-controls input, .admin-controls select { padding: 14px; background: var(--card-bg); border: 2px solid var(--border-color); color: var(--text-main); font-weight: 600; width: auto; flex: 1; border-radius: 12px; }
+
+        .table-wrap { overflow-x: auto; background: var(--card-bg); border: 2px solid var(--border-color); border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.02); }
+        table { width: 100%; border-collapse: collapse; text-align: left; }
+        th { background: #F1F5F9; padding: 1.2rem; font-weight: 800; color: var(--text-muted); text-transform: uppercase; font-size: 0.85rem; border-bottom: 2px solid var(--border-color); }
+        td { padding: 1.2rem; border-bottom: 1px solid var(--border-color); font-weight: 600; font-size: 0.95rem; }
+        tr:hover { background: #F8FAFC; }
+
+        .btn-sm { background: #fff; color: var(--text-main); border: 2px solid var(--border-color); padding: 8px 14px; cursor: pointer; font-weight: 800; font-size: 0.8rem; text-transform: uppercase; transition: 0.2s; border-radius: 8px; margin-right: 5px; }
+        .btn-sm:hover { background: var(--text-main); color: #fff; border-color: var(--text-main); }
+        .btn-approve { border-color: #10B981; color: #10B981; } .btn-approve:hover { background: #10B981; color: #fff; }
+        .btn-reject { border-color: #EF4444; color: #EF4444; } .btn-reject:hover { background: #EF4444; color: #fff; }
+
+        .scan-res { margin-top: 15px; padding: 20px; font-size: 1.2rem; font-weight: 900; text-transform: uppercase; display: none; border-radius: 12px; text-align: center; line-height: 1.4;}
+        .res-success { background: rgba(16, 185, 129, 0.15); color: #10B981; border: 3px solid #10B981; }
+        .res-error { background: rgba(239, 68, 68, 0.15); color: #EF4444; border: 3px solid #EF4444; }
+        .res-used { background: rgba(245, 158, 11, 0.15); color: #F59E0B; border: 3px solid #F59E0B; }
+        .res-icon { font-size: 2.5rem; margin-bottom: 10px; display: block; }
+
+
+
+        /* --- DYNAMIC UPI QR / ORGANIZER SCAN HELPERS --- */
+        #upiQrCode canvas, #upiQrCode img {
+            display: block;
+            width: 150px !important;
+            height: 150px !important;
+            padding: 8px;
+            background: #fff;
+            border: 3px solid #fff;
+            border-radius: 12px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+        }
+        #qrScannerHost {
+            display: none !important;
+            position: absolute !important;
+            width: 1px !important;
+            height: 1px !important;
+            overflow: hidden !important;
+        }
+        .scan-camera-note {
+            margin-top: 10px;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            font-weight: 700;
+            line-height: 1.4;
+        }
+
+        /* --- OFFICIAL DSEU BRAND FOOTER --- */
+        .site-footer { margin-top: 4rem; padding: 2.5rem 1.5rem 2rem; background: var(--text-main); color: #fff; text-align: center; border-top: 5px solid var(--secondary); }
+        .site-footer .footer-title { font-family: 'Montserrat', sans-serif; font-size: 1.05rem; font-weight: 900; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 8px; }
+        .site-footer .footer-subtitle { color: rgba(255,255,255,0.78); font-size: 0.82rem; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; }
+        .site-footer .footer-pride { margin-top: 14px; font-family: 'Montserrat', sans-serif; font-size: 0.9rem; font-weight: 900; color: #fff; text-transform: uppercase; letter-spacing: 1px; }
+        .site-footer .footer-year { margin-top: 8px; color: rgba(255,255,255,0.58); font-size: 0.72rem; font-weight: 600; }
+
+        /* Organizer entry confirmation */
+        .entry-welcome { margin-top: 14px; padding: 16px; background: rgba(16,185,129,0.12); border: 2px solid #10B981; border-radius: 14px; text-align: center; }
+        .entry-welcome .welcome-title { font-family: 'Montserrat', sans-serif; font-size: 1.15rem; font-weight: 900; color: #10B981; text-transform: uppercase; }
+        .entry-welcome .welcome-id { margin-top: 6px; font-family: monospace; font-weight: 900; color: var(--text-main); font-size: 0.95rem; }
+        .entry-welcome .welcome-note { margin-top: 7px; font-size: 0.86rem; font-weight: 700; color: var(--text-muted); }
+        .drive-search-btn { display:inline-flex; align-items:center; gap:7px; color:#fff; background:#4285F4; border:0; border-radius:8px; padding:8px 12px; font-weight:800; text-decoration:none; font-size:0.78rem; }
+        .drive-search-btn:hover { opacity:0.88; }
+
+        /* --- MOBILE RESPONSIVE FIXES --- */
+        @media (max-width: 992px) {
+            .admin-flex { flex-direction: column; width: 100%; }
+            .scanner-section { width: 100%; }
+            .logs-section { width: 100%; }
+            
+            .reg-info { position: relative; top: 0; margin-bottom: 1rem; }
+            
+            .hero-grid, .reg-layout { grid-template-columns: 1fr; gap: 2.5rem; }
+            .hero-text { text-align: center; }
+            .hero-actions { justify-content: center; }
+            .hero-text h1 { font-size: 3.5rem; letter-spacing: -1px; }
+            .hero-desc { font-size: 1rem; margin: 0 auto 2rem auto; }
+            
+            .hero-visual { height: 320px; margin-top: 1rem; }
+            .img-1 { width: 75%; height: 200px; top: 10px; right: 0; }
+            .img-2 { width: 65%; height: 180px; bottom: 10px; left: 0; }
+            
+            .countdown-bar { padding: 1.5rem; flex-direction: column; gap: 1.5rem; border-radius: 24px; display: flex; width: 100%; text-align: center; }
+            .cd-blocks { flex-wrap: wrap; justify-content: center; gap: 1.2rem; }
+            .cd-box:not(:last-child)::after { display: none; }
+            .cd-title { text-align: center; font-size: 1.1rem; border-bottom: 1px solid rgba(255,255,255,0.3); padding-bottom: 10px; width: 100%; }
+            
             .hamburger { display: flex; }
-            .nav-links { display: flex; flex-direction: column; position: absolute; top: 100%; right: -100%; width: 250px; background: rgba(10, 10, 20, 0.95); backdrop-filter: blur(20px); height: 100vh; padding-top: 2rem; transition: right 0.4s ease; border-left: 1px solid rgba(255,255,255,0.1); align-items: center; }
+            .nav-links { position: absolute; top: 100%; right: -100%; flex-direction: column; background: #fff; width: 100%; padding: 2rem; border-bottom: 2px solid var(--border-color); transition: 0.3s; box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
             .nav-links.active { right: 0; }
-            .event-card { flex-direction: column; gap: 1rem; } .time-badge { width: 100%; text-align: left; }
-            .hero h1 { font-size: 2.8rem !important; } 
-            .container { padding: 1.5rem; } .flex-row { flex-direction: column; gap: 0; }
-            .form-group { margin-bottom: 1.2rem; } .form-container { padding: 1.5rem; }
-            .admin-stats { flex-direction: column; } .admin-controls { flex-direction: column; }
+            
+            .form-box { padding: 1.5rem; }
+            .form-grid { grid-template-columns: 1fr; gap: 1rem; }
+            .fg-full { grid-column: span 1; }
+            .event-select-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+            
+            .schedule-table-wrap { padding: 1.5rem; }
+            .schedule-row { flex-direction: column; align-items: flex-start; gap: 5px; }
+            .schedule-time { width: 100%; font-size: 1rem; }
+            .schedule-event { width: 100%; font-size: 1.1rem; }
+            
+            .pass-container { max-width: 100%; }
+            .dash-grid { grid-template-columns: 1fr; gap: 1rem; }
+            .admin-controls { flex-direction: column; }
         }
     </style>
 </head>
 <body>
 
-    <div class="bg-blobs"><div class="blob1"></div><div class="blob2"></div><div class="blob3"></div></div>
+    <div class="bg-blobs">
+        <div class="blob1"></div><div class="blob2"></div><div class="blob3"></div>
+    </div>
 
     <nav>
-        <div class="logo" onclick="navigateTo('home')">TECH KRITI '26 ⚡</div>
+        <div class="logo" onclick="navigateTo('home')"><span>TK</span> TECH KRITI</div>
         <div class="hamburger" onclick="toggleMenu()">
             <span></span><span></span><span></span>
         </div>
         <div class="nav-links" id="navLinks">
-            <button onclick="navigateTo('home')"><i class="fas fa-home"></i> Home</button>
-            <button onclick="navigateTo('schedule')"><i class="fas fa-calendar-check"></i> Schedule</button>
-            <button onclick="navigateTo('register')"><i class="fas fa-ticket-alt"></i> Register</button>
-            <button onclick="navigateTo('student-portal')" class="student-link">Portal 🎓</button>
-            <button onclick="navigateTo('admin')" class="admin-link">Admin 🔒</button>
+            <button onclick="navigateTo('home')">Home</button>
+            <button onclick="navigateTo('schedule')">Lineup</button>
+            <button onclick="navigateTo('register')">Tickets</button>
+            <button onclick="navigateTo('student-portal')">Portal</button>
+            <button onclick="navigateTo('admin-login')" class="admin-link">Organizer</button>
         </div>
     </nav>
 
     <main>
-        <!-- Home Section -->
+        <!-- ================= HERO SECTION ================= -->
         <section id="home" class="page-view active">
-            <div class="container hero" style="padding-top: 2rem;">
-                <div class="liquid-glass" style="display: inline-flex; align-items: center; gap: 8px; padding: 8px 20px; border-radius: 50px; margin-bottom: 20px; font-weight: 600; font-size: 0.9rem; color: #22d3ee;">
-                    <span style="width: 10px; height: 10px; border-radius: 50%; background: #22d3ee; display: inline-block;"></span>
-                    📍 VENUE : DSEU Rajokri Campus | 23rd October
-                </div>
-                
-                <h1 style="font-size: 4.5rem; line-height: 1.1; margin-bottom: 1rem; font-weight: 800; letter-spacing: -1px;">
-                    Step Into the Future at <br>
-                    <span style="background: linear-gradient(to right, #22d3ee, #6366f1); -webkit-background-clip: text; color: transparent;">TECH KRITI</span>
-                </h1>
-
-                <div class="def-box liquid-glass">
-                    <h3 style="color: #22d3ee; margin-bottom: 5px; font-size: 1.5rem; display:flex; align-items:center; gap:10px;">
-                        Tech Kriti <span style="color: #cbd5e1; font-weight: 300; font-size: 1.1rem; font-family: monospace;">/tɛk ˈkriːti/</span>
-                    </h3>
-                    <p style="color: #a78bfa; font-style: italic; margin-bottom: 10px;">noun</p>
-                    <p style="font-size: 1.05rem; line-height: 1.6; color: #e2e8f0;">
-                        <strong>1.</strong> The ultimate convergence of technology, art, and human ingenuity.<br>
-                        <strong>2.</strong> A grand spectacle at DSEU Rajokri where brilliant minds battle in code, creativity, and culture.
+            <div class="container hero-grid">
+                <div class="hero-text">
+                    <div class="hero-tag">DSEU Rajokri Campus</div>
+                    <h1>IGNITE <br>THE <br><span class="highlight">SPARK.</span></h1>
+                    <p class="hero-desc">
+                        Two days of pure energy. The ultimate celebration of technology, culture, and the people who make our college electric.
                     </p>
+                    <div class="hero-actions">
+                        <button class="btn-main" onclick="navigateTo('register')">Get Your Pass</button>
+                        <button class="btn-alt" onclick="navigateTo('schedule')">Explore Events</button>
+                    </div>
                 </div>
                 
-                <div style="display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap;">
-                    <button class="btn-main" onclick="navigateTo('register')">
-                        <i class="fas fa-ticket-alt"></i> Get Digital Pass
-                    </button>
-                    <button class="btn-schedule" onclick="navigateTo('schedule')">
-                        <i class="fas fa-calendar-alt"></i> View Schedule
-                    </button>
+                <div class="hero-visual">
+                    <img src="https://www.cloudfest.com/wp-content/uploads/2025/04/hackathon-contest-programmers.jpg.webp" class="comp-img img-1" alt="Dance Performance">
+                    <img src="https://res.cloudinary.com/purnesh/image/upload/w_1000,f_auto/hansraj-college%2Cjpg00.jpg" class="comp-img img-2" alt="Technology">
+                </div>
+            </div>
+
+            <div class="timer-wrapper">
+                <div class="countdown-bar">
+                    <div class="cd-title">REGISTRATIONS<br>CLOSING IN</div>
+                    <div class="cd-blocks">
+                        <div class="cd-box"><div class="cd-num" id="days">00</div><div class="cd-lbl">Days</div></div>
+                        <div class="cd-box"><div class="cd-num" id="hours">00</div><div class="cd-lbl">Hours</div></div>
+                        <div class="cd-box"><div class="cd-num" id="mins">00</div><div class="cd-lbl">Mins</div></div>
+                        <div class="cd-box"><div class="cd-num" id="secs">00</div><div class="cd-lbl">Secs</div></div>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- Schedule Section -->
+        <!-- ================= EVENTS SECTION ================= -->
         <section id="schedule" class="page-view">
             <div class="container">
-                <button class="back-btn" onclick="navigateTo('home')"><i class="fas fa-arrow-left"></i> Back to Home</button>
-                <h2 style="text-align: center; font-size: 2.5rem; margin-bottom: 2rem;">🗓️ Event Schedule (23 October)</h2>
+                <button class="back-btn" onclick="navigateTo('home')">← Back</button>
+                <h2 class="section-title">The <span>Lineup.</span></h2>
+                <h3 style="text-align:center; color: var(--tertiary); margin-bottom: 2rem;">📅 23 OCTOBER – MAIN EVENT</h3>
                 
-                <div id="mainEventList">
-                    <div class="event-card liquid-glass"><div class="time-badge">9:30 AM</div><div class="event-details"><h3>Mega Entry & Check-in 🎟️</h3><p>Gates open! Collect your participant badges and get ready.</p></div></div>
-                    <div class="event-card liquid-glass"><div class="time-badge">10:00 AM - 11:10 AM</div><div class="event-details"><h3>Front End Battle 💻</h3><p>Live coding competition to design the ultimate landing page.</p></div></div>
-                    <div class="event-card liquid-glass"><div class="time-badge">11:00 AM - 12:15 PM</div><div class="event-details"><h3>Memory Challenge 🧠</h3><p>Test your limits and cognitive skills in this intense contest.</p></div></div>
-                    <div class="event-card liquid-glass"><div class="time-badge">11:10 AM - 11:40 AM</div><div class="event-details"><h3>Prompt Engineering 🤖</h3><p>AI challenges and creative prompt battles.</p></div></div>
-                    <div class="event-card liquid-glass"><div class="time-badge">11:30 AM Onwards</div><div class="event-details"><h3>Food Stall 🍔</h3><p>Grab a bite, relax, and recharge yourself for the next events!</p></div></div>
-                    <div class="event-card liquid-glass"><div class="time-badge">12:00 PM - 12:30 PM</div><div class="event-details"><h3>Singing 🎤</h3><p>Melodious and soulful performances by talented students.</p></div></div>
-                    <div class="event-card liquid-glass"><div class="time-badge">12:30 PM - 1:00 PM</div><div class="event-details"><h3>Poetry ✍️</h3><p>Expressive and heart-touching spoken word poetry sessions.</p></div></div>
-                    <div class="event-card liquid-glass"><div class="time-badge">1:00 PM - 1:30 PM</div><div class="event-details"><h3>Cosplay 🦸‍♂️</h3><p>Showcase your favorite characters with amazing costumes!</p></div></div>
-                    <div class="event-card liquid-glass"><div class="time-badge">1:30 PM - 2:10 PM</div><div class="event-details"><h3>Stand-up Comedy 😂</h3><p>Laugh out loud with the best comedians on campus.</p></div></div>
-                    <div class="event-card liquid-glass"><div class="time-badge">2:10 PM - 2:30 PM</div><div class="event-details"><h3>Tech Debate 🗣️</h3><p>Fierce discussions on the future of technology and AI.</p></div></div>
-                    <div class="event-card liquid-glass"><div class="time-badge">2:30 PM - 3:40 PM</div><div class="event-details"><h3>Dance 💃</h3><p>Electrifying solo and group performances to rock the stage.</p></div></div>
-                    <div class="event-card liquid-glass"><div class="time-badge">3:40 PM - 4:00 PM</div><div class="event-details"><h3>Certification 🏆</h3><p>Award ceremony, winner announcements, and certificates.</p></div></div>
-                    <div class="event-card liquid-glass" style="border-left: 5px solid #ec4899;"><div class="time-badge" style="background: rgba(236, 72, 153, 0.2); color:#ec4899;">4:00 PM Onwards</div><div class="event-details"><h3>Open DJ For All 🎧🔥</h3><p>The ultimate closing celebration! Dance the evening away.</p></div></div>
+                <div class="schedule-table-wrap">
+                    <div class="schedule-row"><span class="schedule-time">9:30 AM</span><span class="schedule-event">Entry</span></div>
+                    <div class="schedule-row"><span class="schedule-time">10:00 AM – 11:10 AM</span><span class="schedule-event">Front End</span></div>
+                    <div class="schedule-row"><span class="schedule-time">11:10 AM – 11:40 AM</span><span class="schedule-event">Prompt Engineering</span></div>
+                    <div class="schedule-row"><span class="schedule-time">11:00 AM – 12:15 PM</span><span class="schedule-event">Memory Challenge</span></div>
+                    <div class="schedule-row"><span class="schedule-time">11:30 AM onwards</span><span class="schedule-event">Food Stall</span></div>
+                    <div class="schedule-row"><span class="schedule-time">12:00 PM – 12:30 PM</span><span class="schedule-event">Singing</span></div>
+                    <div class="schedule-row"><span class="schedule-time">12:30 PM – 1:00 PM</span><span class="schedule-event">Poetry</span></div>
+                    <div class="schedule-row"><span class="schedule-time">1:00 PM – 1:30 PM</span><span class="schedule-event">Cosplay</span></div>
+                    <div class="schedule-row"><span class="schedule-time">1:30 PM – 2:10 PM</span><span class="schedule-event">Stand-up Comedy</span></div>
+                    <div class="schedule-row"><span class="schedule-time">2:10 PM – 2:30 PM</span><span class="schedule-event">Tech Debate</span></div>
+                    <div class="schedule-row"><span class="schedule-time">2:30 PM – 3:40 PM</span><span class="schedule-event">Dance</span></div>
+                    <div class="schedule-row"><span class="schedule-time">3:40 PM – 4:00 PM</span><span class="schedule-event">Certification</span></div>
+                    <div class="schedule-row"><span class="schedule-time">4:00 PM onwards</span><span class="schedule-event">DJ</span></div>
                 </div>
             </div>
         </section>
 
-        <!-- Registration Form -->
+        <!-- ================= REGISTRATION FLOW ================= -->
         <section id="register" class="page-view">
-            <div class="container">
-                <button class="back-btn" onclick="navigateTo('home')"><i class="fas fa-arrow-left"></i> Back to Home</button>
-                <div class="form-container liquid-glass" id="formBox">
-                    
+            <div class="container reg-layout">
+                <div class="reg-info">
+                    <button class="back-btn" onclick="navigateTo('home')">← Back</button>
+                    <h2>Own the <br><span style="color:var(--tertiary);">Stage.</span></h2>
+                    <p>Secure your spot at Tech Kriti 2026. Fill out the details, upload your payment proof, and await verification. Your digital pass will be generated upon approval.</p>
+                </div>
+
+                <div class="form-box">
                     <div class="type-toggle">
-                        <button type="button" id="btnDseu" class="type-btn active" onclick="setStudentType('DSEU')">DSEU Student (₹50)</button>
-                        <button type="button" id="btnOutsider" class="type-btn" onclick="setStudentType('Outsider')">Outsider (₹100)</button>
+                        <button type="button" id="btnDseu" class="type-btn active" onclick="setStudentType('DSEU')">DSEU Student</button>
+                        <button type="button" id="btnOutsider" class="type-btn" onclick="setStudentType('Outsider')">Outsider</button>
                     </div>
 
-                    <h2 style="text-align: center; margin-bottom: 2rem;">🚀 Activity Registration</h2>
                     <form id="regForm">
-                        <div class="form-group"><label>Full Name</label><input type="text" id="fullName" placeholder="Enter your full name" required></div>
-                        
-                        <div id="dseuFields">
-                            <div class="flex-row">
-                                <div class="form-group"><label>Roll Number</label><input type="text" id="rollNumber" placeholder="e.g., 0011223344" required></div>
-                                <div class="form-group">
-                                    <label>Semester</label>
-                                    <select id="semester" required>
-                                        <option value="" disabled selected>Select Semester</option>
-                                        <option value="1st Sem">1st Sem</option><option value="3rd Sem">3rd Sem</option>
-                                        <option value="5th Sem">5th Sem</option><option value="7th Sem">7th Sem</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="flex-row">
-                                <div class="form-group"><label>Section</label><input type="text" id="section" placeholder="e.g., CS-A" required></div>
-                                <div class="form-group">
-                                    <label>Campus</label>
-                                    <select id="campus" required>
-                                        <option value="" disabled selected>Select Campus</option>
-                                        <option value="DSEU RAJOKRI CAMPUS">DSEU RAJOKRI CAMPUS</option>
-                                        <option value="DSEU DWARKA CAMPUS">DSEU DWARKA CAMPUS</option>
-                                        <option value="AMBEDKAR DSEU SHAKARPUR CAMPUS">AMBEDKAR DSEU SHAKARPUR CAMPUS</option>
-                                        <option value="ARYABHATT DSEU CAMPUS">ARYABHATT DSEU CAMPUS</option>
-                                        <option value="BHAI PARMANAND DSEU CAMPUS">BHAI PARMANAND DSEU CAMPUS</option>
-                                        <option value="DSEU JAFFARPUR CAMPUS">DSEU JAFFARPUR CAMPUS</option>
-                                        <option value="DSEU JHANDEWALAN CAMPUS">DSEU JHANDEWALAN CAMPUS</option>
-                                        <option value="DSEU MAYUR VIHAR CAMPUS">DSEU MAYUR VIHAR CAMPUS</option>
-                                        <option value="DSEU MEERABAI MAHARANI BAGH CAMPUS">DSEU MEERABAI MAHARANI BAGH CAMPUS</option>
-                                        <option value="DSEU OKHLA-II CAMPUS">DSEU OKHLA-II CAMPUS</option>
-                                        <option value="DSEU PITAMPURA CAMPUS">DSEU PITAMPURA CAMPUS</option>
-                                        <option value="DSEU PUSA I CAMPUS">DSEU PUSA I CAMPUS</option>
-                                        <option value="DSEU PUSA II CAMPUS">DSEU PUSA II CAMPUS</option>
-                                        <option value="DSEU RANHOLA CAMPUS">DSEU RANHOLA CAMPUS</option>
-                                        <option value="DSEU ROHINI CAMPUS">DSEU ROHINI CAMPUS</option>
-                                        <option value="DSEU SIRI FORT CAMPUS">DSEU SIRI FORT CAMPUS</option>
-                                        <option value="DSEU VIVEK VIHAR CAMPUS">DSEU VIVEK VIHAR CAMPUS</option>
-                                        <option value="DSEU WAZIRPUR-I CAMPUS">DSEU WAZIRPUR-I CAMPUS</option>
-                                        <option value="GB PANT DSEU OKHLA-III CAMPUS">GB PANT DSEU OKHLA-III CAMPUS</option>
-                                        <option value="Other">Other</option>
-                                    </select>
-                                    <input type="text" id="otherCampusInput" placeholder="Type campus name..." style="display: none; margin-top: 15px;">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div id="outsiderFields" style="display:none;">
-                            <div class="form-group"><label>College / School / Organization</label><input type="text" id="collegeName" placeholder="Enter your institute or city"></div>
-                        </div>
-
-                        <div class="form-group"><label>Email Address</label><input type="email" id="email" placeholder="student@example.com" required></div>
-                        <div class="form-group"><label>Phone Number</label><input type="tel" id="phone" placeholder="10-digit mobile number" required></div>
-                        
-                        <div class="form-group">
-                            <label>Select Activity / Stall</label>
-                            <select id="eventChoice" required>
-                                <option value="" disabled selected>Choose an activity or stall...</option>
-                                <option value="Viewer Pass">Viewer Pass (Non-Participant)</option>
-                                <option value="Front End Battle">Front End Battle</option>
-                                <option value="Prompt Engineering">Prompt Engineering</option>
-                                <option value="Memory Challenge">Memory Challenge</option>
-                                <option value="Singing">Singing</option>
-                                <option value="Poetry">Poetry</option>
-                                <option value="Cosplay">Cosplay</option>
-                                <option value="Stand-up Comedy">Stand-up Comedy</option>
-                                <option value="Tech Debate">Tech Debate</option>
-                                <option value="Dance">Dance</option>
-                                <option value="Food Stall">Food Stall</option>
-                                <option value="Game Stall">Game Stall</option>
-                            </select>
-                        </div>
-                        
-                        <div class="form-group" style="background: rgba(0,0,0,0.2); padding: 1.5rem; border-radius: 15px; text-align: center; border: 1px dashed rgba(34,211,238,0.5);">
-                            <label style="color: #22d3ee; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 1px;">Registration Fee Details</label>
-                            <p id="paymentAmountText" style="font-size: 1rem; color: #f472b6; margin-top: 5px; font-weight: bold;">⭐ ₹50 for DSEU student participation</p>
+                        <div class="form-grid">
+                            <div class="form-group"><label>Full Name</label><input type="text" id="fullName" required></div>
+                            <div class="form-group"><label>Phone Number</label><input type="tel" id="phone" required></div>
+                            <div class="form-group fg-full"><label>Email Address</label><input type="email" id="email" required></div>
                             
-                            <div id="paymentSectionBox" style="display: block;">
-                                <div style="position: relative; width: 180px; margin: 15px auto; cursor: pointer;" onclick="openQRModal()">
-                                    <img src="img1.png" alt="Finance QR Code" style="width: 100%; height: 180px; object-fit: cover; border-radius: 10px; display: block; border: 2px solid #22d3ee; box-shadow: 0 0 15px rgba(34,211,238,0.3);">
-                                    <div style="position: absolute; bottom: 8px; right: 8px; background: rgba(0,0,0,0.7); padding: 6px; border-radius: 5px;"><i class="fas fa-expand-arrows-alt" style="color: #22d3ee;"></i></div>
-                                </div>
-                                
-                                <a id="upiLink" href="upi://pay?pa=shub159753@oksbi&pn=TechKriti2026&am=50&cu=INR" class="btn-main" style="display: inline-flex; width: 100%; justify-content: center; margin-bottom: 20px; padding: 12px; background: linear-gradient(135deg, #10b981, #059669); font-size: 1rem; text-decoration: none;">
-                                    <i class="fas fa-mobile-alt"></i> Pay directly via UPI Apps
-                                </a>
+                            <div class="form-group" id="dseuRollGroup"><label>Roll Number</label><input type="text" id="rollNumber"></div>
+                            <div class="form-group" id="outsiderCollegeGroup" style="display:none;"><label>College/Institution</label><input type="text" id="collegeName"></div>
+                        </div>
 
-                                <p style="font-size: 0.85rem; color: #cbd5e1; margin-bottom: 10px;">Upload payment screenshot (Max 1MB)</p>
-                                <input type="file" id="paymentScreenshot" accept="image/png, image/jpeg" required>
+                        <div id="dseuFields" class="form-grid">
+                            <div class="form-group">
+                                <label>Semester</label>
+                                <select id="semester">
+                                    <option value="" disabled selected>Select</option>
+                                    <option value="1st Sem">1st Sem</option><option value="3rd Sem">3rd Sem</option>
+                                    <option value="5th Sem">5th Sem</option><option value="7th Sem">7th Sem</option>
+                                </select>
+                            </div>
+                            <div class="form-group"><label>Section</label><input type="text" id="section"></div>
+                            <div class="form-group fg-full">
+                                <label>Campus</label>
+                                <select id="campus" onchange="document.getElementById('otherCampusInput').style.display=(this.value==='Other')?'block':'none'">
+                                    <option value="" disabled selected>Select Campus</option>
+                                    <option value="DSEU RAJOKRI CAMPUS">DSEU Rajokri Campus</option>
+                                    <option value="DSEU DWARKA CAMPUS">DSEU Dwarka Campus</option>
+                                    <option value="AMBEDKAR DSEU SHAKARPUR">Ambedkar DSEU Shakarpur</option>
+                                    <option value="ARYABHATT DSEU">Aryabhatt DSEU</option>
+                                    <option value="Other">Other (Specify below)</option>
+                                </select>
+                                <input type="text" id="otherCampusInput" placeholder="Enter campus name" style="display: none; margin-top: 10px;">
                             </div>
                         </div>
 
-                        <button type="submit" id="submitBtn" class="btn-main" style="width: 100%; margin-top: 10px;">Submit Registration ✨</button>
+                        <div class="form-group fg-full" style="margin-bottom: 2rem;">
+                            <label>Select Stage / Activity</label>
+                            <input type="hidden" id="eventChoice" required>
+                            <div class="event-select-grid">
+                                <div class="es-item" data-val="Viewer Pass">Viewer Pass</div>
+                                <div class="es-item" data-val="Front End Battle">Front End Battle</div>
+                                <div class="es-item" data-val="Prompt Engineering">Prompt Engineering</div>
+                                <div class="es-item" data-val="Memory Challenge">Memory Challenge</div>
+                                <div class="es-item" data-val="Singing">Singing</div>
+                                <div class="es-item" data-val="Poetry">Poetry</div>
+                                <div class="es-item" data-val="Cosplay">Cosplay</div>
+                                <div class="es-item" data-val="Stand-up Comedy">Stand-up Comedy</div>
+                                <div class="es-item" data-val="Tech Debate">Tech Debate</div>
+                                <div class="es-item" data-val="Dance">Dance</div>
+                            </div>
+                        </div>
+
+                        <div class="payment-box">
+                            <label style="color:var(--text-main);">REGISTRATION FEE</label>
+                            <div class="payment-amt" id="paymentAmountText">₹50</div>
+                            
+                            <img src="img1.png" alt="Scan to Pay" style="width: 150px; height: 150px; margin-bottom: 15px; border: 4px solid #fff; border-radius: 12px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); object-fit: cover;">
+                            <br>
+                            
+                            <a id="upiLinkBtn" href="upi://pay?pa=shub159753@oksbi&pn=TechKriti2026&am=50&cu=INR" class="btn-main" style="width:100%; margin-bottom: 15px; border-radius:12px; background:var(--primary);">PAY ₹50 VIA UPI</a>
+                            
+                            <label style="text-align:left; margin-bottom:8px; display:block;">Upload Payment Proof (PNG/JPG Max 1MB)</label>
+                            <input type="file" id="paymentScreenshot" accept="image/png, image/jpeg" required>
+                        </div>
+
+                        <button type="submit" id="submitBtn" class="btn-main" style="width: 100%; justify-content:center;">Submit Registration</button>
                         <p id="statusMsg" style="text-align:center; margin-top:15px; font-weight:bold;"></p>
                     </form>
                 </div>
             </div>
         </section>
 
-        <!-- STUDENT PORTAL -->
+        <!-- ================= STUDENT PORTAL & DIGITAL PASS ================= -->
         <section id="student-portal" class="page-view">
             <div class="container">
-                <button class="back-btn" onclick="navigateTo('home')"><i class="fas fa-arrow-left"></i> Back to Home</button>
-                <div class="form-container liquid-glass login-box" id="studentLoginBox">
-                    <h2 style="text-align: center; margin-bottom: 2rem; color: #a78bfa;">Student Portal 🎓</h2>
-                    <p style="text-align: center; margin-bottom: 1rem; color: #cbd5e1; font-size: 0.9rem;">Check your registration status & download your digital ticket.</p>
+                <button class="back-btn" onclick="navigateTo('home')">← Back</button>
+                
+                <div class="form-box" id="studentLoginBox" style="max-width: 500px; margin: 0 auto;">
+                    <h2 style="font-size: 2.5rem; margin-bottom: 2rem; text-align: center;">Student <span style="color:var(--secondary);">Portal</span></h2>
                     <form id="studentLoginForm">
-                        <div class="form-group"><label>Roll Number / OS Number</label><input type="text" id="studentRoll" placeholder="e.g. 00112233 or OS-9876" required></div>
-                        <div class="form-group"><label>Phone Number</label><input type="tel" id="studentPhone" placeholder="Enter registered phone no." required></div>
-                        <button type="submit" id="studentLoginBtn" class="btn-main" style="width: 100%; margin-top: 10px; background: linear-gradient(135deg, #8b5cf6, #c084fc);">Check Status 🔍</button>
-                        <p id="studentError" style="color: #f87171; text-align: center; margin-top: 15px; display: none; font-weight: 600;"></p>
+                        <div class="form-group" style="margin-bottom: 1.5rem;"><label>Roll Number / OS Number</label><input type="text" id="studentRoll" required></div>
+                        <div class="form-group" style="margin-bottom: 2rem;"><label>Phone Number</label><input type="tel" id="studentPhone" required></div>
+                        <button type="submit" id="studentLoginBtn" class="btn-main" style="width: 100%; justify-content:center;">Access Portal</button>
+                        <p id="studentError" style="color: var(--primary); text-align: center; margin-top: 15px; font-weight: bold; display: none;"></p>
                     </form>
                 </div>
 
-                <div class="digital-ticket-container" id="ticketDisplayContainer">
-                    <div class="digital-ticket liquid-glass" id="ticketContent">
-                        <h3>🎟️ TECH KRITI 2026 PASS</h3>
-                        <div class="ticket-id" id="tTicketId">DSEU-XXXX-XXXX</div> <br>
-                        <div id="qrcode" style="display: flex; justify-content: center; margin: 15px 0; background: #fff; padding: 10px; border-radius: 10px; width: fit-content; margin-left: auto; margin-right: auto;"></div>
-                        <div class="ticket-info">
-                            Name: <span id="tName">--</span> <br>
-                            Roll No / ID: <span id="tRoll">--</span> <br>
-                            Event / Stall: <span id="tEvent">--</span> <br>
-                            Status: <span id="tStatus" style="color: #10b981;">VERIFIED & APPROVED ✅</span>
+                <div class="pass-container" id="ticketDisplayContainer">
+                    <div class="white-pass" id="ticketContent">
+                        <div class="pass-header">
+                            <div class="pass-brand">TECH KRITI <span>2026 OFFICIAL PASS</span></div>
+                            <div class="pass-id" id="tTicketId">DSEU-XXXX-XXXX</div>
                         </div>
-                        <br>
-                        <div style="font-family: 'Libre Barcode 39', cursive; font-size: 3rem; letter-spacing: 5px; opacity: 0.7;">*#TK26*</div>
+                        <div class="pass-qr-wrap">
+                            <div id="qrcode"></div>
+                        </div>
+                        <div class="pass-details">
+                            <div class="pd-row"><span class="pd-lbl">Participant</span><span class="pd-val" id="tName">--</span></div>
+                            <div class="pd-row"><span class="pd-lbl">Roll No / Type</span><span class="pd-val" id="tRoll">--</span></div>
+                            <div class="pd-row"><span class="pd-lbl">Stage / Activity</span><span class="pd-val" id="tEvent" style="color:var(--tertiary);">--</span></div>
+                        </div>
+                        <div class="pass-status" id="tStatus">ENTRY VERIFIED</div>
                     </div>
-                    <button onclick="downloadTicket()" class="btn-main" style="margin-top: 25px; background: linear-gradient(135deg, #10b981, #34d399); width: 100%;">
-                        <i class="fas fa-download"></i> Download Pass (PNG)
-                    </button>
+                    <button onclick="downloadTicket()" class="btn-alt" style="margin-top: 25px; width: 100%; justify-content:center; color: var(--text-main); border-color: var(--text-main);">Download Pass Image</button>
                 </div>
             </div>
         </section>
 
-        <!-- ADMIN LOGIN -->
+        <!-- ================= ORGANIZER DASHBOARD (ADMIN) ================= -->
         <section id="admin-login" class="page-view">
             <div class="container">
-                <button class="back-btn" onclick="navigateTo('home')"><i class="fas fa-arrow-left"></i> Back to Home</button>
-                <div class="form-container liquid-glass login-box">
-                    <h2 style="text-align: center; margin-bottom: 2rem; color: #ec4899;">Admin Login 🔒</h2>
+                <button class="back-btn" onclick="navigateTo('home')">← Back</button>
+                <div class="form-box" style="max-width: 450px; margin: 0 auto; border-top: 6px solid var(--tertiary);">
+                    <h2 style="font-size: 2rem; margin-bottom: 2rem; text-align: center; color:var(--text-main);">Organizer Login</h2>
                     <form id="loginForm">
-                        <div class="form-group"><label>Username</label><input type="text" id="adminUser" placeholder="Enter username" required></div>
-                        <div class="form-group"><label>Password</label><input type="password" id="adminPass" placeholder="Enter password" required></div>
-                        <button type="submit" id="loginBtn" class="btn-main" style="width: 100%; margin-top: 10px; background: linear-gradient(135deg, #ec4899, #f43f5e);">Login to Dashboard</button>
-                        <p id="loginError" style="color: #f87171; text-align: center; margin-top: 15px; display: none; font-weight: 600;">Incorrect Credentials! Access Denied.</p>
+                        <div class="form-group" style="margin-bottom: 1.5rem;"><label>Admin ID</label><input type="text" id="adminUser" required></div>
+                        <div class="form-group" style="margin-bottom: 2rem;"><label>Secure Password</label><input type="password" id="adminPass" required></div>
+                        <button type="submit" id="loginBtn" class="btn-main" style="width: 100%; justify-content:center; background:var(--text-main); box-shadow: 0 10px 20px rgba(0,0,0,0.1);">Login to System</button>
+                        <p id="loginError" style="color: var(--primary); text-align: center; margin-top: 15px; display: none; font-weight:bold;">Authentication Failed.</p>
                     </form>
                 </div>
             </div>
         </section>
 
-        <!-- ADMIN DASHBOARD -->
         <section id="admin-dashboard" class="page-view">
-            <div class="admin-container" id="adminDashboardView">
-                <button class="back-btn" onclick="logoutAdmin()"><i class="fas fa-sign-out-alt"></i> Logout</button>
-                <h2 style="margin-bottom: 2rem; font-size: 2.5rem;">Organizer Dashboard 📊</h2>
-                
-                <!-- Gate QR Scanner Section -->
-                <div class="liquid-glass" style="margin-bottom: 2rem; padding: 2rem; border: 1px solid rgba(34, 211, 238, 0.3); border-radius: 20px; text-align: center;">
-                    <h3 style="color: #22d3ee; margin-bottom: 10px;"><i class="fas fa-qrcode"></i> Gate QR Pass Scanner</h3>
-                    <p style="color: #cbd5e1; font-size: 0.9rem; margin-bottom: 15px;">Scan student digital pass QR code at the entrance for instant verification.</p>
-                    <button type="button" class="action-btn" onclick="startScanner()" style="padding: 10px 20px; font-size: 1rem;"><i class="fas fa-camera"></i> Start Camera Scanner</button>
-                    <div id="reader" style="width: 100%; max-width: 400px; margin: 15px auto 0 auto; border-radius: 10px; overflow: hidden; border: 2px solid #22d3ee;"></div>
-                    <div id="scanResultBox" style="margin-top: 15px; font-size: 1.2rem; font-weight: bold; padding: 10px; border-radius: 10px; display: none;"></div>
+            <div class="container" style="max-width: 1400px;">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:2rem;">
+                    <h2 style="font-size: 2.5rem;">Organizer <span style="color:var(--secondary);">Control.</span></h2>
+                    <button class="back-btn" style="margin:0; border-color:var(--primary); color:var(--primary);" onclick="logoutAdmin()">Secure Exit</button>
                 </div>
 
-                <div class="admin-stats">
-                    <div class="stat-card liquid-glass"><h3 id="statTotal">--</h3><p>Total Registrations</p></div>
-                    <div class="stat-card liquid-glass"><h3 id="statTopEvent" style="color: #ec4899;">--</h3><p>Most Popular Event</p></div>
+                <div class="dash-grid">
+                    <div class="stat-card"><h3 id="statTotal">0</h3><p>Total Registrations</p></div>
+                    <div class="stat-card" style="border-top: 4px solid var(--primary);"><h3 id="statApproved" style="color:var(--primary);">0</h3><p>Approved Passes</p></div>
+                    <div class="stat-card" style="border-top: 4px solid #10B981;"><h3 id="statCheckedIn" style="color:#10B981;">0</h3><p>Checked In</p></div>
                 </div>
 
-                <div class="admin-controls">
-                    <div class="search-box"><input type="text" id="adminSearch" placeholder="Search by name, roll no..." onkeyup="renderAdminTable()"></div>
-                    
-                    <div class="filter-box">
-                        <select id="adminTypeFilter" onchange="renderAdminTable()">
-                            <option value="All">All Participants</option>
-                            <option value="DSEU">DSEU Students Only</option>
-                            <option value="Outsider">Outsiders Only</option>
-                        </select>
+                <div class="admin-flex">
+                    <div class="scanner-section">
+                        <h3 style="color: var(--text-main); margin-bottom: 10px; font-weight: 900;"><i class="fas fa-qrcode"></i> GATE SECURITY</h3>
+                        <p style="font-size:0.9rem; color:var(--text-muted); margin-bottom:20px; font-weight: 600;">Scan unique QR to verify one-time entry.</p>
+                        
+                        <input type="file" accept="image/*" capture="environment" id="nativeQrInput" style="display:none;">
+                        <button type="button" class="btn-main" onclick="document.getElementById('nativeQrInput').click()" style="width:100%; padding:15px; font-size: 1rem;"><i class="fas fa-camera"></i> Open Phone Camera</button>
+                        <a href="https://drive.google.com/drive/folders/129hu_rVMFRLDjZQJfTkvx0gC10UAmLnd" target="_blank" rel="noopener noreferrer" class="drive-search-btn" style="margin-top:12px; width:100%; justify-content:center; padding:12px; font-size:0.9rem;"><i class="fab fa-google-drive"></i> Open Payment Drive</a>
+                        <div class="scan-camera-note">Android/iPhone: the button uses the phone's native camera/photo picker. The public registration page never requests camera access.</div>
+                        
+                        <div id="scanResultBox" class="scan-res"></div>
                     </div>
 
-                    <div class="filter-box">
-                        <select id="adminFilter" onchange="renderAdminTable()">
-                            <option value="All">All Events & Stalls</option>
-                            <option value="Viewer Pass">Viewer Pass</option>
-                            <option value="Front End Battle">Front End Battle</option>
-                            <option value="Prompt Engineering">Prompt Engineering</option>
-                            <option value="Memory Challenge">Memory Challenge</option>
-                            <option value="Singing">Singing</option>
-                            <option value="Poetry">Poetry</option>
-                            <option value="Cosplay">Cosplay</option>
-                            <option value="Stand-up Comedy">Stand-up Comedy</option>
-                            <option value="Tech Debate">Tech Debate</option>
-                            <option value="Dance">Dance</option>
-                            <option value="Food Stall">Food Stall</option>
-                            <option value="Game Stall">Game Stall</option>
-                        </select>
+                    <div class="logs-section">
+                        <div class="admin-controls">
+                            <input type="text" id="adminSearch" placeholder="Search Ticket ID or Name..." onkeyup="renderAdminTable()">
+                            <select id="adminTypeFilter" onchange="renderAdminTable()">
+                                <option value="All">All Participants</option>
+                                <option value="Pending">Pending Approval</option>
+                                <option value="Approved">Approved</option>
+                                <option value="Checked-In">Checked In</option>
+                            </select>
+                        </div>
+                        
+                        <div class="table-wrap">
+                            <table>
+                                <thead><tr><th>Participant</th><th>Ticket ID</th><th>Payment Proof</th><th>Status</th><th>Action / Logs</th></tr></thead>
+                                <tbody id="adminTableBody">
+                                    <tr><td colspan="5" style="text-align:center; padding: 3rem; color: var(--text-muted); font-weight: 600;">Loading Secure Data...</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
-                </div>
-
-                <div class="glass-table-wrapper liquid-glass">
-                    <table class="glass-table">
-                        <thead>
-                            <tr><th>Name</th><th>Roll No / College</th><th>Event / Stall</th><th>Status</th><th>Actions</th></tr>
-                        </thead>
-                        <tbody id="adminTableBody">
-                            <tr><td colspan="5" class="empty-state"><i class="fas fa-spinner fa-spin"></i> Fetching Live Data...</td></tr>
-                        </tbody>
-                    </table>
                 </div>
             </div>
         </section>
+
+        <footer class="site-footer">
+            <div class="footer-title">Designed by DSEU Rajokri Campus • All Clubs</div>
+            <div class="footer-subtitle">Official Student Fest Platform • TECH KRITI 2026</div>
+            <div class="footer-pride">Proudly Made by DSEU Rajokri Campus</div>
+            <div class="footer-year">Technology • Creativity • Community • 2026</div>
+        </footer>
     </main>
 
-    <!-- Full Screen QR Code Modal -->
-    <div id="qrModal" class="qr-overlay" onclick="closeQRModal()">
-        <div style="position: relative; max-width: 90vw; max-height: 90vh;">
-            <span style="position: absolute; top: -40px; right: 0; color: white; font-size: 2.5rem; cursor: pointer;">&times;</span>
-            <img src="img1.png" style="width: 100%; max-width: 400px; border-radius: 15px; border: 3px solid #22d3ee; box-shadow: 0 0 30px rgba(34,211,238,0.5);">
-        </div>
-    </div>
-
-    <footer class="liquid-glass" style="border-radius: 0; border: none; border-top: 1px solid rgba(255,255,255,0.1);">
-        <p>TECH KRITI | DSEU Rajokri Campus</p>
-        <span class="contact-tag">Designed by: DSEU RAJOKRI ✨</span>
-    </footer>
-
     <script>
+        // REPLACE WITH YOUR ACTUAL APPS SCRIPT WEB APP URL
         const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwdJs-t1u5Fxa_sOl9EQ6lJVYnwmnrJC4RUYmbh_JHk-_CkRKNlgzFWrXkynv49TR_K/exec";
-
-        let isOutsider = false;
-
-        function calculateFee() {
-            let currentFee = isOutsider ? 100 : 50;
-            let feeText = `⭐ ₹${currentFee} for ${isOutsider ? 'Outsider' : 'DSEU student'} participation`;
-            
-            const payBox = document.getElementById('paymentSectionBox');
-            const upiLink = document.getElementById('upiLink');
-            const ssInput = document.getElementById('paymentScreenshot');
-            const paymentAmountText = document.getElementById('paymentAmountText');
-            
-            paymentAmountText.innerText = feeText;
-            payBox.style.display = 'block'; 
-            ssInput.setAttribute('required', 'true');
-            upiLink.href = `upi://pay?pa=shub159753@oksbi&pn=TechKriti2026&am=${currentFee}&cu=INR`;
-            upiLink.innerHTML = `<i class="fas fa-mobile-alt"></i> Pay ₹${currentFee} directly via UPI Apps`;
-        }
-
-        function setStudentType(type) {
-            isOutsider = (type === 'Outsider');
-            document.getElementById('btnDseu').classList.toggle('active', !isOutsider);
-            document.getElementById('btnOutsider').classList.toggle('active', isOutsider);
-            
-            document.getElementById('dseuFields').style.display = isOutsider ? 'none' : 'block';
-            document.getElementById('outsiderFields').style.display = isOutsider ? 'block' : 'none';
-            document.getElementById('rollNumber').required = !isOutsider;
-            
-            calculateFee();
-        }
-
-        function toggleMenu() { document.getElementById('navLinks').classList.toggle('active'); }
-        function openQRModal() { document.getElementById('qrModal').classList.add('active'); }
-        function closeQRModal() { document.getElementById('qrModal').classList.remove('active'); }
+        let scanInProgress = false;
 
         function navigateTo(pageId) {
-            document.getElementById('navLinks').classList.remove('active'); 
-            if (pageId === 'admin') {
-                const token = sessionStorage.getItem("admin_token");
-                if (!token) { pageId = 'admin-login'; } else { pageId = 'admin-dashboard'; loadAdminData(); }
+            // If the organizer session exists, NEVER let a page reload or a stray
+            // navigation call send the organizer to Home.
+            const savedAdminToken = sessionStorage.getItem("admin_token") || localStorage.getItem("techkriti_admin_token");
+            if (savedAdminToken) sessionStorage.setItem("admin_token", savedAdminToken);
+
+            if (scanInProgress && pageId === 'home') return;
+            if (savedAdminToken && pageId === 'home') pageId = 'admin-dashboard';
+
+            document.querySelectorAll('.page-view').forEach(p => { p.classList.remove('active'); p.style.display = 'none'; });
+            document.getElementById('navLinks').classList.remove('active');
+
+            if (pageId === 'admin-dashboard' || pageId === 'admin-login') {
+                if (savedAdminToken) { pageId = 'admin-dashboard'; loadAdminData(); } 
+                else { pageId = 'admin-login'; }
             }
             if (pageId === 'student-portal') {
                 document.getElementById('ticketDisplayContainer').style.display = 'none';
                 document.getElementById('studentLoginBox').style.display = 'block';
-                document.getElementById('studentLoginForm').reset();
                 document.getElementById('studentError').style.display = 'none';
+                document.getElementById('studentLoginForm').reset();
             }
-            document.querySelectorAll('.page-view').forEach(page => page.classList.remove('active'));
-            document.getElementById(pageId).classList.add('active');
+
+            const targetPage = document.getElementById(pageId);
+            if(targetPage) { targetPage.classList.add('active'); targetPage.style.display = 'block'; }
             window.scrollTo(0, 0);
         }
+        function toggleMenu() { document.getElementById('navLinks').classList.toggle('active'); }
 
-        function logoutAdmin() {
-            sessionStorage.removeItem("admin_token");
-            document.getElementById('loginForm').reset();
-            navigateTo('home');
+        function updateTimer() {
+            const targetDate = new Date("October 22, 2026 23:59:00 GMT+0530").getTime();
+            const distance = targetDate - new Date().getTime();
+            if (distance < 0) { document.querySelector('.cd-blocks').innerHTML = "<h2 style='color:var(--primary); font-weight: 900;'>CLOSED</h2>"; return; }
+            document.getElementById("days").innerText = Math.floor(distance / (1000 * 60 * 60 * 24)).toString().padStart(2, '0');
+            document.getElementById("hours").innerText = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0');
+            document.getElementById("mins").innerText = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
+            document.getElementById("secs").innerText = Math.floor((distance % (1000 * 60)) / 1000).toString().padStart(2, '0');
+        }
+        setInterval(updateTimer, 1000); updateTimer();
+
+        let isOutsider = false;
+        function setStudentType(type) {
+            isOutsider = (type === 'Outsider');
+            document.getElementById('btnDseu').classList.toggle('active', !isOutsider);
+            document.getElementById('btnOutsider').classList.toggle('active', isOutsider);
+            document.getElementById('dseuFields').style.display = isOutsider ? 'none' : 'grid';
+            document.getElementById('dseuRollGroup').style.display = isOutsider ? 'none' : 'block';
+            document.getElementById('outsiderCollegeGroup').style.display = isOutsider ? 'block' : 'none';
+            document.getElementById('rollNumber').required = !isOutsider;
+            
+            let fee = isOutsider ? 100 : 50; 
+            document.getElementById('paymentAmountText').innerText = `₹${fee}`;
+            const upiBtn = document.getElementById('upiLinkBtn');
+            upiBtn.href = `upi://pay?pa=shub159753@oksbi&pn=TechKriti2026&am=${fee}&cu=INR`;
+            upiBtn.innerText = `PAY ₹${fee} VIA UPI`;
         }
 
-        document.getElementById('loginForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const user = document.getElementById('adminUser').value;
-            const pass = document.getElementById('adminPass').value;
-            const errorMsg = document.getElementById('loginError');
-            const btn = document.getElementById('loginBtn');
-            btn.innerText = "Authenticating..."; btn.disabled = true; errorMsg.style.display = 'none';
-
-            fetch(SCRIPT_URL, {
-                method: 'POST',
-                headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-                body: JSON.stringify({ action: "adminLogin", username: user, password: pass })
-            })
-            .then(res => res.json())
-            .then(res => {
-                btn.innerText = "Login to Dashboard"; btn.disabled = false;
-                if (res.status === "success" && res.token) {
-                    sessionStorage.setItem("admin_token", res.token);
-                    document.getElementById('loginForm').reset();
-                    navigateTo('admin');
-                } else { errorMsg.style.display = 'block'; }
-            })
-            .catch(err => {
-                btn.innerText = "Login to Dashboard"; btn.disabled = false;
-                errorMsg.style.display = 'block';
-            });
-        });
-
-        // --- DROPDOWN BLUR LOGIC ---
         function initCustomSelects() {
-            document.querySelectorAll(".custom-select").forEach(el => {
-                const parent = el.parentNode; const select = el.querySelector("select");
-                if (select) { parent.insertBefore(select, el); } el.remove();
-            });
-
             document.querySelectorAll("select").forEach(select => {
+                if(select.id === 'adminTypeFilter') return;
                 const wrapper = document.createElement("div"); wrapper.className = "custom-select";
                 select.parentNode.insertBefore(wrapper, select); wrapper.appendChild(select);
-
                 const selectedDiv = document.createElement("div"); selectedDiv.className = "select-selected";
                 selectedDiv.innerHTML = `<span>${select.options[select.selectedIndex].innerHTML}</span> <i class="fas fa-chevron-down"></i>`;
                 wrapper.appendChild(selectedDiv);
-
                 const optionsDiv = document.createElement("div"); optionsDiv.className = "select-items";
                 wrapper.appendChild(optionsDiv);
 
@@ -592,48 +637,34 @@
                     const optionDiv = document.createElement("div"); optionDiv.innerHTML = select.options[i].innerHTML;
                     optionDiv.addEventListener("click", function(e) {
                         select.selectedIndex = i; selectedDiv.querySelector("span").innerHTML = this.innerHTML;
-                        select.dispatchEvent(new Event('change')); closeAllSelect();
+                        select.dispatchEvent(new Event('change'));
+                        document.querySelectorAll('.select-items').forEach(el=>el.classList.remove('select-show'));
                     });
                     optionsDiv.appendChild(optionDiv);
                 }
-
                 selectedDiv.addEventListener("click", function(e) {
-                    e.stopPropagation(); const isClosed = !optionsDiv.classList.contains("select-show");
-                    closeAllSelect();
-                    if (isClosed) {
-                        optionsDiv.classList.add("select-show"); 
-                        selectedDiv.classList.add("active"); 
-                        wrapper.style.zIndex = "999"; 
-                        
-                        const elementsToBlur = document.querySelectorAll('.form-group, .admin-stats, .glass-table-wrapper, .search-box, .btn-main, h2, .type-toggle');
-                        elementsToBlur.forEach(el => {
-                            if (!el.contains(wrapper)) { el.classList.add('blur-sibling'); }
-                        });
-                    }
+                    e.stopPropagation();
+                    const isClosed = !optionsDiv.classList.contains("select-show");
+                    document.querySelectorAll('.select-items').forEach(el=>el.classList.remove('select-show'));
+                    if (isClosed) optionsDiv.classList.add("select-show"); 
                 });
             });
         }
-        initCustomSelects(); 
+        initCustomSelects(); document.addEventListener("click", () => document.querySelectorAll('.select-items').forEach(el=>el.classList.remove('select-show')));
 
-        function closeAllSelect() {
-            document.querySelectorAll(".select-items").forEach(el => el.classList.remove("select-show"));
-            document.querySelectorAll(".select-selected").forEach(el => el.classList.remove("active"));
-            document.querySelectorAll(".custom-select").forEach(el => el.style.zIndex = "1");
-            document.querySelectorAll('.blur-sibling').forEach(el => el.classList.remove('blur-sibling'));
-        }
-        document.addEventListener("click", closeAllSelect);
-
-        document.getElementById('campus').addEventListener('change', function() {
-            const otherInput = document.getElementById('otherCampusInput');
-            if (this.value === 'Other') { otherInput.style.display = 'block'; } 
-            else { otherInput.style.display = 'none'; }
+        document.querySelectorAll('.es-item').forEach(item => {
+            item.addEventListener('click', function() {
+                document.querySelectorAll('.es-item').forEach(el => el.classList.remove('selected'));
+                this.classList.add('selected');
+                document.getElementById('eventChoice').value = this.getAttribute('data-val');
+            });
         });
 
-        let base64Image = ""; let mimeType = ""; let fileName = "";
+        let base64Image = "", mimeType = "", fileName = "";
         document.getElementById('paymentScreenshot').addEventListener('change', function(e) {
             const file = e.target.files[0];
             if (file) {
-                if (file.size > 1024 * 1024) { alert("File is too large! Please upload a screenshot under 1MB."); this.value = ""; return; }
+                if (file.size > 1024 * 1024) { alert("File max 1MB limit exceeded!"); this.value = ""; return; }
                 mimeType = file.type; fileName = file.name;
                 const reader = new FileReader();
                 reader.onload = function(evt) { base64Image = evt.target.result.split(',')[1]; }
@@ -643,17 +674,16 @@
 
         document.getElementById('regForm').addEventListener('submit', function(e) {
             e.preventDefault();
+            const eventVal = document.getElementById('eventChoice').value;
+            if(!eventVal) { alert("Please select a stage/activity!"); return; }
+
             const btn = document.getElementById('submitBtn'); const status = document.getElementById('statusMsg');
-            btn.innerText = "Processing & Saving..."; btn.disabled = true; status.innerText = "";
+            btn.innerText = "PROCESSING..."; btn.disabled = true; status.innerText = "";
             
             let phoneVal = document.getElementById('phone').value;
             let nameVal = document.getElementById('fullName').value;
             
-            let finalCampus = "N/A";
-            let finalRoll = "N/A";
-            let finalSem = "N/A";
-            let finalSec = "N/A";
-            
+            let finalCampus = "N/A", finalRoll = "N/A", finalSem = "N/A", finalSec = "N/A";
             if(isOutsider) {
                 finalCampus = document.getElementById('collegeName').value || "Outsider";
                 finalRoll = "OS-" + (phoneVal.length >= 4 ? phoneVal.slice(-4) : "1234");
@@ -665,264 +695,350 @@
                 finalSec = document.getElementById('section').value;
             }
 
-            let finalEvent = document.getElementById('eventChoice').value;
+            let random4 = Math.floor(1000 + Math.random() * 9000);
+            let namePrefix = nameVal.replace(/\s+/g, '').substring(0, 4).toUpperCase();
+            let generatedTicket = `DSEU-${random4}-${namePrefix}`;
+            
+            const data = {
+                action: "register", fullName: nameVal, rollNumber: finalRoll, semester: finalSem, section: finalSec,
+                campus: finalCampus, email: document.getElementById('email').value, phone: phoneVal,
+                eventChoice: eventVal, ticketId: generatedTicket, studentType: isOutsider ? "Outsider" : "DSEU",
+                imageBase64: base64Image, mimeType: mimeType, fileName: fileName
+            };
 
-            fetch(SCRIPT_URL)
-            .then(res => res.json())
-            .then(existingData => {
-                let isDuplicate = false;
-                if(Array.isArray(existingData)) {
-                     isDuplicate = existingData.some(item => 
-                        item && item.fullName && typeof item.fullName === 'string' &&
-                        item.fullName.toLowerCase() === nameVal.toLowerCase() && 
-                        item.phone === phoneVal
-                    );
-                }
-
-                if(isDuplicate) {
-                    status.innerText = "❌ Error: A registration with this Name and Phone Number already exists!";
-                    status.style.color = "#f87171";
-                    btn.innerText = "Submit Registration ✨"; btn.disabled = false;
-                    return; 
-                }
-
-                let phoneSuffix = phoneVal.length >= 4 ? phoneVal.slice(-4) : "0000";
-                let namePrefix = nameVal.replace(/\s+/g, '').substring(0, 4).toUpperCase();
-                let generatedTicket = `DSEU-${phoneSuffix}-${namePrefix}`;
-                
-                const data = {
-                    action: "register", fullName: nameVal, rollNumber: finalRoll,
-                    semester: finalSem, section: finalSec,
-                    campus: finalCampus, email: document.getElementById('email').value, phone: phoneVal,
-                    eventChoice: finalEvent, ticketId: generatedTicket,
-                    imageBase64: base64Image, mimeType: mimeType, fileName: fileName,
-                    studentType: isOutsider ? "Outsider" : "DSEU"
-                };
-
-                return fetch(SCRIPT_URL, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(data) });
-            })
-            .then(res => res ? res.json() : null)
-            .then(res => {
-                if(res && res.result === "success") {
-                    status.innerText = "🎉 Registration Submitted! Check Student Portal later."; status.style.color = "#22d3ee";
-                    btn.innerText = "Submit Registration ✨"; btn.disabled = false;
+            fetch(SCRIPT_URL, { method: 'POST', body: JSON.stringify(data) })
+            .then(res => res.json()).then(res => {
+                if(res.result === "duplicate") { status.innerText = "⚠ DUPLICATE DETECTED"; status.style.color = "var(--primary)"; }
+                else {
+                    const serverTicketId = res.ticketId || "GENERATING...";
+                    status.innerHTML = `🎉 REGISTRATION SUCCESSFUL<br><span style="font-size:0.9rem;">Ticket ID: <strong>${escapeHtml(serverTicketId)}</strong></span>`;
+                    status.style.color = "var(--secondary)";
                     document.getElementById('regForm').reset();
-                    document.querySelectorAll('#regForm .select-selected span').forEach(span => span.innerText = "Select Option");
-                    document.getElementById('otherCampusInput').style.display = 'none'; 
-                    setStudentType('DSEU');
-                    base64Image = ""; 
+                    document.querySelectorAll('.es-item').forEach(el=>el.classList.remove('selected'));
+                    document.getElementById('eventChoice').value = ""; base64Image = ""; 
                 }
-            }).catch(err => {
-                status.innerText = "❌ Connection error."; status.style.color = "red";
-                btn.innerText = "Submit Registration ✨"; btn.disabled = false;
-            });
+                btn.innerText = "SUBMIT REGISTRATION"; btn.disabled = false;
+            }).catch(() => { status.innerText = "❌ NETWORK ERROR"; btn.disabled = false; btn.innerText = "SUBMIT REGISTRATION"; });
         });
 
-        // 🚀 STUDENT PORTAL STATUS UPDATE (Includes QR Generation)
         document.getElementById('studentLoginForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            const roll = document.getElementById('studentRoll').value;
-            const phone = document.getElementById('studentPhone').value;
-            const btn = document.getElementById('studentLoginBtn');
-            const err = document.getElementById('studentError');
-            btn.innerText = "Checking..."; btn.disabled = true; err.style.display = 'none';
-
-            fetch(SCRIPT_URL)
-            .then(res => res.json())
-            .then(data => {
-                btn.innerText = "Check Status"; btn.disabled = false;
-                
-                if(!Array.isArray(data)) {
-                    err.innerText = "Network Error. Invalid data.";
-                    err.style.display = 'block';
-                    return;
+            const roll = document.getElementById('studentRoll').value; const phone = document.getElementById('studentPhone').value;
+            const btn = document.getElementById('studentLoginBtn'); btn.innerText = "VERIFYING..."; btn.disabled = true;
+            
+            fetch(SCRIPT_URL).then(res=>res.json()).then(data=>{
+                btn.innerText = "ACCESS PORTAL"; btn.disabled = false;
+                const student = data.find(item => String(item.rollNumber).toLowerCase() == String(roll).toLowerCase() && item.phone == phone);
+                if(student && student.status === "Approved") {
+                    document.getElementById('studentLoginBox').style.display = 'none';
+                    document.getElementById('ticketDisplayContainer').style.display = 'block';
+                    
+                    let safeTicketId = student.ticketId || "ID-NOT-FOUND";
+                    document.getElementById('tTicketId').innerText = safeTicketId;
+                    document.getElementById('tName').innerText = student.fullName;
+                    document.getElementById('tRoll').innerText = `${student.rollNumber} / ${student.studentType}`;
+                    document.getElementById('tEvent').innerText = student.eventChoice;
+                    
+                    document.getElementById('qrcode').innerHTML = "";
+                    new QRCode(document.getElementById("qrcode"), { text: safeTicketId, width: 140, height: 140, colorDark : "#000000", colorLight : "#ffffff" });
+                } else if (student && student.status === "Rejected") {
+                    document.getElementById('studentError').innerText = "❌ REJECTED: " + (student.rejectReason || "Contact Admin");
+                    document.getElementById('studentError').style.display = 'block';
+                } else { 
+                    document.getElementById('studentError').innerText = "⏳ PENDING APPROVAL OR NOT FOUND";
+                    document.getElementById('studentError').style.display = 'block';
                 }
+            }).catch(()=>{ btn.innerText = "ACCESS PORTAL"; btn.disabled = false; });
+        });
 
-                const studentRecord = data.find(item => item && String(item.rollNumber).toLowerCase() == String(roll).toLowerCase() && item.phone == phone);
-                if(studentRecord) {
-                    if(studentRecord.status === "Approved") {
-                        document.getElementById('studentLoginBox').style.display = 'none';
-                        document.getElementById('ticketDisplayContainer').style.display = 'block';
-                        let phoneSuffix = studentRecord.phone.toString().slice(-4);
-                        let namePrefix = studentRecord.fullName.replace(/\s+/g, '').substring(0, 4).toUpperCase();
-                        
-                        let generatedTicketId = studentRecord.ticketId || `DSEU-${phoneSuffix}-${namePrefix}`;
-                        document.getElementById('tTicketId').innerText = generatedTicketId;
-                        document.getElementById('tName').innerText = studentRecord.fullName;
-                        document.getElementById('tRoll').innerText = studentRecord.rollNumber;
-                        document.getElementById('tEvent').innerText = studentRecord.eventChoice;
-                        document.getElementById('tStatus').innerText = "VERIFIED & APPROVED ✅";
-                        
-                        // Generate QR Code dynamically
-                        document.getElementById('qrcode').innerHTML = "";
-                        new QRCode(document.getElementById("qrcode"), {
-                            text: generatedTicketId,
-                            width: 130,
-                            height: 130
-                        });
-                        
-                    } else if (studentRecord.status === "Rejected") {
-                        err.innerHTML = `❌ Registration Rejected.<br><span style="color:#cbd5e1; font-weight:normal;">Reason: ${studentRecord.rejectReason || "Issue with payment screenshot. Contact admin."}</span>`;
-                        err.style.color = "#f87171"; err.style.display = 'block';
-                    } else {
-                        err.innerText = "⏳ Payment verification is pending. Please check back later!";
-                        err.style.color = "#fbbf24"; err.style.display = 'block';
-                    }
-                } else {
-                    err.innerText = "No record found! Check your details.";
-                    err.style.color = "#f87171"; err.style.display = 'block';
-                }
-            }).catch(e => {
-                btn.innerText = "Check Status"; btn.disabled = false;
-                err.innerText = "Network Error."; err.style.display = 'block';
+        function downloadTicket() { html2canvas(document.getElementById('ticketContent'), {scale: 2}).then(canvas => { let link = document.createElement('a'); link.download = `TechKriti_Pass.png`; link.href = canvas.toDataURL("image/png"); link.click(); }); }
+
+        function logoutAdmin() { sessionStorage.removeItem("admin_token"); localStorage.removeItem("techkriti_admin_token"); document.getElementById('loginForm').reset(); navigateTo('home'); }
+        
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            fetch(SCRIPT_URL, { method: 'POST', body: JSON.stringify({ action: "adminLogin", username: document.getElementById('adminUser').value, password: document.getElementById('adminPass').value }) })
+            .then(res => res.json()).then(res => {
+                if (res.status === "success") { sessionStorage.setItem("admin_token", res.token); localStorage.setItem("techkriti_admin_token", res.token); navigateTo('admin-dashboard'); }
+                else { document.getElementById('loginError').style.display = 'block'; }
             });
         });
 
-        function downloadTicket() {
-            const ticketEl = document.getElementById('ticketContent');
-            html2canvas(ticketEl, { backgroundColor: null, scale: 2 }).then(canvas => {
-                let link = document.createElement('a');
-                link.download = `TechKriti_Pass_${document.getElementById('tRoll').innerText}.png`;
-                link.href = canvas.toDataURL("image/png"); link.click();
-            });
-        }
-
         let rawAdminData = [];
-        function loadAdminData() { fetch(SCRIPT_URL).then(res => res.json()).then(data => { rawAdminData = data; renderAdminTable(); }).catch(err => { rawAdminData = []; renderAdminTable(); }); }
+        function loadAdminData() { 
+            const table = document.getElementById('adminTableBody');
+            if (table) table.innerHTML = '<tr><td colspan="5" style="text-align:center; padding: 2rem;">Fetching Secure Data...</td></tr>';
+            // Cache-bust the Apps Script GET so Checked-In/Entered state is fresh.
+            fetch(SCRIPT_URL + '?t=' + Date.now(), { cache: 'no-store' })
+            .then(res=>res.json())
+            .then(data=>{
+                if (!Array.isArray(data)) throw new Error('Invalid backend response');
+                rawAdminData = data;
+                renderAdminTable();
+            })
+            .catch(err => { if (table) table.innerHTML = '<tr><td colspan="5" style="text-align:center; padding: 2rem; color: #EF4444;">Failed to load data. Please check backend link.</td></tr>'; console.error(err); });
+        }
 
         function renderAdminTable() {
-            const searchStr = document.getElementById('adminSearch').value.toLowerCase();
-            const filterStr = document.getElementById('adminFilter').value;
-            const typeFilterStr = document.getElementById('adminTypeFilter').value;
-            const tbody = document.getElementById('adminTableBody');
+            const search = document.getElementById('adminSearch').value.toLowerCase();
+            const filter = document.getElementById('adminTypeFilter').value;
             
-            if(!Array.isArray(rawAdminData)){
-                tbody.innerHTML = '<tr><td colspan="5" class="empty-state">No records found.</td></tr>'; 
-                return;
-            }
-
-            let filteredData = rawAdminData.filter(item => {
-                if(!item || !item.fullName) return false;
-                const matchesSearch = item.fullName.toLowerCase().includes(searchStr) || (item.rollNumber && item.rollNumber.toLowerCase().includes(searchStr));
-                const matchesFilter = filterStr === 'All' || (item.eventChoice && item.eventChoice.includes(filterStr));
+            let checkedInCount = 0; let approvedCount = 0;
+            
+            let filtered = rawAdminData.filter(i => {
+                if(!i || !i.fullName) return false;
+                if(i.checkInStatus === "Checked-In") checkedInCount++;
+                if(i.status === "Approved") approvedCount++;
                 
-                const isOS = item.studentType === 'Outsider' || (item.rollNumber && item.rollNumber.startsWith('OS-'));
-                const matchesType = typeFilterStr === 'All' || (typeFilterStr === 'Outsider' && isOS) || (typeFilterStr === 'DSEU' && !isOS);
-
-                return matchesSearch && matchesFilter && matchesType;
+                let matchesSearch = i.fullName.toLowerCase().includes(search) || (i.ticketId && i.ticketId.toLowerCase().includes(search)) || (i.rollNumber && i.rollNumber.toLowerCase().includes(search));
+                let matchesFilter = filter === 'All' || i.status === filter || (filter === 'Checked-In' && i.checkInStatus === 'Checked-In');
+                return matchesSearch && matchesFilter;
             });
-            document.getElementById('statTotal').innerText = filteredData.length;
             
-            let eventCounts = {}; filteredData.forEach(item => { eventCounts[item.eventChoice] = (eventCounts[item.eventChoice] || 0) + 1; });
-            let topEvent = "--"; let maxCount = 0;
-            for(let event in eventCounts) { if(eventCounts[event] > maxCount) { maxCount = eventCounts[event]; topEvent = event; } }
-            document.getElementById('statTopEvent').innerText = topEvent !== "undefined" ? topEvent.split(" ")[0] : "--"; 
-
-            if(filteredData.length === 0) { tbody.innerHTML = '<tr><td colspan="5" class="empty-state">No records found.</td></tr>'; return; }
-
-            let html = '';
-            filteredData.forEach(item => {
+            document.getElementById('statTotal').innerText = rawAdminData.length;
+            document.getElementById('statApproved').innerText = approvedCount;
+            document.getElementById('statCheckedIn').innerText = checkedInCount;
+            
+            let tbody = document.getElementById('adminTableBody'); let html = '';
+            filtered.forEach(item => {
                 let statusBadge = "";
-                let actionButtons = "";
-                
-                let paymentImageLink = item.paymentUrl && item.paymentUrl.includes("http") ? item.paymentUrl : `${item.rollNumber}_payment.jpg`; 
+                if(item.checkInStatus === "Checked-In") statusBadge = `<span style="background: rgba(16, 185, 129, 0.1); color: #10B981; padding: 5px 9px; border-radius: 6px; font-weight: 900; font-size: 0.75rem;">✓ ENTERED</span><br><span style="font-size:0.68rem; color:#475569; font-weight:700;">${escapeHtml(item.checkInTime || '')}</span>`;
+                else if(item.status === "Approved") statusBadge = `<span style="background: rgba(0, 180, 216, 0.1); color: #00B4D8; padding: 4px 8px; border-radius: 4px; font-weight: bold; font-size: 0.75rem;">Approved</span>`;
+                else if(item.status === "Rejected") statusBadge = `<span style="background: rgba(239, 68, 68, 0.1); color: #EF4444; padding: 4px 8px; border-radius: 4px; font-weight: bold; font-size: 0.75rem;">Rejected</span>`;
+                else statusBadge = `<span style="background: rgba(245, 158, 11, 0.1); color: #F59E0B; padding: 4px 8px; border-radius: 4px; font-weight: bold; font-size: 0.75rem;">Pending</span>`;
 
-                if (item.status === "Approved") {
-                    statusBadge = `<span style="color:#10b981; font-weight:bold;">Approved</span>`;
-                    actionButtons = `<span style="background: rgba(16, 185, 129, 0.2); color: #10b981; padding: 4px 10px; border-radius: 6px; font-family: monospace; font-size: 0.9rem; border: 1px solid rgba(16, 185, 129, 0.4);"><i class="fas fa-ticket-alt"></i> ${item.ticketId}</span>`;
-                } 
-                else if (item.status === "Rejected") {
-                    statusBadge = `<span style="color:#ef4444; font-weight:bold;">Rejected</span>`;
-                    actionButtons = `<span style="color:#ef4444; font-size:0.85rem;"><i class="fas fa-times-circle"></i> Rejected</span>`;
-                } 
-                else {
-                    statusBadge = `<span style="color:#fbbf24; font-weight:bold;">Pending</span>`;
-                    actionButtons = `
-                        <a href="${paymentImageLink}" target="_blank" class="action-btn"><i class="fas fa-eye"></i> View</a>
-                        <button class="action-btn approve-btn" onclick="approveStudent('${item.rollNumber}', '${item.eventChoice}')" title="Approve"><i class="fas fa-check"></i></button>
-                        <button class="action-btn reject-btn" onclick="rejectStudent('${item.rollNumber}', '${item.eventChoice}')" title="Reject"><i class="fas fa-times"></i></button>
-                    `;
+                const driveSearchTerm = String(item.rollNumber || '').trim();
+                const driveSearchUrl = driveSearchTerm
+                    ? `https://drive.google.com/drive/u/0/search?q=${encodeURIComponent(driveSearchTerm)}`
+                    : 'https://drive.google.com/drive/folders/129hu_rVMFRLDjZQJfTkvx0gC10UAmLnd';
+                let paymentLink = `<a class="drive-search-btn" href="${driveSearchUrl}" target="_blank" rel="noopener noreferrer"><i class="fab fa-google-drive"></i> Drive Search</a>`;
+
+                let actionBtns = "";
+                if(item.status === "Pending") {
+                    actionBtns = `<button class="btn-sm btn-approve" onclick="manageApproval('${item.ticketId}', 'approve', '${item.rollNumber}')">✔</button>
+                                  <button class="btn-sm btn-reject" onclick="manageApproval('${item.ticketId}', 'reject', '${item.rollNumber}')">✖</button>`;
+                } else if(item.checkInStatus === "Checked-In") {
+                    actionBtns = `<span style="color:var(--text-muted); font-size:0.75rem; font-weight:700;">Log: ${item.checkInTime || 'N/A'}</span>`;
+                } else {
+                    actionBtns = `<span style="color:var(--text-muted); font-size:0.75rem; font-weight:700;">Awaiting Check-in</span>`;
                 }
-                
-                const isOS = item.studentType === 'Outsider' || (item.rollNumber && item.rollNumber.startsWith('OS-'));
-                let osBadge = isOS ? `<span style="background:#ef4444; color:#fff; padding:2px 6px; border-radius:4px; font-size:0.7rem; margin-left:5px;">OS</span>` : '';
-                let displayRoll = isOS ? item.campus : item.rollNumber;
 
-                html += `<tr><td><strong>${item.fullName}</strong> ${osBadge}</td><td>${displayRoll || 'N/A'}</td><td><span style="background: rgba(34,211,238,0.1); color: #22d3ee; padding: 4px 8px; border-radius: 4px; font-size: 0.85rem; white-space: normal;">${item.eventChoice}</span></td><td>${statusBadge}</td><td>${actionButtons}</td></tr>`;
+                html += `<tr>
+                    <td style="padding: 1rem; border-bottom: 1px solid #E2E8F0;"><strong>${escapeHtml(item.fullName)}</strong><br><span style="font-size:0.75rem; color:#475569;">${escapeHtml(item.eventChoice)}</span></td>
+                    <td style="padding: 1rem; border-bottom: 1px solid #E2E8F0; font-family:monospace; color:#FF0055; font-size:0.85rem;">${escapeHtml(item.ticketId || 'N/A')}</td>
+                    <td style="padding: 1rem; border-bottom: 1px solid #E2E8F0; font-size:0.85rem;">${paymentLink}</td>
+                    <td style="padding: 1rem; border-bottom: 1px solid #E2E8F0;">${statusBadge}</td>
+                    <td style="padding: 1rem; border-bottom: 1px solid #E2E8F0;">${actionBtns}</td>
+                </tr>`;
             });
-            tbody.innerHTML = html;
+            tbody.innerHTML = html || '<tr><td colspan="5" style="text-align:center; padding: 2rem;">No records found.</td></tr>';
         }
 
-        function approveStudent(rollNo, eventName) {
-            if(confirm(`Approve ticket for Roll No: ${rollNo}?`)) {
-                fetch(SCRIPT_URL, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify({ action: "approve", rollNumber: rollNo, eventChoice: eventName }) })
-                .then(res => res.json()).then(res => { if(res.result === "approved") { loadAdminData(); } });
+        function manageApproval(ticketId, type, rollNumber) {
+            let reason = "";
+            if(type === 'reject') { 
+                reason = prompt("Enter Rejection Reason (e.g. Invalid Screenshot):"); 
+                if(!reason) return; 
+            } else { 
+                if(!confirm(`Approve Ticket ID: ${ticketId}?`)) return; 
             }
-        }
-
-        function rejectStudent(rollNo, eventName) {
-            let reason = prompt(`Reason for rejecting Roll No: ${rollNo}?\n(e.g., Fake Screenshot, Blur Image, Name Mismatch)`);
-            if (reason !== null && reason.trim() !== "") {
-                fetch(SCRIPT_URL, { 
-                    method: 'POST', 
-                    headers: { 'Content-Type': 'text/plain;charset=utf-8' }, 
-                    body: JSON.stringify({ action: "reject", rollNumber: rollNo, eventChoice: eventName, reason: reason }) 
-                })
-                .then(res => res.json()).then(res => { 
-                    if(res.result === "rejected") { alert("Student Rejected Successfully."); loadAdminData(); } 
-                });
-            }
-        }
-        
-        // --- GATE QR SCANNER LOGIC ---
-        function startScanner() {
-            const scanner = new Html5QrcodeScanner("reader", { fps: 10, qrbox: 250 });
-            scanner.render((decodedText) => {
-                scanner.clear();
-                verifyScannedTicket(decodedText);
-            }, (error) => {});
-        }
-
-        function verifyScannedTicket(ticketId) {
-            const resultBox = document.getElementById('scanResultBox');
-            resultBox.style.display = 'block';
             
-            const student = rawAdminData.find(item => item.ticketId === ticketId);
-            if(student && student.status === "Approved") {
-                resultBox.style.background = "rgba(16, 185, 129, 0.2)";
-                resultBox.style.color = "#10b981";
-                resultBox.style.border = "1px solid #10b981";
-                resultBox.innerHTML = `✅ ACCESS GRANTED!<br><small style="font-size:0.9rem; color:#fff;">${student.fullName} (${student.rollNumber}) - ${student.eventChoice}</small>`;
-            } else {
-                resultBox.style.background = "rgba(239, 68, 68, 0.2)";
-                resultBox.style.color = "#ef4444";
-                resultBox.style.border = "1px solid #ef4444";
-                resultBox.innerHTML = `❌ ACCESS DENIED!<br><small style="font-size:0.9rem; color:#fff;">Invalid Pass or Not Approved (${ticketId})</small>`;
+            fetch(SCRIPT_URL, { 
+                method: 'POST', 
+                body: JSON.stringify({ action: type, ticketId: ticketId, rollNumber: rollNumber, reason: reason }) 
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.result === "manual_check") {
+                    alert(`⚠️ DECLINED: Check Manually!\nDrive folder mein Roll Number (${rollNumber}) ke naam se koi photo nahi mili.`);
+                } else if (data.result === "success") {
+                    loadAdminData(); 
+                } else {
+                    alert("❌ Operation failed. Please try again.");
+                }
+            })
+            .catch(err => {
+                alert("❌ Network Error: Backend se connect nahi ho paya.");
+                console.error(err);
+            });
+        }
+
+        // Native Android/iOS camera input is used for mobile QR capture.
+        // A hidden scanner host is created only for html5-qrcode's image decoding API.
+        const qrScannerHost = document.createElement('div');
+        qrScannerHost.id = 'qrScannerHost';
+        qrScannerHost.style.display = 'none';
+        document.body.appendChild(qrScannerHost);
+        const html5QrCode = new Html5Qrcode("qrScannerHost");
+
+        function escapeHtml(value) {
+            return String(value ?? '')
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#039;');
+        }
+
+        function getDriveProofUrl(value) {
+            if (!value) return "";
+            const raw = String(value).trim();
+            if (!raw || raw === "No Receipt" || raw.toLowerCase().startsWith("upload failed")) return "";
+
+            // Apps Script may return a normal Drive viewer URL or a raw file ID.
+            const idMatch = raw.match(/(?:id=|\/d\/)([A-Za-z0-9_-]{20,})/);
+            if (idMatch && idMatch[1]) {
+                return `https://drive.google.com/uc?export=view&id=${idMatch[1]}`;
             }
+            if (/^[A-Za-z0-9_-]{20,}$/.test(raw)) {
+                return `https://drive.google.com/uc?export=view&id=${raw}`;
+            }
+            return raw;
         }
 
-        document.getElementById('adminTypeFilter').addEventListener('change', renderAdminTable);
+        function renderScanParticipant(res, decodedText) {
+            const ticket = String(decodedText || res.ticketId || '').trim();
+            const local = rawAdminData.find(item => String(item.ticketId || '').trim() === ticket);
+            const name = res.name || res.fullName || (local && local.fullName) || 'Participant';
+            const event = res.event || res.eventChoice || (local && local.eventChoice) || 'N/A';
+            const roll = res.rollNumber || (local && local.rollNumber) || 'N/A';
+            const ticketId = res.ticketId || ticket || (local && local.ticketId) || 'N/A';
 
-        // --- PREMIUM & CLEAN EMOJI ANIMATION ---
-        const eventEmojis = ['💻', '🤖', '🧠', '🍔', '🎤', '💃', '😂', '🏆', '🎸', '✨', '🔥'];
-        function createSingleEmoji() {
-            const emojiEl = document.createElement('div'); emojiEl.className = 'floating-emoji';
-            emojiEl.innerText = eventEmojis[Math.floor(Math.random() * eventEmojis.length)];
-            emojiEl.style.left = (Math.random() * 90 + 5) + 'vw'; 
-            const duration = Math.random() * 4 + 10; 
-            emojiEl.style.animationDuration = duration + 's';
-            document.body.appendChild(emojiEl);
-            setTimeout(() => { emojiEl.remove(); }, duration * 1000);
+            return `<div style="margin-top:8px; font-size:0.95rem; font-weight:700;">
+                <strong>${escapeHtml(name)}</strong><br>
+                Ticket: <span style="font-family:monospace;">${escapeHtml(ticketId)}</span><br>
+                Roll: ${escapeHtml(roll)}<br>
+                Event: ${escapeHtml(event)}
+            </div>`;
         }
 
-        function runEmojiRoutine() {
-            let count = Math.random() > 0.5 ? 1 : 2; 
-            for (let i = 0; i < count; i++) { setTimeout(createSingleEmoji, i * 2000); }
-        }
-        setInterval(runEmojiRoutine, 8000);
-        setTimeout(runEmojiRoutine, 2000);
+        document.getElementById('nativeQrInput').addEventListener('change', function(e) {
+            if (!e.target.files || e.target.files.length === 0) return;
 
-        calculateFee();
+            const imageFile = e.target.files[0];
+            const resBox = document.getElementById('scanResultBox');
+            scanInProgress = true;
+
+            // IMPORTANT: do not call navigateTo() here. The organizer stays
+            // inside the dashboard after scanning a ticket.
+            resBox.style.display = 'block';
+            resBox.className = 'scan-res';
+            resBox.innerHTML = "<i class='fas fa-spinner fa-spin res-icon' style='color:#000;'></i><br>Reading QR...";
+            resBox.style.background = "#fff";
+            resBox.style.color = "#000";
+
+            html5QrCode.scanFile(imageFile, true)
+            .then(decodedText => {
+                const ticketId = String(decodedText || "").trim();
+
+                if (!ticketId) {
+                    throw new Error("Empty QR value");
+                }
+
+                resBox.innerHTML = "<i class='fas fa-cloud-upload-alt res-icon' style='color:#00B4D8;'></i><br>Verifying on Server...";
+
+                return fetch(SCRIPT_URL + '?scan=' + encodeURIComponent(ticketId) + '&t=' + Date.now(), {
+                    method: 'POST',
+                    cache: 'no-store',
+                    body: JSON.stringify({
+                        action: "checkIn",
+                        ticketId: ticketId
+                    })
+                }).then(res => res.json()).then(res => {
+                    if (res.result === "success") {
+                        resBox.className = 'scan-res res-success';
+                        const successTicket = res.ticketId || ticketId;
+                        resBox.innerHTML =
+                            `<i class='fas fa-check-circle res-icon'></i>` +
+                            `<div style="font-family:'Montserrat',sans-serif; font-size:1.25rem; font-weight:900;">WELCOME TO TECH KRITI 2026! 🎉</div>` +
+                            `<div style="margin-top:6px; font-size:0.95rem; font-weight:800;">ENTRY VERIFIED — ENJOY THE FEST!</div>` +
+                            renderScanParticipant(res, successTicket) +
+                            `<div class="entry-welcome"><div class="welcome-title">✓ You Are In — Have An Amazing Time!</div><div class="welcome-id">Ticket ID: ${escapeHtml(successTicket)}</div><div class="welcome-note">DSEU Rajokri Campus • Tech Kriti 2026</div></div>`;
+
+                        // Update the visible organizer row immediately; GET is also refreshed below.
+                        const idx = rawAdminData.findIndex(item => String(item.ticketId || '').trim().toUpperCase() === successTicket.toUpperCase());
+                        if (idx >= 0) {
+                            rawAdminData[idx].checkInStatus = 'Checked-In';
+                            rawAdminData[idx].checkInTime = res.time || new Date().toLocaleString();
+                            renderAdminTable();
+                        }
+                    } else if (res.result === "already_used") {
+                        resBox.className = 'scan-res res-used';
+                        resBox.innerHTML =
+                            `<i class='fas fa-exclamation-triangle res-icon'></i>ALREADY ENTERED` +
+                            renderScanParticipant(res, ticketId) +
+                            `<div style="margin-top:8px; font-size:0.82rem;">Logged at: ${escapeHtml(res.time || 'N/A')}</div>`;
+                    } else {
+                        resBox.className = 'scan-res res-error';
+                        resBox.innerHTML =
+                            `<i class='fas fa-times-circle res-icon'></i>DECLINED / INVALID` +
+                            `<div style="margin-top:8px; font-size:0.85rem; font-weight:700;">Ticket Not Found, Rejected, or Pending</div>` +
+                            `<div style="margin-top:6px; font-family:monospace; font-size:0.8rem;">${escapeHtml(ticketId)}</div>`;
+                    }
+
+                    // Refresh only the dashboard table/stats. Never navigate away.
+                    loadAdminData();
+                });
+            })
+            .catch(err => {
+                console.error("QR scan/check-in error:", err);
+                resBox.className = 'scan-res res-error';
+                resBox.innerHTML =
+                    `<i class='fas fa-camera res-icon'></i>NO QR CODE DETECTED.` +
+                    `<br><span style="font-size:0.8rem; font-weight:normal;">Please capture a clearer photo with the complete QR visible.</span>`;
+            })
+            .finally(() => {
+                // Reset the native input so the same camera/photo can be selected again.
+                e.target.value = "";
+                scanInProgress = false;
+            });
+        });
+
+
+
+        /*
+         * TECH KRITI 2026 - FRONTEND FIX NOTES
+         * 1. Registration fee remains dynamic: DSEU ₹50 / Outsider ₹100.
+         * 2. UPI intent and QR are generated from the same fee-specific UPI URI.
+         * 3. Ticket ID is accepted from the Apps Script response rather than
+         *    being fabricated by the browser.
+         * 4. Organizer scanning uses the native file/camera input on mobile.
+         * 5. The scan result is rendered inside the organizer dashboard and
+         *    loadAdminData() refreshes only the table; it does not navigate home.
+         * 6. Organizer payment access uses a Google Drive search for the participant roll number.
+         * 7. First successful scan shows a festive welcome + Ticket ID; repeat scans show ALREADY ENTERED.
+         * 8. Organizer status displays a permanent ENTERED tick/time when the backend returns check-in data.
+         * 7. Existing event schedule and UI structure are preserved.
+         */
+
+        // Android camera return / browser restore safety net.
+        // If an organizer is logged in, always restore the dashboard.
+        window.addEventListener("pageshow", function() {
+            const token = sessionStorage.getItem("admin_token") || localStorage.getItem("techkriti_admin_token");
+            if (token) {
+                sessionStorage.setItem("admin_token", token);
+                const dashboard = document.getElementById("admin-dashboard");
+                if (dashboard && !dashboard.classList.contains("active")) {
+                    navigateTo("admin-dashboard");
+                }
+            }
+        });
+
+
+        document.addEventListener("DOMContentLoaded", () => {
+            setStudentType('DSEU');
+
+            // Android camera/file capture can return to the page after a reload.
+            // Restore the organizer session first so the page NEVER falls back to Home.
+            const savedAdminToken = sessionStorage.getItem("admin_token") || localStorage.getItem("techkriti_admin_token");
+
+            if (savedAdminToken) {
+                sessionStorage.setItem("admin_token", savedAdminToken);
+                navigateTo('admin-dashboard');
+            } else {
+                navigateTo('home');
+            }
+        });
     </script>
 </body>
 </html>
