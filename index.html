@@ -43,7 +43,7 @@
         /* Navbar */
         nav { position: fixed; top: 0; width: 100%; background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); display: flex; justify-content: space-between; align-items: center; padding: 1rem 5%; z-index: 1000; box-shadow: 0 4px 20px rgba(0,0,0,0.05); }
         .logo { font-size: 1.8rem; font-weight: 900; color: var(--text-main); cursor: pointer; letter-spacing: -1px; display: flex; align-items: center; gap: 8px; }
-        .logo span { background: var(--tertiary); color: #fff; padding: 2px 8px; font-size: 1.2rem; transform: skewX(-10deg); }
+        .logo img { width: 32px; height: 32px; object-fit: contain; display: block; flex: 0 0 32px; }
         
         .nav-links { display: flex; gap: 2rem; align-items: center; }
         .nav-links button { background: none; border: none; color: var(--text-muted); font-size: 1rem; font-weight: 700; cursor: pointer; transition: 0.3s; text-transform: uppercase; position: relative; z-index: 10; }
@@ -289,7 +289,7 @@
     </div>
 
     <nav>
-        <div class="logo" onclick="navigateTo('home')"><span>#TK'26</span> TECH KRITI 2026</div>
+        <div class="logo" onclick="navigateTo('home')"><img src="img2.png" alt="Tech Kriti logo"> TECH KRITI 2026</div>
         <div class="hamburger" onclick="toggleMenu()">
             <span></span><span></span><span></span>
         </div>
@@ -319,8 +319,8 @@
                 </div>
                 
                 <div class="hero-visual">
-                    <img src="https://www.cloudfest.com/wp-content/uploads/2025/04/hackathon-contest-programmers.jpg.webp" class="comp-img img-1" alt="Dance Performance">
-                    <img src="https://res.cloudinary.com/purnesh/image/upload/w_1000,f_auto/hansraj-college%2Cjpg00.jpg" class="comp-img img-2" alt="Technology">
+                    <img src="https://www.cloudfest.com/wp-content/uploads/2025/04/hackathon-contest-programmers.jpg.webp" class="comp-img img-1" alt="Tech Performance">
+                    <img src="https://res.cloudinary.com/purnesh/image/upload/w_1000,f_auto/hansraj-college%2Cjpg00.jpg" class="comp-img img-2" alt="College Campus">
                 </div>
             </div>
 
@@ -434,7 +434,7 @@
                             <label style="color:var(--text-main);">REGISTRATION FEE</label>
                             <div class="payment-amt" id="paymentAmountText">₹50</div>
                             
-                            <img src="img1.png" alt="Scan to Pay" style="width: 150px; height: 150px; margin-bottom: 15px; border: 4px solid #fff; border-radius: 12px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); object-fit: cover;">
+                            <img src="img1.png" alt="Scan to Pay QR" style="width: 150px; height: 150px; margin-bottom: 15px; border: 4px solid #fff; border-radius: 12px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); object-fit: cover;">
                             <br>
                             
                             <a id="upiLinkBtn" href="upi://pay?pa=shub159753@oksbi&pn=TechKriti2026&am=50&cu=INR" class="btn-main" style="width:100%; margin-bottom: 15px; border-radius:12px; background:var(--primary);">PAY ₹50 VIA UPI</a>
@@ -525,6 +525,13 @@
                         <a href="https://drive.google.com/drive/folders/129hu_rVMFRLDjZQJfTkvx0gC10UAmLnd" target="_blank" rel="noopener noreferrer" class="drive-search-btn" style="margin-top:12px; width:100%; justify-content:center; padding:12px; font-size:0.9rem;"><i class="fab fa-google-drive"></i> Open Payment Drive</a>
                         <div class="scan-camera-note">Android/iPhone: the button uses the phone's native camera/photo picker. The public registration page never requests camera access.</div>
                         
+                        <div style="margin-top:22px; padding:16px; border:1px solid var(--border-color); border-radius:14px; background:var(--card-bg);">
+                            <h4 style="margin:0 0 8px; color:var(--text-main);">Manual Entry / Check-in</h4>
+                            <p style="font-size:.82rem; color:var(--text-muted); margin-bottom:10px;">QR scan na ho toh approved participant ka Ticket ID enter kar.</p>
+                            <input id="manualEntryTicket" type="text" placeholder="Enter Ticket ID (e.g. TK26-123456)" style="width:100%; padding:12px; border:1px solid var(--border-color); border-radius:9px; margin-bottom:10px;">
+                            <button type="button" class="btn-main" onclick="manualEntryCheckIn()" style="width:100%; justify-content:center;">Verify & Mark Entry</button>
+                            <p id="manualEntryMessage" style="font-size:.85rem; font-weight:700; margin-top:10px;"></p>
+                        </div>
                         <div id="scanResultBox" class="scan-res"></div>
                     </div>
 
@@ -703,6 +710,9 @@
             e.preventDefault();
             const eventVal = document.getElementById('eventChoice').value;
             if(!eventVal) { alert("Please select a stage/activity!"); return; }
+            const screenshotInput = document.getElementById('paymentScreenshot');
+            if (!screenshotInput.files || !screenshotInput.files.length) { alert("Payment screenshot is compulsory. Upload the proof first."); return; }
+            if (!base64Image) { alert("Screenshot is still loading. Wait a moment and submit again."); return; }
 
             const btn = document.getElementById('submitBtn'); const status = document.getElementById('statusMsg');
             btn.innerText = "PROCESSING..."; btn.disabled = true; status.innerText = "";
@@ -734,48 +744,83 @@
             };
 
             fetch(SCRIPT_URL, { method: 'POST', body: JSON.stringify(data) })
-            .then(res => res.json()).then(res => {
-                if(res.result === "duplicate") { status.innerText = "⚠ DUPLICATE DETECTED"; status.style.color = "var(--primary)"; }
-                else {
-                    const serverTicketId = res.ticketId || "GENERATING...";
-                    status.innerHTML = `🎉 REGISTRATION SUCCESSFUL<br><span style="font-size:0.9rem;">Ticket ID: <strong>${escapeHtml(serverTicketId)}</strong></span>`;
+            .then(res => {
+                if (!res.ok) throw new Error("Network Response: " + res.status);
+                return res.json();
+            })
+            .then(res => {
+                if (res.result === "duplicate") {
+                    status.innerText = "⚠ DUPLICATE DETECTED";
+                    status.style.color = "var(--primary)";
+                } else if (res.result === "success" && res.ticketId) {
+                    status.innerHTML = `🎉 REGISTRATION SUCCESSFUL<br><span style="font-size:0.9rem;">Ticket ID: <strong>${escapeHtml(res.ticketId)}</strong></span>`;
                     status.style.color = "var(--secondary)";
                     document.getElementById('regForm').reset();
-                    document.querySelectorAll('.es-item').forEach(el=>el.classList.remove('selected'));
-                    document.getElementById('eventChoice').value = ""; base64Image = ""; 
+                    document.querySelectorAll('.es-item').forEach(el => el.classList.remove('selected'));
+                    document.getElementById('eventChoice').value = "";
+                    base64Image = "";
+                    mimeType = "";
+                    fileName = "";
+                } else {
+                    status.innerText = "❌ " + (res.message || "Registration failed. Please try again.");
+                    status.style.color = "var(--primary)";
                 }
-                btn.innerText = "SUBMIT REGISTRATION"; btn.disabled = false;
-            }).catch(() => { status.innerText = "❌ NETWORK ERROR"; btn.disabled = false; btn.innerText = "SUBMIT REGISTRATION"; });
+                btn.innerText = "SUBMIT REGISTRATION";
+                btn.disabled = false;
+            }).catch((err) => {
+                status.innerText = "❌ NETWORK ERROR: Could not reach registration service.";
+                btn.disabled = false;
+                btn.innerText = "SUBMIT REGISTRATION";
+                console.error(err);
+            });
         });
 
         document.getElementById('studentLoginForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            const roll = document.getElementById('studentRoll').value; const phone = document.getElementById('studentPhone').value;
-            const btn = document.getElementById('studentLoginBtn'); btn.innerText = "VERIFYING..."; btn.disabled = true;
-            
-            fetch(SCRIPT_URL).then(res=>res.json()).then(data=>{
-                btn.innerText = "ACCESS PORTAL"; btn.disabled = false;
-                const student = data.find(item => String(item.rollNumber).toLowerCase() == String(roll).toLowerCase() && item.phone == phone);
-                if(student && student.status === "Approved") {
+            const roll = document.getElementById('studentRoll').value.trim();
+            const phone = document.getElementById('studentPhone').value.trim();
+            const btn = document.getElementById('studentLoginBtn');
+            const errorBox = document.getElementById('studentError');
+            btn.innerText = "VERIFYING...";
+            btn.disabled = true;
+            errorBox.style.display = 'none';
+
+            fetch(SCRIPT_URL, {
+                method: 'POST',
+                body: JSON.stringify({ action: "studentLookup", rollNumber: roll, phone: phone })
+            })
+            .then(res => {
+                if (!res.ok) throw new Error("Network Response: " + res.status);
+                return res.json();
+            })
+            .then(student => {
+                if (student.result === "success" && student.status === "Approved") {
                     document.getElementById('studentLoginBox').style.display = 'none';
                     document.getElementById('ticketDisplayContainer').style.display = 'block';
-                    
-                    let safeTicketId = student.ticketId || "ID-NOT-FOUND";
+                    const safeTicketId = student.ticketId || "ID-NOT-FOUND";
                     document.getElementById('tTicketId').innerText = safeTicketId;
-                    document.getElementById('tName').innerText = student.fullName;
-                    document.getElementById('tRoll').innerText = `${student.rollNumber} / ${student.studentType}`;
-                    document.getElementById('tEvent').innerText = student.eventChoice;
-                    
+                    document.getElementById('tName').innerText = student.fullName || "";
+                    document.getElementById('tRoll').innerText = `${student.rollNumber || ""} / ${student.studentType || ""}`;
+                    document.getElementById('tEvent').innerText = student.eventChoice || "";
                     document.getElementById('qrcode').innerHTML = "";
-                    new QRCode(document.getElementById("qrcode"), { text: safeTicketId, width: 140, height: 140, colorDark : "#000000", colorLight : "#ffffff" });
-                } else if (student && student.status === "Rejected") {
-                    document.getElementById('studentError').innerText = "❌ REJECTED: " + (student.rejectReason || "Contact Admin");
-                    document.getElementById('studentError').style.display = 'block';
-                } else { 
-                    document.getElementById('studentError').innerText = "⏳ PENDING APPROVAL OR NOT FOUND";
-                    document.getElementById('studentError').style.display = 'block';
+                    new QRCode(document.getElementById("qrcode"), { text: safeTicketId, width: 140, height: 140, colorDark: "#000000", colorLight: "#ffffff" });
+                } else if (student.result === "success" && student.status === "Rejected") {
+                    errorBox.innerText = "❌ REJECTED: " + (student.rejectReason || "Contact Admin");
+                    errorBox.style.display = 'block';
+                } else {
+                    errorBox.innerText = student.result === "pending" ? "⏳ PENDING APPROVAL" : "❌ Details not found. Check roll number and phone.";
+                    errorBox.style.display = 'block';
                 }
-            }).catch(()=>{ btn.innerText = "ACCESS PORTAL"; btn.disabled = false; });
+            })
+            .catch(err => {
+                errorBox.innerText = "❌ Network Error: Could not reach server.";
+                errorBox.style.display = 'block';
+                console.error(err);
+            })
+            .finally(() => {
+                btn.innerText = "ACCESS PORTAL";
+                btn.disabled = false;
+            });
         });
 
         function downloadTicket() { html2canvas(document.getElementById('ticketContent'), {scale: 2}).then(canvas => { let link = document.createElement('a'); link.download = `TechKriti_Pass.png`; link.href = canvas.toDataURL("image/png"); link.click(); }); }
@@ -784,26 +829,56 @@
         
         document.getElementById('loginForm').addEventListener('submit', function(e) {
             e.preventDefault();
+            const btn = document.getElementById('loginBtn');
+            btn.innerText = "Authenticating...";
             fetch(SCRIPT_URL, { method: 'POST', body: JSON.stringify({ action: "adminLogin", username: document.getElementById('adminUser').value, password: document.getElementById('adminPass').value }) })
-            .then(res => res.json()).then(res => {
+            .then(res => {
+                if (!res.ok) throw new Error("Network Response: " + res.status);
+                return res.json();
+            })
+            .then(res => {
+                btn.innerText = "Login to System";
                 if (res.status === "success") { sessionStorage.setItem("admin_token", res.token); localStorage.setItem("techkriti_admin_token", res.token); navigateTo('admin-dashboard'); }
                 else { document.getElementById('loginError').style.display = 'block'; }
+            })
+            .catch(err => {
+                btn.innerText = "Login to System";
+                document.getElementById('loginError').innerText = "Network Error: Auth Failed.";
+                document.getElementById('loginError').style.display = 'block';
+                console.error(err);
             });
         });
 
         let rawAdminData = [];
         function loadAdminData() { 
             const table = document.getElementById('adminTableBody');
-            if (table) table.innerHTML = '<tr><td colspan="5" style="text-align:center; padding: 2rem;">Fetching Secure Data...</td></tr>';
-            // Cache-bust the Apps Script GET so Checked-In/Entered state is fresh.
-            fetch(SCRIPT_URL + '?t=' + Date.now(), { cache: 'no-store' })
-            .then(res=>res.json())
-            .then(data=>{
-                if (!Array.isArray(data)) throw new Error('Invalid backend response');
+            if (table) table.innerHTML = '<tr><td colspan="5" style="text-align:center; padding: 2rem;">Fetching Secure Data... <i class="fas fa-spinner fa-spin"></i></td></tr>';
+            
+            const token = sessionStorage.getItem("admin_token") || localStorage.getItem("techkriti_admin_token");
+            if (!token) return navigateTo('admin-login');
+
+            fetch(SCRIPT_URL, { 
+                method: 'POST', 
+                body: JSON.stringify({ action: "getData", token: token }) 
+            })
+            .then(res => {
+                if (!res.ok) throw new Error("HTTP " + res.status);
+                return res.json();
+            })
+            .then(data => {
+                if (data.error) throw new Error(data.error);
+                if (data.result === "error") {
+                    logoutAdmin();
+                    return;
+                }
+                if (!Array.isArray(data)) throw new Error('Invalid backend response. Ensure Apps Script Web App is deployed as "Anyone".');
                 rawAdminData = data;
                 renderAdminTable();
             })
-            .catch(err => { if (table) table.innerHTML = '<tr><td colspan="5" style="text-align:center; padding: 2rem; color: #EF4444;">Failed to load data. Please check backend link.</td></tr>'; console.error(err); });
+            .catch(err => { 
+                if (table) table.innerHTML = `<tr><td colspan="5" style="text-align:center; padding: 2rem; color: #EF4444; font-weight:bold;">❌ Failed to load data.<br><span style="font-size:0.8rem; color:#475569; font-weight:normal;">Error: ${err.message}</span></td></tr>`; 
+                console.error(err); 
+            });
         }
 
         function renderAdminTable() {
@@ -863,21 +938,36 @@
         }
 
         function manageApproval(ticketId, type, rollNumber) {
+            const token = sessionStorage.getItem("admin_token") || localStorage.getItem("techkriti_admin_token");
+            if (!token) {
+                alert("Session expired. Please login again.");
+                return logoutAdmin();
+            }
+
             let reason = "";
+            let pin = "";
+            
             if(type === 'reject') { 
                 reason = prompt("Enter Rejection Reason (e.g. Invalid Screenshot):"); 
                 if(!reason) return; 
             } else { 
-                if(!confirm(`Approve Ticket ID: ${ticketId}?`)) return; 
+                pin = prompt("Enter 4-Digit Security PIN to Approve:"); 
+                if(!pin) return; 
             }
             
             fetch(SCRIPT_URL, { 
                 method: 'POST', 
-                body: JSON.stringify({ action: type, ticketId: ticketId, rollNumber: rollNumber, reason: reason }) 
+                body: JSON.stringify({ action: type, ticketId: ticketId, rollNumber: rollNumber, reason: reason, token: token, pin: pin }) 
             })
-            .then(res => res.json())
+            .then(res => {
+                if (!res.ok) throw new Error("Network Response: " + res.status);
+                return res.json();
+            })
             .then(data => {
-                if (data.result === "manual_check") {
+                if (data.result === "error") {
+                    alert(`❌ ${data.message}`);
+                    if (data.message.includes("Unauthorized")) logoutAdmin();
+                } else if (data.result === "manual_check") {
                     alert(`⚠️ DECLINED: Check Manually!\nDrive folder mein Roll Number (${rollNumber}) ke naam se koi photo nahi mili.`);
                 } else if (data.result === "success") {
                     loadAdminData(); 
@@ -889,6 +979,33 @@
                 alert("❌ Network Error: Backend se connect nahi ho paya.");
                 console.error(err);
             });
+        }
+
+        function manualEntryCheckIn() {
+            const input = document.getElementById('manualEntryTicket');
+            const message = document.getElementById('manualEntryMessage');
+            const ticketId = String(input.value || '').trim();
+            const token = sessionStorage.getItem("admin_token") || localStorage.getItem("techkriti_admin_token");
+            if (!ticketId) { message.style.color = '#EF4444'; message.textContent = 'Ticket ID enter kar.'; return; }
+            if (!token) { message.style.color = '#EF4444'; message.textContent = 'Session expired. Login again.'; return; }
+            message.style.color = 'var(--text-muted)'; message.textContent = 'Verifying entry...';
+            fetch(SCRIPT_URL, { method:'POST', body:JSON.stringify({action:'manualEntry',ticketId:ticketId,token:token}) })
+                .then(r => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+                .then(data => {
+                    if (data.result === 'success') {
+                        message.style.color = '#10B981';
+                        message.textContent = 'ENTRY RECORDED: ' + (data.name || ticketId);
+                        input.value = '';
+                        loadAdminData();
+                    } else if (data.result === 'already_used') {
+                        message.style.color = '#F59E0B'; message.textContent = 'Already checked in: ' + (data.name || ticketId);
+                    } else if (data.result === 'not_approved') {
+                        message.style.color = '#EF4444'; message.textContent = 'Not approved yet. Payment approval required.';
+                    } else {
+                        message.style.color = '#EF4444'; message.textContent = data.message || 'Ticket not found. Check the Ticket ID.';
+                    }
+                })
+                .catch(err => { message.style.color = '#EF4444'; message.textContent = 'Entry failed: ' + err.message; });
         }
 
         // Native Android/iOS camera input is used for mobile QR capture.
@@ -913,7 +1030,6 @@
             const raw = String(value).trim();
             if (!raw || raw === "No Receipt" || raw.toLowerCase().startsWith("upload failed")) return "";
 
-            // Apps Script may return a normal Drive viewer URL or a raw file ID.
             const idMatch = raw.match(/(?:id=|\/d\/)([A-Za-z0-9_-]{20,})/);
             if (idMatch && idMatch[1]) {
                 return `https://drive.google.com/uc?export=view&id=${idMatch[1]}`;
@@ -946,9 +1062,8 @@
             const imageFile = e.target.files[0];
             const resBox = document.getElementById('scanResultBox');
             scanInProgress = true;
+            const token = sessionStorage.getItem("admin_token") || localStorage.getItem("techkriti_admin_token");
 
-            // IMPORTANT: do not call navigateTo() here. The organizer stays
-            // inside the dashboard after scanning a ticket.
             resBox.style.display = 'block';
             resBox.className = 'scan-res';
             resBox.innerHTML = "<i class='fas fa-spinner fa-spin res-icon' style='color:#000;'></i><br>Reading QR...";
@@ -965,14 +1080,17 @@
 
                 resBox.innerHTML = "<i class='fas fa-cloud-upload-alt res-icon' style='color:#00B4D8;'></i><br>Verifying on Server...";
 
-                return fetch(SCRIPT_URL + '?scan=' + encodeURIComponent(ticketId) + '&t=' + Date.now(), {
+                return fetch(SCRIPT_URL, {
                     method: 'POST',
-                    cache: 'no-store',
                     body: JSON.stringify({
                         action: "checkIn",
-                        ticketId: ticketId
+                        ticketId: ticketId,
+                        token: token
                     })
-                }).then(res => res.json()).then(res => {
+                }).then(res => {
+                    if (!res.ok) throw new Error("Network Error");
+                    return res.json();
+                }).then(res => {
                     if (res.result === "success") {
                         resBox.className = 'scan-res res-success';
                         const successTicket = res.ticketId || ticketId;
@@ -983,7 +1101,6 @@
                             renderScanParticipant(res, successTicket) +
                             `<div class="entry-welcome"><div class="welcome-title">✓ You Are In — Have An Amazing Time!</div><div class="welcome-id">Ticket ID: ${escapeHtml(successTicket)}</div><div class="welcome-note">DSEU Rajokri Campus • Tech Kriti 2026</div></div>`;
 
-                        // Update the visible organizer row immediately; GET is also refreshed below.
                         const idx = rawAdminData.findIndex(item => String(item.ticketId || '').trim().toUpperCase() === successTicket.toUpperCase());
                         if (idx >= 0) {
                             rawAdminData[idx].checkInStatus = 'Checked-In';
@@ -1004,7 +1121,6 @@
                             `<div style="margin-top:6px; font-family:monospace; font-size:0.8rem;">${escapeHtml(ticketId)}</div>`;
                     }
 
-                    // Refresh only the dashboard table/stats. Never navigate away.
                     loadAdminData();
                 });
             })
@@ -1016,14 +1132,11 @@
                     `<br><span style="font-size:0.8rem; font-weight:normal;">Please capture a clearer photo with the complete QR visible.</span>`;
             })
             .finally(() => {
-                // Reset the native input so the same camera/photo can be selected again.
                 e.target.value = "";
                 scanInProgress = false;
             });
         });
 
-        // Android camera return / browser restore safety net.
-        // If an organizer is logged in, always restore the dashboard.
         window.addEventListener("pageshow", function() {
             const token = sessionStorage.getItem("admin_token") || localStorage.getItem("techkriti_admin_token");
             if (token) {
@@ -1038,8 +1151,6 @@
         document.addEventListener("DOMContentLoaded", () => {
             setStudentType('DSEU');
 
-            // Android camera/file capture can return to the page after a reload.
-            // Restore the organizer session first so the page NEVER falls back to Home.
             const savedAdminToken = sessionStorage.getItem("admin_token") || localStorage.getItem("techkriti_admin_token");
 
             if (savedAdminToken) {
@@ -1055,6 +1166,7 @@
            DO NOT REMOVE - REQUESTED BY USER FOR FILE INTEGRITY
            ========================================================= */
         // Padding lines to ensure code constraints and maintain file scale
+        // Padding padding
         // Padding padding
         // Padding padding
         // Padding padding
