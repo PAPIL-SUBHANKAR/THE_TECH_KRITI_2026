@@ -987,7 +987,7 @@
             const message = document.getElementById('manualEntryMessage');
             const ticketId = String(input.value || '').trim();
             const token = sessionStorage.getItem("admin_token") || localStorage.getItem("techkriti_admin_token");
-            if (!ticketId) { message.style.color = '#EF4444'; message.textContent = 'Ticket ID enter kar.'; return; }
+            if (!ticketId) { message.style.color = '#EF4444'; message.textContent = 'ENTER TICKET ID FIRST .'; return; }
             if (!token) { message.style.color = '#EF4444'; message.textContent = 'Session expired. Login again.'; return; }
             message.style.color = 'var(--text-muted)'; message.textContent = 'Verifying entry...';
             fetch(SCRIPT_URL, { method:'POST', body:JSON.stringify({action:'manualEntry',ticketId:ticketId,token:token}) })
