@@ -227,11 +227,33 @@
         }
 
         /* --- OFFICIAL DSEU BRAND FOOTER --- */
-        .site-footer { margin-top: 4rem; padding: 2.5rem 1.5rem 2rem; background: var(--text-main); color: #fff; text-align: center; border-top: 5px solid var(--secondary); }
-        .site-footer .footer-title { font-family: 'Montserrat', sans-serif; font-size: 1.05rem; font-weight: 900; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 8px; }
-        .site-footer .footer-subtitle { color: rgba(255,255,255,0.78); font-size: 0.82rem; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; }
-        .site-footer .footer-pride { margin-top: 14px; font-family: 'Montserrat', sans-serif; font-size: 0.9rem; font-weight: 900; color: #fff; text-transform: uppercase; letter-spacing: 1px; }
-        .site-footer .footer-year { margin-top: 8px; color: rgba(255,255,255,0.58); font-size: 0.72rem; font-weight: 600; }
+        .site-footer { margin-top: 4rem; padding: 2.5rem 5%; background: #020612; color: #fff; text-align: center; border-top: 5px solid #000; font-family: 'Montserrat', sans-serif; }
+        .footer-header { margin-bottom: 1rem; }
+        .footer-header h2 { font-size: 2rem; font-weight: 900; margin-bottom: 5px; letter-spacing: 1px; }
+        .footer-header h3 { font-size: 1.3rem; font-weight: 700; }
+        .dotted-underline { border-bottom: 2px dotted #FF5722; padding-bottom: 3px; }
+        
+        .footer-divider { height: 2px; background: #ea580c; margin: 1.5rem 0; width: 100%; }
+        
+        .footer-contacts { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+        .contact-person { flex: 1; min-width: 150px; text-align: center; }
+        .contact-person h4 { font-size: 1.1rem; font-weight: 900; border-bottom: 2px dotted #ea580c; display: inline-block; margin-bottom: 8px; padding-bottom: 2px; }
+        .contact-person p { font-size: 1rem; font-weight: 700; }
+        
+        .footer-bottom { display: flex; justify-content: space-between; align-items: center; text-align: left; flex-wrap: wrap; gap: 2rem; margin-top: 1rem; }
+        .faculty-info { flex: 1; }
+        .faculty-label { font-family: 'Space Grotesk', sans-serif; font-size: 1.5rem; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 5px; }
+        .faculty-name { font-size: 3rem; font-weight: 400; letter-spacing: 4px; font-family: monospace; border-bottom: 2px dotted #ea580c; display: inline-block; margin-bottom: 10px; line-height: 1; }
+        .faculty-phone { font-size: 1.5rem; font-family: monospace; letter-spacing: 2px; }
+        
+        /* Circular Logo Cutout */
+        .footer-logo img { width: 130px; height: 130px; border-radius: 50%; object-fit: cover; background: linear-gradient(135deg, #c084fc, #a855f7); border: 3px solid #000; box-shadow: 0 0 20px rgba(168, 85, 247, 0.4); }
+        
+        @media (max-width: 768px) {
+            .footer-contacts { flex-direction: column; gap: 2rem; }
+            .footer-bottom { flex-direction: column; text-align: center; justify-content: center; }
+            .faculty-name { font-size: 2.2rem; }
+        }
 
         /* Organizer entry confirmation */
         .entry-welcome { margin-top: 14px; padding: 16px; background: rgba(16,185,129,0.12); border: 2px solid #10B981; border-radius: 14px; text-align: center; }
@@ -321,8 +343,8 @@
                 </div>
                 
                 <div class="hero-visual">
-                    <img src="https://i.ibb.co/vCmHKZ1g/im2.webp" class="comp-img img-1" alt="Main Event">
-                    <img src="https://i.ibb.co/yFWGYqgX/img1.webp" class="comp-img img-2" alt="Tech Lab">
+                    <img src="img3.webp" class="comp-img img-1" alt="Main Event">
+                    <img src="img4.webp" class="comp-img img-2" alt="Tech Lab">
                 </div>
             </div>
 
@@ -350,7 +372,7 @@
                     <div class="schedule-row"><span class="schedule-time">9:30 AM</span><span class="schedule-event">Entry</span></div>
                     <div class="schedule-row"><span class="schedule-time">10:00 AM – 11:10 AM</span><span class="schedule-event">Front End</span></div>
                     <div class="schedule-row"><span class="schedule-time">11:10 AM – 11:40 AM</span><span class="schedule-event">Prompt Engineering</span></div>
-                    <div class="schedule-row"><span class="schedule-time">11:00 AM – 12:15 PM</span><span class="schedule-event">Memory Challenge</span></div>
+                    <div class="schedule-row"><span class="schedule-time">11:00 AM – 12:15 PM</span><span class="schedule-event">Memory & Magic Show</span></div>
                     <div class="schedule-row"><span class="schedule-time">11:30 AM onwards</span><span class="schedule-event">Food Stall</span></div>
                     <div class="schedule-row"><span class="schedule-time">12:00 PM – 12:30 PM</span><span class="schedule-event">Singing</span></div>
                     <div class="schedule-row"><span class="schedule-time">12:30 PM – 1:00 PM</span><span class="schedule-event">Poetry</span></div>
@@ -420,7 +442,7 @@
                                 <div class="es-item" data-val="Viewer Pass">Viewer Pass</div>
                                 <div class="es-item" data-val="Front End Battle">Front End Battle</div>
                                 <div class="es-item" data-val="Prompt Engineering">Prompt Engineering</div>
-                                <div class="es-item" data-val="Memory Challenge">Memory Challenge</div>
+                                <div class="es-item" data-val="Memory & Magic Show">Memory & Magic Show</div>
                                 <div class="es-item" data-val="Singing">Singing</div>
                                 <div class="es-item" data-val="Poetry">Poetry</div>
                                 <div class="es-item" data-val="Cosplay">Cosplay</div>
@@ -562,10 +584,40 @@
         </section>
 
         <footer class="site-footer">
-            <div class="footer-title">Designed by DSEU Rajokri Campus • All Clubs</div>
-            <div class="footer-subtitle">Official Student Fest Platform • TECH KRITI 2026</div>
-            <div class="footer-pride">Proudly Made by DSEU Rajokri Campus</div>
-            <div class="footer-year">Technology • Creativity • Community • 2026</div>
+            <div class="footer-header">
+                <h2>DSEU RAJOKRI CAMPUS</h2>
+                <h3><span class="dotted-underline">TECHKRITI</span> 3.0</h3>
+            </div>
+            
+            <div class="footer-divider"></div>
+            
+            <div class="footer-contacts">
+                <div class="contact-person">
+                    <h4>SHUBHAM KUMAR</h4>
+                    <p>+91 9599470582</p>
+                </div>
+                <div class="contact-person">
+                    <h4>ANKIT VERMA</h4>
+                    <p>+91 9811393626</p>
+                </div>
+                <div class="contact-person">
+                    <h4>SHIVAM</h4>
+                    <p>+91 9266098650</p>
+                </div>
+            </div>
+            
+            <div class="footer-divider"></div>
+            
+            <div class="footer-bottom">
+                <div class="faculty-info">
+                    <p class="faculty-label">CLUB FACULTY</p>
+                    <div class="faculty-name">SHANTI LAL</div>
+                    <p class="faculty-phone">+91 99261 20443</p>
+                </div>
+                <div class="footer-logo">
+                    <img src="img2.png" alt="Tech Kriti Logo">
+                </div>
+            </div>
         </footer>
     </main>
 
