@@ -584,40 +584,188 @@
         </section>
 
         <footer class="site-footer">
-            <div class="footer-header">
-                <h2>DSEU RAJOKRI CAMPUS</h2>
-                <h3><span class="dotted-underline">TECHKRITI</span> 3.0</h3>
+            <<style>
+            .custom-footer {
+                background-color: #0b0f19;
+                padding: 3rem 0;
+                color: #fff;
+                position: relative;
+                z-index: 10;
+            }
+            .f-header-row {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 0 5%;
+                flex-wrap: wrap;
+                gap: 1.5rem;
+            }
+            .f-header-text {
+                text-align: center;
+                flex: 1;
+                min-width: 250px;
+            }
+            .f-title {
+                font-size: 2.8rem;
+                font-weight: 900;
+                margin-bottom: 5px;
+                font-family: 'Montserrat', sans-serif;
+            }
+            .f-subtitle {
+                font-size: 2.2rem;
+                font-weight: 700;
+                font-family: 'Montserrat', sans-serif;
+                display: inline-block;
+                border-bottom: 2px dotted #dc2626;
+                padding-bottom: 4px;
+            }
+            .f-logo { width: 120px; height: auto; }
+            .torn-edge {
+                width: 100%;
+                height: 16px;
+                background-color: #a7f3d0;
+                margin: 2.5rem 0;
+                mask-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 100 10" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><polygon points="0,2 5,0 10,3 15,1 20,4 25,0 30,2 35,1 40,4 45,0 50,2 55,0 60,3 65,1 70,4 75,0 80,2 85,1 90,4 95,0 100,2 100,8 95,10 90,6 85,9 80,8 75,10 70,6 65,9 60,7 55,10 50,8 45,10 40,6 35,9 30,8 25,10 20,6 15,9 10,7 5,10 0,8" fill="black"/></svg>');
+                mask-size: 30px 100%;
+                -webkit-mask-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 100 10" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><polygon points="0,2 5,0 10,3 15,1 20,4 25,0 30,2 35,1 40,4 45,0 50,2 55,0 60,3 65,1 70,4 75,0 80,2 85,1 90,4 95,0 100,2 100,8 95,10 90,6 85,9 80,8 75,10 70,6 65,9 60,7 55,10 50,8 45,10 40,6 35,9 30,8 25,10 20,6 15,9 10,7 5,10 0,8" fill="black"/></svg>');
+                -webkit-mask-size: 30px 100%;
+            }
+            .f-org-title {
+                text-align: center;
+                font-size: 2.6rem;
+                margin-bottom: 2rem;
+                letter-spacing: 3px;
+                font-family: 'Black Ops One', cursive;
+                text-shadow: 2px 2px 0px rgba(0,0,0,0.5);
+            }
+            .f-contacts {
+                display: flex;
+                justify-content: space-around;
+                flex-wrap: wrap;
+                gap: 2rem;
+                padding: 0 5%;
+            }
+            .f-person { text-align: center; flex: 1; min-width: 200px; }
+            .f-person h4 {
+                font-size: 1.4rem;
+                font-weight: 900;
+                border-bottom: 2px dotted #dc2626;
+                display: inline-block;
+                margin-bottom: 12px;
+                padding-bottom: 4px;
+                font-family: 'Montserrat', sans-serif;
+            }
+            /* Make link highly clickable */
+            .phone-link {
+                display: inline-block;
+                font-size: 1.2rem;
+                font-family: 'Space Grotesk', sans-serif;
+                color: #e2e8f0;
+                text-decoration: none;
+                padding: 8px 16px;
+                background: rgba(255,255,255,0.05);
+                border-radius: 8px;
+                border: 1px solid rgba(255,255,255,0.1);
+                transition: 0.3s;
+                position: relative;
+                z-index: 50;
+            }
+            .phone-link:active, .phone-link:hover {
+                background: rgba(255,255,255,0.15);
+                color: #a7f3d0;
+            }
+            .f-bottom {
+                display: flex;
+                justify-content: space-around;
+                flex-wrap: wrap;
+                gap: 2.5rem;
+                text-align: center;
+                padding: 0 5%;
+            }
+            .f-faculty-box { flex: 1; min-width: 250px; }
+            .f-fac-label {
+                font-size: 1.2rem;
+                letter-spacing: 2px;
+                margin-bottom: 12px;
+                font-family: 'Space Grotesk', monospace;
+                text-transform: uppercase;
+                color: #cbd5e1;
+            }
+            .f-fac-name {
+                font-size: 1.7rem;
+                border-bottom: 2px dotted #dc2626;
+                display: inline-block;
+                letter-spacing: 2px;
+                font-family: 'Black Ops One', cursive;
+                padding-bottom: 4px;
+            }
+            
+            /* MOBILE STYLES */
+            @media (max-width: 768px) {
+                .f-header-row { flex-direction: column; text-align: center; }
+                .f-logo { width: 90px; }
+                .f-title { font-size: 2.2rem; }
+                .f-subtitle { font-size: 1.8rem; }
+                .f-subtitle span { font-size: 2.2rem !important; }
+                .f-org-title { font-size: 2rem; }
+                .f-contacts { flex-direction: column; gap: 2.5rem; }
+                .f-person h4 { font-size: 1.3rem; }
+                /* Big tap area for mobile */
+                .phone-link { font-size: 1.1rem; display: block; padding: 12px; margin: 0 20px; }
+                .f-bottom { flex-direction: column; gap: 3rem; }
+                .f-fac-name { font-size: 1.5rem; }
+            }
+        </style>
+
+        <footer class="custom-footer">
+            <!-- Header section with Logos -->
+            <div class="f-header-row">
+                <img src="img5.png" alt="DSEU Logo" class="f-logo">
+                <div class="f-header-text">
+                    <h2 class="f-title">DSEU RAJOKRI CAMPUS</h2>
+                    <h3 class="f-subtitle">TECHKRITI <span style="font-size: 2.8rem; font-weight: 900; color: #fff;">3.0</span></h3>
+                </div>
+                <img src="img2.png" alt="Techkriti Logo" class="f-logo">
             </div>
             
-            <div class="footer-divider"></div>
+            <!-- Torn Paper Divider Top -->
+            <div class="torn-edge"></div>
             
-            <div class="footer-contacts">
-                <div class="contact-person">
+            <h3 class="f-org-title">ORGANIZING COMMITEE</h3>
+            
+            <div class="f-contacts">
+                <div class="f-person">
                     <h4>SHUBHAM KUMAR</h4>
-                    <p>+91 9599470582</p>
+                    <a href="tel:+919599470582" class="phone-link">+91 9599470582</a>
                 </div>
-                <div class="contact-person">
+                <div class="f-person">
                     <h4>ANKIT VERMA</h4>
-                    <p>+91 9811393626</p>
+                    <a href="tel:+919811393626" class="phone-link">+91 9811393626</a>
                 </div>
-                <div class="contact-person">
+                <div class="f-person">
                     <h4>SHIVAM</h4>
-                    <p>+91 9266098650</p>
+                    <a href="tel:+919266098650" class="phone-link">+91 9266098650</a>
                 </div>
             </div>
             
-            <div class="footer-divider"></div>
+            <!-- Torn Paper Divider Bottom -->
+            <div class="torn-edge"></div>
             
-            <div class="footer-bottom">
-                <div class="faculty-info">
-                    <p class="faculty-label">CLUB FACULTY</p>
-                    <div class="faculty-name">SHANTI LAL</div>
-                    <p class="faculty-phone">+91 99261 20443</p>
+            <div class="f-bottom">
+                <div class="f-faculty-box">
+                    <p class="f-fac-label">CLUB FACULTY</p>
+                    <div class="f-fac-name">MR.SHANTILAL</div>
                 </div>
-                <div class="footer-logo">
-                    <img src="img2.png" alt="Tech Kriti Logo">
+                <div class="f-faculty-box">
+                    <p class="f-fac-label">ASSOCIATE CAMPUS DIRECTOR</p>
+                    <div class="f-fac-name">DR.SUNITA CHAURASIA</div>
+                </div>
+                <div class="f-faculty-box">
+                    <p class="f-fac-label">CAMPUS DIRECTOR</p>
+                    <div class="f-fac-name">MR.VIRENDRA DAGAR</div>
                 </div>
             </div>
+        </footer>
         </footer>
     </main>
 
