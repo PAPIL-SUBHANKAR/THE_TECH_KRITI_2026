@@ -1547,19 +1547,32 @@
                 const r = await fetch(SCRIPT_URL,{method:'POST',body:JSON.stringify({action:'getGallery',firebaseToken})});
                 const items = await r.json();
                 if (!Array.isArray(items) || !items.length) { feed.innerHTML='<div class="stat-card">No photos found in the configured Drive folder, or the backend has not been redeployed with Drive access.</div>'; return; }
-                feed.innerHTML=items.map(item=>`<article class="stat-card"><a href="${escapeHtml(item.viewUrl)}" target="_blank" rel="noopener noreferrer"><img src="${escapeHtml(item.imageUrl)}" alt="${escapeHtml(item.name)}" loading="lazy" style="width:100%;height:240px;object-fit:cover;border-radius:12px"></a><p style="margin-top:8px;overflow-wrap:anywhere">${escapeHtml(item.name)}</p><button class="btn-alt" style="padding:8px 14px;font-size:.85rem;margin-top:8px" onclick="toggleGalleryLike('${escapeHtml(item.id)}')">♥ ${Number(item.likes||0)} Likes${item.liked?' · Liked':''}</button></article>`).join('');
+                feed.innerHTML=items.map(item=>`<article class="stat-card"><a href="${escapeHtml(item.viewUrl)}" target="_blank" rel="noopener noreferrer"><img src="${escapeHtml(item.imageUrl)}" alt="${escapeHtml(item.name)}" loading="lazy" style="width:100%;height:240px;object-fit:cover;border-radius:12px"></a><p style="margin-top:8px;overflow-wrap:anywhere">${escapeHtml(item.name)}</p><button class="btn-alt" data-gallery-like-button="${escapeHtml(item.id)}" data-likes-count="${Number(item.likes||0)}" data-liked="${item.liked?'true':'false'}" style="padding:8px 14px;font-size:.85rem;margin-top:8px" onclick="toggleGalleryLike('${escapeHtml(item.id)}')">♥ ${Number(item.likes||0)} Likes${item.liked?' · Liked':''}</button></article>`).join('');
             } catch(e) { feed.innerHTML='<div class="stat-card">Could not load Drive gallery. The updated Apps Script backend must be deployed and authorized.</div>'; }
         }
         async function toggleGalleryLike(fileId) {
             const user = window.techKritiFirebaseUser || null;
             if (!user) { alert('Sign in with Google in the Student Portal to like gallery photos.'); navigateTo('student-portal'); return; }
+            const button = Array.from(document.querySelectorAll('[data-gallery-like-button]')).find(el => el.dataset.galleryLikeButton === fileId);
+            if (button && button.disabled) return;
+            if (button) button.disabled = true;
             try {
                 const firebaseToken = await user.getIdToken();
                 const r = await fetch(SCRIPT_URL,{method:'POST',body:JSON.stringify({action:'toggleGalleryLike',fileId,firebaseToken})});
                 const result = await r.json();
                 if (result.result !== 'success') throw new Error(result.message||'Could not save like');
-                loadGallery();
-            } catch(e) { alert(e.message||'Could not save like. Check backend deployment.'); }
+                if (button && typeof result.liked === 'boolean') {
+                    const oldCount = Number(button.dataset.likesCount || 0);
+                    const newCount = Math.max(0, oldCount + (result.liked ? 1 : -1));
+                    button.dataset.likesCount = String(newCount);
+                    button.dataset.liked = result.liked ? 'true' : 'false';
+                    button.textContent = `♥ ${newCount} Likes${result.liked ? ' · Liked' : ''}`;
+                }
+            } catch(e) {
+                alert(e.message||'Could not save like. Check backend deployment.');
+            } finally {
+                if (button) button.disabled = false;
+            }
         }
         function loadNewswire() {
             const feed = document.getElementById('newswireFeed');
