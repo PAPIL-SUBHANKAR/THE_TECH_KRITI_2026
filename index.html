@@ -13,6 +13,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
     <style>
         
         @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Space+Grotesk:wght@400;600;700&display=swap');
@@ -322,6 +324,8 @@
             <button onclick="navigateTo('schedule')">Lineup</button>
             <button onclick="navigateTo('register')">Tickets</button>
             <button onclick="navigateTo('student-portal')">Portal</button>
+            <button onclick="navigateTo('newswire')">Newswire</button>
+            <button onclick="navigateTo('gallery')">Gallery</button>
             <button onclick="navigateTo('admin-login')" class="admin-link">Organizer</button>
         </div>
     </nav>
@@ -481,6 +485,11 @@
                 
                 <div class="form-box" id="studentLoginBox" style="max-width: 500px; margin: 0 auto;">
                     <h2 style="font-size: 2.5rem; margin-bottom: 2rem; text-align: center;">Student <span style="color:var(--secondary);">Portal</span></h2>
+                    <div style="text-align:center;margin-bottom:18px">
+                        <button type="button" id="googleStudentLoginBtn" class="btn-main" style="width:100%;justify-content:center;background:#fff;color:#1f2937;border:1px solid #d1d5db;box-shadow:none" onclick="googleStudentLogin()"><i class="fab fa-google"></i> Continue with Google</button>
+                        <p style="font-size:.85rem;color:var(--text-muted);margin-top:10px">Use the same Google account email entered during registration.</p>
+                        <div style="display:flex;align-items:center;gap:12px;margin:18px 0;color:var(--text-muted)"><span style="height:1px;background:var(--border-color);flex:1"></span><span>OR</span><span style="height:1px;background:var(--border-color);flex:1"></span></div>
+                    </div>
                     <form id="studentLoginForm">
                         <div class="form-group" style="margin-bottom: 1.5rem;"><label>Roll Number / OS Number</label><input type="text" id="studentRoll" required></div>
                         <div class="form-group" style="margin-bottom: 2rem;"><label>Phone Number</label><input type="tel" id="studentPhone" required></div>
@@ -507,6 +516,22 @@
                     </div>
                     <button onclick="downloadTicket()" class="btn-alt" style="margin-top: 25px; width: 100%; justify-content:center; color: var(--text-main); border-color: var(--text-main);">Download Pass Image</button>
                 </div>
+            </div>
+        </section>
+
+        <section id="newswire" class="page-view">
+            <div class="container">
+                <button class="back-btn" onclick="navigateTo('home')">← Back</button>
+                <h2 class="section-title">TECH KRITI <span>NEWSWIRE</span></h2>
+                <div id="newswireFeed" class="dash-grid"><div class="stat-card">Loading latest updates…</div></div>
+            </div>
+        </section>
+        <section id="gallery" class="page-view">
+            <div class="container">
+                <button class="back-btn" onclick="navigateTo('home')">← Back</button>
+                <h2 class="section-title">FEST <span>GALLERY</span></h2>
+                <p style="text-align:center;color:var(--text-muted);margin-bottom:2rem">Photos from the official Tech Kriti Google Drive gallery.</p>
+                <div id="driveGalleryFeed" class="dash-grid"><div class="stat-card">Loading gallery photos…</div></div>
             </div>
         </section>
 
@@ -560,6 +585,16 @@
                     </div>
 
                     <div class="logs-section">
+                        <div class="form-box" style="margin-bottom:1.5rem;padding:1.5rem">
+                            <h3 style="margin-bottom:1rem">Newswire Manager</h3>
+                            <input id="newsTitle" type="text" maxlength="160" placeholder="News headline" style="margin-bottom:10px">
+                            <textarea id="newsBody" rows="3" placeholder="News details / announcement" style="width:100%;padding:14px;border:2px solid #E2E8F0;border-radius:12px;margin-bottom:10px;font:inherit"></textarea>
+                            <label for="newsImageFile" style="display:block;margin:4px 0 8px;font-weight:700">News image (optional)</label>
+                            <input id="newsImageFile" type="file" accept="image/*" style="margin-bottom:10px;width:100%">
+                            <small style="display:block;margin:-4px 0 10px;color:var(--text-muted)">Choose an image from your PC (max 4 MB).</small>
+                            <button class="btn-main" type="button" onclick="publishNews()" style="padding:12px 18px;font-size:.9rem">Publish News</button>
+                            <div id="adminNewsList" style="margin-top:12px"></div>
+                        </div>
                         <div class="admin-controls">
                             <input type="text" id="adminSearch" placeholder="Search Ticket ID or Name..." onkeyup="renderAdminTable()">
                             <select id="adminTypeFilter" onchange="renderAdminTable()">
@@ -976,6 +1011,56 @@
             });
         });
 
+        const TECHKRITI_FIREBASE_CONFIG = {
+            apiKey: "AIzaSyC_ITfHACJ6YRq518GtyXA6urq7Q_0-td4",
+            authDomain: "techkriti2026-3o.firebaseapp.com",
+            projectId: "techkriti2026-3o",
+            storageBucket: "techkriti2026-3o.firebasestorage.app",
+            messagingSenderId: "359023931390",
+            appId: "1:359023931390:web:79be4d3685ec652f4fdaaf",
+            measurementId: "G-J7CJKDS3H5"
+        };
+        try {
+            if (!firebase.apps.length) firebase.initializeApp(TECHKRITI_FIREBASE_CONFIG);
+            window.techKritiAuth = firebase.auth();
+            window.techKritiFirebaseUser = null;
+            window.techKritiAuth.onAuthStateChanged(user => { window.techKritiFirebaseUser=user||null; });
+        } catch (e) { console.error('Firebase initialization failed', e); }
+        async function googleStudentLogin() {
+            const btn=document.getElementById('googleStudentLoginBtn');
+            const errorBox=document.getElementById('studentError');
+            if (!window.techKritiAuth) { errorBox.innerText='Google sign-in could not initialize. Check Firebase setup.'; errorBox.style.display='block'; return; }
+            btn.disabled=true; btn.innerHTML='<i class="fas fa-spinner fa-spin"></i> Signing in…'; errorBox.style.display='none';
+            try {
+                const provider=new firebase.auth.GoogleAuthProvider();
+                const result=await window.techKritiAuth.signInWithPopup(provider);
+                const firebaseToken=await result.user.getIdToken();
+                const response=await fetch(SCRIPT_URL,{method:'POST',body:JSON.stringify({action:'studentGoogleLookup',firebaseToken})});
+                const student=await response.json();
+                if (student.result==='success' && student.status==='Approved') {
+                    document.getElementById('studentLoginBox').style.display='none';
+                    document.getElementById('ticketDisplayContainer').style.display='block';
+                    const safeTicketId=student.ticketId||'ID-NOT-FOUND';
+                    document.getElementById('tTicketId').innerText=safeTicketId;
+                    document.getElementById('tName').innerText=student.fullName||'';
+                    document.getElementById('tRoll').innerText=`${student.rollNumber||''} / ${student.studentType||''}`;
+                    document.getElementById('tEvent').innerText=student.eventChoice||'';
+                    document.getElementById('qrcode').innerHTML='';
+                    new QRCode(document.getElementById('qrcode'),{text:safeTicketId,width:140,height:140,colorDark:'#000000',colorLight:'#ffffff'});
+                } else if(student.result==='success' && student.status==='Rejected') {
+                    errorBox.innerText='Registration rejected: '+(student.rejectReason||'Contact the organizers.'); errorBox.style.display='block';
+                } else if(student.result==='pending') {
+                    errorBox.innerText='Registration found, but approval is still pending.'; errorBox.style.display='block';
+                } else {
+                    errorBox.innerText=student.message||'No registration matches this Google email. Use the email entered during registration.'; errorBox.style.display='block';
+                }
+            } catch(e) {
+                console.error('Google student login failed',e);
+                errorBox.innerText=(e.code==='auth/unauthorized-domain')?'This website domain is not authorized in Firebase Authentication.':'Google sign-in failed. Check the Firebase authorized domain and backend deployment.';
+                errorBox.style.display='block';
+            } finally { btn.disabled=false; btn.innerHTML='<i class="fab fa-google"></i> Continue with Google'; }
+        }
+
         document.getElementById('studentLoginForm').addEventListener('submit', function(e) {
             e.preventDefault();
             const roll = document.getElementById('studentRoll').value.trim();
@@ -1120,6 +1205,8 @@
                 if(item.status === "Pending") {
                     actionBtns = `<button class="btn-sm btn-approve" onclick="manageApproval('${item.ticketId}', 'approve', '${item.rollNumber}')">✔</button>
                                   <button class="btn-sm btn-reject" onclick="manageApproval('${item.ticketId}', 'reject', '${item.rollNumber}')">✖</button>`;
+                } else if(item.status === "Rejected") {
+                    actionBtns = `<button class="btn-sm btn-reject" onclick="deleteRejectedRegistration('${item.ticketId}')">Delete rejected</button>`;
                 } else if(item.checkInStatus === "Checked-In") {
                     actionBtns = `<span style="color:var(--text-muted); font-size:0.75rem; font-weight:700;">Log: ${item.checkInTime || 'N/A'}</span>`;
                 } else {
@@ -1417,6 +1504,83 @@
         // Padding padding
         // Padding padding
         // Padding padding
+        function postAdminAction(payload) {
+            const token = sessionStorage.getItem("admin_token") || localStorage.getItem("techkriti_admin_token");
+            if (!token) { alert("Please log in again."); navigateTo('admin-login'); return Promise.reject(new Error("No admin session")); }
+            return fetch(SCRIPT_URL, {method:'POST', body:JSON.stringify({...payload,token})}).then(r=>r.json()).then(d=>{
+                if (d.result === 'error') throw new Error(d.message || 'Request failed');
+                return d;
+            });
+        }
+        function deleteRejectedRegistration(ticketId) {
+            if (!confirm('Permanently delete this REJECTED registration? This cannot be undone.')) return;
+            postAdminAction({action:'deleteRejected',ticketId}).then(()=>{alert('Rejected registration deleted.');loadAdminData();}).catch(e=>alert(e.message));
+        }
+        function publishNews() {
+            const title = document.getElementById('newsTitle').value.trim();
+            const body = document.getElementById('newsBody').value.trim();
+            const file = document.getElementById('newsImageFile').files[0];
+            if (!title || !body) { alert('Headline and details are required.'); return; }
+            if (file && file.size > 4 * 1024 * 1024) { alert('Image must be 4 MB or smaller.'); return; }
+            const submit = imageData => postAdminAction({action:'saveNews',title,body,imageData:imageData||''}).then(()=>{
+                document.getElementById('newsTitle').value=''; document.getElementById('newsBody').value=''; document.getElementById('newsImageFile').value='';
+                alert('Newswire post published.'); loadNewswire(); loadAdminNewsList();
+            }).catch(e=>alert(e.message));
+            if (!file) { submit(''); return; }
+            if (!file.type.startsWith('image/')) { alert('Please choose an image file.'); return; }
+            const reader = new FileReader();
+            reader.onload = () => submit(String(reader.result||''));
+            reader.onerror = () => alert('Could not read the selected image.');
+            reader.readAsDataURL(file);
+        }
+        function deleteNewsPost(id) {
+            if (!confirm('Delete this news post?')) return;
+            postAdminAction({action:'deleteNews',id}).then(loadNewswire).catch(e=>alert(e.message));
+        }
+        async function loadGallery() {
+            const feed = document.getElementById('driveGalleryFeed');
+            if (!feed) return;
+            feed.innerHTML='<div class="stat-card">Loading Drive gallery…</div>';
+            try {
+                const user = window.techKritiFirebaseUser || null;
+                const firebaseToken = user ? await user.getIdToken() : '';
+                const r = await fetch(SCRIPT_URL,{method:'POST',body:JSON.stringify({action:'getGallery',firebaseToken})});
+                const items = await r.json();
+                if (!Array.isArray(items) || !items.length) { feed.innerHTML='<div class="stat-card">No photos found in the configured Drive folder, or the backend has not been redeployed with Drive access.</div>'; return; }
+                feed.innerHTML=items.map(item=>`<article class="stat-card"><a href="${escapeHtml(item.viewUrl)}" target="_blank" rel="noopener noreferrer"><img src="${escapeHtml(item.imageUrl)}" alt="${escapeHtml(item.name)}" loading="lazy" style="width:100%;height:240px;object-fit:cover;border-radius:12px"></a><p style="margin-top:8px;overflow-wrap:anywhere">${escapeHtml(item.name)}</p><button class="btn-alt" style="padding:8px 14px;font-size:.85rem;margin-top:8px" onclick="toggleGalleryLike('${escapeHtml(item.id)}')">♥ ${Number(item.likes||0)} Likes${item.liked?' · Liked':''}</button></article>`).join('');
+            } catch(e) { feed.innerHTML='<div class="stat-card">Could not load Drive gallery. The updated Apps Script backend must be deployed and authorized.</div>'; }
+        }
+        async function toggleGalleryLike(fileId) {
+            const user = window.techKritiFirebaseUser || null;
+            if (!user) { alert('Sign in with Google in the Student Portal to like gallery photos.'); navigateTo('student-portal'); return; }
+            try {
+                const firebaseToken = await user.getIdToken();
+                const r = await fetch(SCRIPT_URL,{method:'POST',body:JSON.stringify({action:'toggleGalleryLike',fileId,firebaseToken})});
+                const result = await r.json();
+                if (result.result !== 'success') throw new Error(result.message||'Could not save like');
+                loadGallery();
+            } catch(e) { alert(e.message||'Could not save like. Check backend deployment.'); }
+        }
+        function loadNewswire() {
+            const feed = document.getElementById('newswireFeed');
+            if (!feed) return;
+            fetch(SCRIPT_URL,{method:'POST',body:JSON.stringify({action:'getNewswire'})}).then(r=>r.json()).then(items=>{
+                if (!Array.isArray(items) || !items.length) { feed.innerHTML='<div class="stat-card">No news published yet.</div>'; return; }
+                feed.innerHTML=items.map(n=>`<article class="stat-card"><h3 style="font-size:1.5rem">${escapeHtml(n.title)}</h3><p style="margin-top:12px;white-space:pre-wrap">${escapeHtml(n.body)}</p>${n.imageUrl?`<img src="${escapeHtml(n.imageUrl)}" alt="Newswire image" style="width:100%;max-height:240px;object-fit:cover;border-radius:12px;margin-top:12px">`:''}<small style="display:block;margin-top:12px;color:var(--text-muted)">${escapeHtml(n.publishedAt||'')}</small></article>`).join('');
+            }).catch(()=>{feed.innerHTML='<div class="stat-card">Could not load news. Check backend deployment.</div>';});
+        }
+        const originalNavigateTo = navigateTo;
+        navigateTo = function(pageId) { originalNavigateTo(pageId); if(pageId==='newswire') loadNewswire(); if(pageId==='gallery') loadGallery(); if(pageId==='admin-dashboard' || pageId==='admin-login') setTimeout(loadAdminNewsList,500); };
+        setInterval(() => { const gallery=document.getElementById('gallery'); if (gallery && gallery.classList.contains('active')) loadGallery(); }, 120000);
+        function loadAdminNewsList() {
+            const box=document.getElementById('adminNewsList'); if(!box) return;
+            const token=sessionStorage.getItem('admin_token')||localStorage.getItem('techkriti_admin_token');
+            if(!token) return;
+            fetch(SCRIPT_URL,{method:'POST',body:JSON.stringify({action:'getNewswire',token})}).then(r=>r.json()).then(items=>{
+                box.innerHTML=(Array.isArray(items)?items:[]).map(n=>`<div style="display:flex;justify-content:space-between;gap:10px;padding:8px 0;border-bottom:1px solid #E2E8F0"><span>${escapeHtml(n.title)}</span><button class="btn-sm btn-reject" onclick="deleteNewsPost('${n.id}')">Delete</button></div>`).join('')||'<small>No published news.</small>';
+            }).catch(()=>{box.textContent='Could not load news list.';});
+        }
+
         /* =================== END OF SCRIPT ======================= */
     </script>
 </body>
